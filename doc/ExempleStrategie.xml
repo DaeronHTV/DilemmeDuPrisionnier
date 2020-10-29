@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Strategie dateInsertion="2020-10-28 22:03:34" dateDerniereModification="2020-10-28 22:03:34">
+    <Infos>
+        <Name>Gentille</Name>
+        <Description>Je coopère toujours</Description>
+        <Authors>
+            <Author surname="Aurélien" name="Avanzino" mail="aurelien.avanzino@etu.univ-grenoble-alpes.fr"/>
+            <Author surname="Stéphanie" name="Gourdon" mail="stephanie.gourdon@etu.univ-grenoble-alpes.fr"/>
+        </Authors>
+    </Infos>
+    <Caracteristiques ACooperate="Y" ABetrayed="N">
+        <Loop nbTurn="1" ExitCondition="none">
+            <Turn libelle="coopère" />
+        <Loop>
+    </Caracteristiques>
+    <Statistiques>
+        <Statistiques name="NbGames" value="0" typeValue="integer"/>
+        <Statistiques name="NbWin" value="0" typeValue="integer"/>
+        <Statistiques name="NbDefeat" value="0" typeValue="integer"/>
+    </Statistiques>
+</Strategie>
