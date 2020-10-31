@@ -22,6 +22,7 @@ public class Strategie {
 	 * @see Strategie#Strategie(String, String)
 	 * @see Tournoi#Tournoi(int, ArrayList)
 	 */
+	//J'ai rajouté ça mais ce n'est une chose obligatoire
 	private String description;
 	
 	/**

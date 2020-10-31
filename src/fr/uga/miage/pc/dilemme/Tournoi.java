@@ -37,15 +37,21 @@ public class Tournoi {
 			this.nbTours = nbTours;
 			this.matchNum = 0;
 			//Permet de calculer le nombre de rencontres en fonction du nombre de strategies
-			// On fait (n²-n)/2, on pourrait faire également n(n+1)/2 avec n = nbStrategie - 1
-			double nbRencontre = (Math.pow(this.strategies.size(), 2) - this.strategies.size())/2;
+			// On fait n(n+1)/2 avec n = nbStrategie
+			double nbRencontre = (this.strategies.size()*(this.strategies.size()+1))/2;
+			for(int j = 0; j < this.strategies.size(); j++) {
+				for(int i = j; i < this.strategies.size(); i++) {
+					this.confrontations.add(new Rencontre(this.strategies.get(j), this.strategies.get(i)));
+				}
+			}
 		} else {
 			throw new LengthException("Impossible de lancer un tournoi avec moins de deux Strategies !");
 		}
-		
 		//this.finalScores = new ArrayList<int[]>(); Je mets en commentaire vu que je m'en sert pas pour l'instant
 	}
 	
+	/*Ensemble des fonctions appliqués à la liste des confrontations*/
+	//GETTER
 	public ArrayList<Rencontre> getConfrontations() {
 		return this.confrontations;
 	}
@@ -53,26 +59,7 @@ public class Tournoi {
 	public Rencontre getConfrontation(int index) {
 		return this.confrontations.get(index);
 	}
-	
-	//Du coup cette foncion serait à enlever si on enlève l'arraylist
-	/*public ArrayList<int[]> getFinalScores(){
-		return this.finalScores;
-	}*/
-	//Même chose pour cette fonction
-	/*public int[] getFinalScore(int index) {
-		return this.finalScores.get(index);
-	}*/
-	
-	public int getNbTours() {
-		return this.nbTours;
-	}
-	
-	//Est-ce qu'on ajoute une exception si le tournoi est démarré ?
-	//Du type : Impossible de changer le nb de tours une fois le tournoi lancé
-	public void setNbTours(int nbTours) {
-		this.nbTours = nbTours;
-	}
-	
+	//SETTER
 	public void setConfrontations(ArrayList<Rencontre> confrontations) {
 		this.confrontations = confrontations;
 	}
@@ -83,6 +70,65 @@ public class Tournoi {
 			this.confrontations.add(confrontation);
 		}
 	}
+	//TOSTRING
+	public String confrontationsToString() {
+		
+		return null;
+	}
+	
+	/*Ensemble des fonctions appliquées à la liste des strategies*/
+	//GETTER
+	
+	//SETTER
+	
+	//TOSTRING
+	public String strategiesToString() {
+		String result = "Ce tournoi opposera les strategies suivantes : \n";
+		for(Strategie s: this.strategies) {
+			result = result + s.getNomStrategie() + " : " + s.getDescription();
+		}
+		return result;
+	}
+	
+	/*Ensemble des fonctions appliquées au nombre de tours par rencontre*/
+	//GETTER
+	public int getNbTours() {
+		return this.nbTours;
+	}
+	//SETTER
+	public void setNbTours(int nbTours) {
+		this.nbTours = nbTours;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//Du coup cette foncion serait à enlever si on enlève l'arraylist
+	/*public ArrayList<int[]> getFinalScores(){
+		return this.finalScores;
+	}*/
+	//Même chose pour cette fonction
+	/*public int[] getFinalScore(int index) {
+		return this.finalScores.get(index);
+	}*/
+	
+	
+	
+	//Est-ce qu'on ajoute une exception si le tournoi est démarré ?
+	//Du type : Impossible de changer le nb de tours une fois le tournoi lancé
+	//Dans ce cas là il faudra rajouter un boolean
+	
+	
+	
 	
 	//Je ne l'implemente pas encore car je sais pas si je le ferais
 	/*public void setConfrontations(ArrayList<Strategie> strategies) {
