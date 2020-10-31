@@ -33,4 +33,7 @@ public class Rencontre {
 		this.s2 = s2;
 	}
 	
+	public String toString() {
+		return "La rencontre oppose " + this.s1.getNomStrategie() + " et " + this.s2.getNomStrategie();
+	}
 }

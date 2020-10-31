@@ -32,8 +32,9 @@ public class Tournoi {
 	//en faisant un genre de foreach
 	public Tournoi(int nbTours, ArrayList<Strategie> strategies) throws LengthException{
 		//On prend en compte l'exception si jamais on a pas assez de strategies pour effectuer le tournoi
-		if(this.strategies.size() <= 1) {
+		if(strategies.size() > 1) {
 			this.strategies = strategies;
+			this.confrontations = new ArrayList<Rencontre>();
 			this.nbTours = nbTours;
 			this.matchNum = 0;
 			//Permet de calculer le nombre de rencontres en fonction du nombre de strategies
@@ -72,8 +73,13 @@ public class Tournoi {
 	}
 	//TOSTRING
 	public String confrontationsToString() {
-		
-		return null;
+		int i = 0;
+		String result = "Voici les différentes recontres du tournoi : \n";
+		for(Rencontre r: this.confrontations) {
+			result = result + "Rencontre " + i + " : " + r.getStrategie1().getNomStrategie() + " - " + r.getStrategie2().getNomStrategie() + "\n";
+			i++;
+		}
+		return result;
 	}
 	
 	/*Ensemble des fonctions appliquées à la liste des strategies*/
@@ -85,7 +91,7 @@ public class Tournoi {
 	public String strategiesToString() {
 		String result = "Ce tournoi opposera les strategies suivantes : \n";
 		for(Strategie s: this.strategies) {
-			result = result + s.getNomStrategie() + " : " + s.getDescription();
+			result = result + s.getNomStrategie() + " : " + s.getDescription() + "\n";
 		}
 		return result;
 	}
