@@ -32,19 +32,11 @@ public class Tournoi {
 	//en faisant un genre de foreach
 	public Tournoi(int nbTours, ArrayList<Strategie> strategies) throws LengthException{
 		//On prend en compte l'exception si jamais on a pas assez de strategies pour effectuer le tournoi
-		if(strategies.size() > 1) {
-			this.strategies = strategies;
+		if(strategies.size() >= 1) {
 			this.confrontations = new ArrayList<Rencontre>();
 			this.nbTours = nbTours;
 			this.matchNum = 0;
-			//Permet de calculer le nombre de rencontres en fonction du nombre de strategies
-			// On fait n(n+1)/2 avec n = nbStrategie
-			double nbRencontre = (this.strategies.size()*(this.strategies.size()+1))/2;
-			for(int j = 0; j < this.strategies.size(); j++) {
-				for(int i = j; i < this.strategies.size(); i++) {
-					this.confrontations.add(new Rencontre(this.strategies.get(j), this.strategies.get(i)));
-				}
-			}
+			this.setStrategies(strategies);
 		} else {
 			throw new LengthException("Impossible de lancer un tournoi avec moins de deux Strategies !");
 		}
@@ -84,9 +76,32 @@ public class Tournoi {
 	
 	/*Ensemble des fonctions appliquées à la liste des strategies*/
 	//GETTER
-	
+	public ArrayList<Strategie> getStrategies(){
+		return this.strategies;
+	}
+	public Strategie getStrategie(int index) {
+		return this.strategies.get(index);
+	}
 	//SETTER
-	
+	public void setStrategies(ArrayList<Strategie> strategies) {
+		this.strategies = strategies;
+		this.confrontations.clear();
+		for(int j = 0; j < this.strategies.size(); j++) {
+			for(int i = j; i < this.strategies.size(); i++) {
+				this.confrontations.add(new Rencontre(this.strategies.get(j), this.strategies.get(i)));
+			}
+		}
+	}
+	public void setStrategies(Strategie[] strategies) {
+		this.strategies.clear();
+		this.confrontations.clear();
+		for(Strategie s: strategies) { this.strategies.add(s); }
+		for(int j = 0; j < this.strategies.size(); j++) {
+			for(int i = j; i < this.strategies.size(); i++) {
+				this.confrontations.add(new Rencontre(this.strategies.get(j), this.strategies.get(i)));
+			}
+		}
+	}
 	//TOSTRING
 	public String strategiesToString() {
 		String result = "Ce tournoi opposera les strategies suivantes : \n";

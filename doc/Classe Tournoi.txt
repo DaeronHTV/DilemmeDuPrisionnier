@@ -1,0 +1,72 @@
+***Je n'ai pas fini l'ensemble des fonctions dans le code, il se peut que j'en
+rajoute ou que j'en enlève en fonction***
+
+La classe Tournoi est la classe principale du programme, c'est elle qui va gérer
+l'ensemble des paramètres pour faire ce que le prof attend.
+
+Cette classe est composé des paramètres suivants :
+
+-> nbTours : Car c'est l'utilisateur qui va indiquer au programme le nombre de
+tour à effectuer. Il correspond au nombre de tour/round effectué durant une
+Rencontre entre deux strategies;
+
+-> matchNum : Il représente le numéro du match qui est en train de se dérouler ou
+qui va se dérouler
+N.B : Il n'est pas encore utilisé pour l'instant dans le code
+
+-> finalScores : Représente les scores des différentes strategies durant les 
+différents Tours
+N.B : Il n'est pas encore utilisé et je pense qu'il faudrait l'enlever car on peut
+récupérer les scores des Tours via la liste des confrontations
+
+-> confrontations : Représent l'ensemble des Rencontre qui vont se dérouler lors
+du tournoi entre les différentes strategies indiquées par l'utilisateur
+C'est lui qui fera le lien avec la classe Rencontre
+
+-> strategies : Représentre l'ensemble des Strategies qui vont se battre durant le
+tournoi. Je l'ai rajouté car c'est l'utlisateur qui indique les stratégies qui 
+s'affrontent.
+
+Cette classe est composé des constructeurs suivants :
+
+-> Tournoi(int nbTours, ArrayList<Strategie> strategies) : Il s'agit du
+constructeur par défaut qui sera utilisé para l'utilisateur pour créer le tournoi
+Ce dernier lève une exception si l'utilisateur n'a pas donné de strategie.
+N.B : On ne lève pas l'exception si l'utilisateur indique une seule strategie
+car cette dernière peut se battre avec elle même d'après les spécifications
+Les confrontations sont crées en fonction du nombre de strategies données
+par l'utilisateur
+
+N.B : Il est possible que j'ajoute d'autres constructeurs en fonction des specs
+ou autres
+
+Cette classe est composé des fonctions suivantes :
+
+-> getConfrontations() : Retourne l'ArrayList<Rencontre>
+-> getConfrontation(int index) : Retourne la Rencontre se trouvant à la position
+index de l'ArrayList
+-> setConfrontations(ArrayList<Rencontre> confrontations) : Change la liste des
+confrontations
+N.B : Peut-être ajouté une exception si jamais le tournoi a démarré pour éviter
+de changer en plein milieux ?
+-> setConfrontations(Rencontre[] confrontations) : Même principe que 
+setConfrontations(ArrayList<Rencontre> confrontations)
+-> confrontationToString() : Retourne un texte affichant la liste des rencontres
+du tournoi
+
+-> strategiesToString() : Retourne la liste des strategies avec leur nom et leur
+description
+-> getStrategies() : Retourne l'ArrayList<Strategie>
+-> getStrategie(int index) : Retourne la strategie se trouvant à l'indice index
+de la liste
+-> setStrategies(ArrayList<Strategie> strategies) : Change la liste des
+strategies
+N.B : Peut-être ajouté une exception si jamais le tournoi a démarré pour éviter
+de changer en plein milieux ?
+-> setStrategies(Strategie[] strategies) : Même principe que 
+setStrategies(ArrayList<Rencontre> confrontations)
+
+-> getNbTours() : Retourne le nombre de tours durant une Rencontre
+-> setNbTours() : Change le nombre de tours des Rencontres
+N.B : Est-ce qu'on lève une exception si l'utilisateur souhaite changer le nombre
+de tour alors que le tournoi à démarrer ?
