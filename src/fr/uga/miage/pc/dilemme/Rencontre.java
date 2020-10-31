@@ -1,4 +1,5 @@
 package fr.uga.miage.pc.dilemme;
+import java.util.*;
 
 /**
  * @description This class implement all the features to describe a Rencontre
@@ -9,6 +10,7 @@ package fr.uga.miage.pc.dilemme;
 public class Rencontre {
 	Strategie s1;
 	Strategie s2;
+	ArrayList<Tour> rounds;
 	
 	public Rencontre(Strategie s1, Strategie s2) {
 		this.s1 = s1;
