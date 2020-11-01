@@ -1,5 +1,5 @@
 package fr.uga.miage.pc.dilemme;
-import java.util.ArrayList;
+
 import fr.uga.miage.exception.ForfaitException;
 
 /**
@@ -8,123 +8,94 @@ import fr.uga.miage.exception.ForfaitException;
  * @version 1.0
  */
 
-public class Strategie {
+public abstract class Strategie {
 	
-	/**
-	 * @description The name of the strategie
-	 * @see Strategie#Strategie(String, String)
-	 * @see Strategie#getNomStrategie()
-	 */
 	private String nomStrategie;
-	
-	/**
-	 * @description A text which describe the strategie
-	 * @see Strategie#Strategie(String, String)
-	 * @see Tournoi#Tournoi(int, ArrayList)
-	 */
-	//J'ai rajouté ça mais ce n'est une chose obligatoire
 	private String description;
-	
-	/**
-	 * @description Say is the strategie declare forfeit or not
-	 * @see Strategie#setForfait(boolean)
-	 * @see Strategie#isForfait()
-	 */
-	//Je rajoute ce booléen car l'utilisateur peut décider si une strategie déclare forfait
 	private boolean forfait;
+	private int numTour;
+	private boolean betrayed;
 	
-	/**
-	 * @description Construct a new Strategie with the name and description given
-	 * @param String nomStrategie
-	 * @param String description
-	 * @version 1.0.0
-	 * @see Strategie#score
-	 */
 	public Strategie(String nomStrategie, String description) {
 		this.nomStrategie = nomStrategie;
 		this.description = description;
 		this.forfait = false;
+		this.numTour = 1;
+		this.betrayed = false;
 	}
 	
-	/**
-	 * @description Get the name of the Strategie
-	 * @version 1.0.0
-	 * @see Strategie#nomStrategie
-	 * @return String
-	 */
 	public String getNomStrategie() {
 		return this.nomStrategie;
 	}
 	
-	/**
-	 * @description change te name of the Strategie
-	 * @param String nomStrategie
-	 * @version 1.0.0
-	 * @see Strategie#nomStrategie
-	 */
 	public void setNomStrategie(String nomStrategie) {
 		this.nomStrategie = nomStrategie;
 	}
 	
-	/**
-	 * @description change the description of the Strategie
-	 * @param String description
-	 * @version 1.0.0
-	 * @see Strategie#description
-	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 	
-	/**
-	 * @description get the description of the Strategie
-	 * @version 1.0.0
-	 * @see Strategie#description
-	 * @return String
-	 */
 	public String getDescription() {
 		return this.description;
 	}
-	
-	/**
-	 * @description change if the Strategie declare forfeit or not
-	 * @param boolean forfait
-	 * @throws ForfaitException
-	 * @version 1.0.0
-	 * @see Strategie#forfait
-	 */
-	//Est-ce qu'on considère qu'une strategies une fois qu'elle déclare forfait
-	//ne plus participer à aucune rencontre du tournoi ou le forfait ne s'applique
-	//qu'à la rencontre actuelle ?
+
 	public void setForfait(boolean forfait) throws ForfaitException{
 		if(!forfait) {
 			this.forfait = !forfait;
-		} else {
-			throw new ForfaitException("Un forfait est définitif lors du tournoi");
+		}else {
+			throw new ForfaitException("Une strategie déclarant forfait ne peux plus participer au tournoi");
 		}
 	}
 	
-	/**
-	 * @description Say if the Strategie declared forfeit or not
-	 * @version 1.0.0
-	 * @see Strategie#forfait
-	 * @return boolean
-	 */
 	public boolean isForfait() {
 		return this.forfait;
 	}
 	
-	/**
-	 * @description Return a String with all the information about the Strategie
-	 * @version 1.0.0
-	 * @see Strategie#description
-	 * @see Strategie#forfait
-	 * @see Strategie#nomStrategie
-	 * @return String
-	 */
+	public void incrementNumTour() {
+		this.numTour = this.numTour++;
+	}
+	
+	public int getNumTour() {
+		return this.numTour;
+	}
+	
+	public boolean hasBetrayed() {
+		return this.betrayed;
+	}
+	
+	public void setBetrayed(boolean betrayed) {
+		this.betrayed = betrayed;
+	}
+	
+	public void clear() {
+		//this.forfait = false; Voir avec Steph
+		this.numTour = 1;
+		this.betrayed = false;
+	}
+	
 	@Override
 	public String toString() {
 		String isforfait = this.forfait ? "A déclaré forfait pour ce tournoi !" : "Est toujours dans la course !";
 		return "Stratégie : " + this.getNomStrategie() + "\nDescription : " + this.getDescription() + "\n" + isforfait;
+	}
+	
+	public abstract String play();
+	
+	public abstract String play(String lastPlay);
+	
+	@Override
+	public int hashCode() { 
+		return this.nomStrategie.hashCode() ^ this.description.hashCode(); 
+	}
+
+	@Override //Voir si on rajoute forfait et numtour dans le test
+	public boolean equals(Object o) {
+		boolean result = false;
+		if(o instanceof Strategie) {
+			Strategie test = (Strategie) o;
+			result = this.nomStrategie.equals(test.getNomStrategie()) && this.description.equals(test.getDescription());
+		}
+		return result;
 	}
 }

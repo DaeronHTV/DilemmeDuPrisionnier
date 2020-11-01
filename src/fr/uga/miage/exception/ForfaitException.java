@@ -1,8 +1,10 @@
 package fr.uga.miage.exception;
 
 public class ForfaitException extends Exception{
-		
-	private static final long serialVersionUID = 2369777277275093048L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public ForfaitException() {
 		super();

@@ -36,4 +36,8 @@ public class Rencontre {
 	public String toString() {
 		return "La rencontre oppose " + this.s1.getNomStrategie() + " et " + this.s2.getNomStrategie();
 	}
+	
+	public void lauch() {
+		
+	}
 }

@@ -1,6 +1,8 @@
 package fr.uga.miage.pc.dilemme;
 
-import fr.uga.miage.exception.LengthException;
+import java.util.ArrayList;
+
+import fr.uga.miage.object.Triplet;
 
 /**
  * @description This class implement all the features to desribe a Tour
@@ -16,22 +18,11 @@ public class Tour {
 	 */
 	public int[] score;
 	
-	/**
-	 * @description Number of participant in this Tour
-	 * @see Tour#Tour(int)
-	 * @see Tour#setNbParticipant(int)
-	 */
-	public int nbParticipant;
+	public char[] joue;
 	
-	/**
-	 * @description Default constructor of the class Tour
-	 * @version 1.0.0
-	 * @see Tour#score
-	 */
-	public Tour(int nbParticipant) {
-		this.score = new int[nbParticipant];
-		this.nbParticipant = nbParticipant;
-	}
+	private ArrayList<Triplet<Strategie, Integer, String>> partie;
+	
+	private Tour lastTour;
 	
 	/**
 	 * @description Constructor of the class
@@ -39,9 +30,26 @@ public class Tour {
 	 * @version 1.0.0
 	 * @see Tour#score
 	 */
-	public Tour(int[] score) {
-		this.score = score;
-		this.nbParticipant = this.score.length;
+	public Tour(Strategie s1, Strategie s2) {
+		this(s1, s2, null);
+	}
+	
+	public Tour(Strategie s1, Strategie s2, Tour t) {
+		this.lastTour = t;
+		this.setStrategie(s1);
+		this.setStrategie(s2);
+	}
+	
+	public void setStrategie(Strategie s) {
+		this.setStrategie(s, 0, "");
+	}
+	
+	public void setStrategie(Strategie s, int i) {
+		this.setStrategie(s, i, "");
+	}
+	
+	public void setStrategie(Strategie s, int i, String st) {
+		this.partie.add(new Triplet<Strategie, Integer, String>(s, i, st));
 	}
 	
 	/**
@@ -53,12 +61,8 @@ public class Tour {
 	 * @see LengthException#LengthException
 	 * @see Tour#score
 	 */
-	public void setScore(int[] score) throws LengthException {
-		if(score.length == this.nbParticipant) {
+	public void setScore(int[] score){
 			this.score = score;
-		} else {
-			throw new LengthException("The length of the array doesn't match !");
-		}
 	}
 	
 	/**
@@ -69,31 +73,5 @@ public class Tour {
 	 */
 	public int[] getScore() {
 		return this.score;
-	}
-	
-	/**
-	 * @description Get the number of participant
-	 * @version 1.0.0
-	 * @return int
-	 * @see Tour#nbParticipant
-	 */
-	public int getNbParticipant() {
-		return this.nbParticipant;
-	}
-	
-	/**
-	 * @description Set a new number of participant
-	 * @version 1.0.0
-	 * @param int nbParticipant
-	 * @see Tour#nbParticipant
-	 */
-	public void setNbParticipant(int nbParticipant) {
-		this.nbParticipant = nbParticipant;
-		int[] temp = this.score;
-		this.score = new int[nbParticipant];
-		int length = this.score.length < temp.length ? this.score.length : temp.length;
-		for(int i = 0; i < length; i++) {
-			this.score[i] = temp[i];
-		}
 	}
 }
