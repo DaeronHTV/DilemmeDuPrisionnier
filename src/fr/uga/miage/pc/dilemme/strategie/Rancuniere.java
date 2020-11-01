@@ -3,21 +3,14 @@ import fr.uga.miage.pc.dilemme.Strategie;
 
 public class Rancuniere extends Strategie{
 
-	public Rancuniere(String nomStrategie, String description) {
-		super(nomStrategie, description);
+	public Rancuniere() {
+		super("Rancuniere", "Je coopere à la première partie, mais des que mon adversaire trahit, je trahis toujours.");
 	}
 
 	@Override
 	public String play() {
-		return this.play("");
+		String result = this.findValue("t") && this.getNumTour() != 1 ? "t" : "c";
+		this.incrementNumTour();
+		return result;
 	}
-
-	@Override
-	public String play(String lastPlay) {
-		if(lastPlay.equals("t") && !this.hasBetrayed()) {
-			this.setBetrayed(true);
-		}
-		return this.hasBetrayed() && this.getNumTour() != 1 ? "t" : "c";
-	}
-
 }

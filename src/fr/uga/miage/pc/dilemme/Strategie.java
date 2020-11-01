@@ -1,5 +1,7 @@
 package fr.uga.miage.pc.dilemme;
 
+import java.util.ArrayList;
+
 import fr.uga.miage.exception.ForfaitException;
 
 /**
@@ -14,14 +16,14 @@ public abstract class Strategie {
 	private String description;
 	private boolean forfait;
 	private int numTour;
-	private boolean betrayed;
+	private ArrayList<String> listPlay;
 	
 	public Strategie(String nomStrategie, String description) {
 		this.nomStrategie = nomStrategie;
 		this.description = description;
 		this.forfait = false;
 		this.numTour = 1;
-		this.betrayed = false;
+		this.listPlay = new ArrayList<String>();
 	}
 	
 	public String getNomStrategie() {
@@ -41,8 +43,8 @@ public abstract class Strategie {
 	}
 
 	public void setForfait(boolean forfait) throws ForfaitException{
-		if(!forfait) {
-			this.forfait = !forfait;
+		if(this.forfait == false) {
+			this.forfait = forfait;
 		}else {
 			throw new ForfaitException("Une strategie déclarant forfait ne peux plus participer au tournoi");
 		}
@@ -53,36 +55,52 @@ public abstract class Strategie {
 	}
 	
 	public void incrementNumTour() {
-		this.numTour = this.numTour++;
+		this.numTour = this.numTour + 1;
 	}
 	
 	public int getNumTour() {
 		return this.numTour;
 	}
 	
-	public boolean hasBetrayed() {
-		return this.betrayed;
+	public boolean findValue(String value) {
+		return this.listPlay.contains(value);
 	}
 	
-	public void setBetrayed(boolean betrayed) {
-		this.betrayed = betrayed;
+	public void setPlay(String value) {
+		this.listPlay.add(value);
 	}
+	
+	public String getPlayValue(int index) { return this.listPlay.get(index); }
+	
+	public ArrayList<String> getPlayValue(int... index) {
+		int j = 0;
+		ArrayList<String> result = new ArrayList<String>();
+		for(int i: index) {
+			if(j < this.listPlay.size()) {
+				result.add(this.listPlay.get(i));
+				j++;
+			} else {
+				result.add(null);
+			}
+		}
+		return result;
+	}
+	
+	public int sizeListPlay() { return this.listPlay.size(); }
 	
 	public void clear() {
 		//this.forfait = false; Voir avec Steph
 		this.numTour = 1;
-		this.betrayed = false;
+		this.listPlay.clear();
 	}
+	
+	public abstract String play();
 	
 	@Override
 	public String toString() {
 		String isforfait = this.forfait ? "A déclaré forfait pour ce tournoi !" : "Est toujours dans la course !";
 		return "Stratégie : " + this.getNomStrategie() + "\nDescription : " + this.getDescription() + "\n" + isforfait;
 	}
-	
-	public abstract String play();
-	
-	public abstract String play(String lastPlay);
 	
 	@Override
 	public int hashCode() { 

@@ -10,11 +10,6 @@ public class PerGentille extends Strategie{
 
 	@Override
 	public String play() {
-		return this.play("");
-	}
-
-	@Override
-	public String play(String lastPlay) {
 		String result = "c";
 		if(this.getNumTour() % 3 == 0) {
 			result = "t";
@@ -22,5 +17,4 @@ public class PerGentille extends Strategie{
 		this.incrementNumTour();
 		return result;
 	}
-
 }

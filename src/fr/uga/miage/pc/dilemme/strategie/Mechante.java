@@ -10,13 +10,7 @@ public class Mechante extends Strategie{
 
 	@Override
 	public String play() {
-		return this.play("");
-	}
-
-	@Override
-	public String play(String lastPlay) {
 		this.incrementNumTour();
 		return "t";
 	}
-
 }

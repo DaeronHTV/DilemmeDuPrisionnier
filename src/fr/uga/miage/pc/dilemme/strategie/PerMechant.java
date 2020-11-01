@@ -10,18 +10,11 @@ public class PerMechant extends Strategie{
 
 	@Override
 	public String play() {
-		return this.play("");
-	}
-
-	@Override
-	public String play(String lastPlay) {
 		String result = "t";
 		if(this.getNumTour() % 3 == 0) {
 			result = "c";
 		}
 		this.incrementNumTour();
 		return result;
-	}
-	
-	
+	}	
 }

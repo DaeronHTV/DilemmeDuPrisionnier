@@ -10,11 +10,6 @@ public class Gentille extends Strategie{
 
 	@Override
 	public String play() {
-		return this.play("");
-	}
-
-	@Override
-	public String play(String lastPlay) {
 		this.incrementNumTour();
 		return "c";
 	}
