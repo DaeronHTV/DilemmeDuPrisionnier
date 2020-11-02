@@ -1,5 +1,4 @@
 package fr.uga.miage.pc.dilemme;
-import java.util.*;
 
 /**
  * @description This class implement all the features to describe a Rencontre

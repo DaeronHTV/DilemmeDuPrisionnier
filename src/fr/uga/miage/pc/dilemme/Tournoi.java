@@ -24,16 +24,18 @@ public class Tournoi {
 		}
 	}
 	
+	public void start() {
+		for(Rencontre r: this.confrontations) {
+			r.lauch(this.nbTours);
+		}
+	}
+	
 	public ArrayList<Rencontre> getConfrontations() {
 		return this.confrontations;
 	}
 	
 	public Rencontre getConfrontation(int index) {
 		return this.confrontations.get(index);
-	}
-	
-	public Rencontre getCurrentConfrontation() {
-		return this.confrontations.get(this.matchNum);
 	}
 
 	public void setConfrontations(ArrayList<Rencontre> confrontations) {

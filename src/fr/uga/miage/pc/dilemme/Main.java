@@ -1,33 +1,82 @@
 package fr.uga.miage.pc.dilemme;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import fr.uga.miage.pc.dilemme.strategie.*;
 
 public class Main {
 	
-	private ArrayList<Strategie> s = new ArrayList<Strategie>();
-	private Tournoi t;
-	
-	public void Launch() {
-		for(Rencontre r: this.t.getConfrontations()) {
-			System.out.println("Rencontre N°" + (this.t.getNumRencontre()+1) + " :");
-			System.out.println(r.toString());
-			System.out.println();
-			this.t.rencontreIncrement();;
+	public static void main(String[] args) throws IOException {
+		boolean confirm = false;
+		ArrayList<Strategie> list = null;
+		while(!confirm){
+			list = init();
 		}
+		
 	}
 	
-	public static void main(String[] args) {
-		
-		System.out.println("Bienvenue dans ce tournoi !");
-		
-		ArrayList<Strategie> s = new ArrayList<Strategie>();
-		/*s.add(new Strategie("test", "test description"));
-		s.add(new Strategie("test 2", "test description 2"));
-		s.add(new Strategie("test 3", "test description 3"));
-		s.add(new Strategie("test 4", "test description 4"));
-		s.add(new Strategie("test 5", "test description 5"));
-		s.add(new Strategie("test 6", "test description 6"));
-		Tournoi t = new Tournoi(10, s);*/
-		//System.out.println(t.toString());
+	public static ArrayList<Strategie> init() throws IOException {
+		String[] result = null;
+		ArrayList<Strategie> list = new ArrayList<Strategie>();
+		System.out.println("Bienvenue dans ce tournoi !\n");
+		System.out.println("Avant de commencer veuillez choisir les Strategies qui vont s'affronter :");
+		afficheStrategie();
+		System.out.print("Separe les numéros par un '-' : ");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			result = br.readLine().split("-");
+			list = initListStrategie(result);
+		}catch(IOException ioe) {
+			ioe.printStackTrace();
+		}
+		return list;
+	}
+	
+	public static void afficheStrategie() {
+		System.out.println("1. Gentille");
+		System.out.println("2. Mechante");
+		System.out.println("3. Donnant-Donant");
+		System.out.println("4. Donnant-Donnant Dur");
+		System.out.println("5. Mefiante");
+		System.out.println("6. Rancunière");
+		System.out.println("7. Periodique-Gentille");
+		System.out.println("8. Periodique-Mechante\n");
+	}
+	
+	public static ArrayList<Strategie> initListStrategie(String[] choice){
+		ArrayList<Strategie> list = new ArrayList<Strategie>();
+		for(String s: choice) {
+			switch(s) {
+				case "1":
+					list.add(new Gentille());
+					break;
+				case "2":
+					list.add(new Mechante());
+					break;
+				case "3":
+					list.add(new DonnantDonnant());
+					break;
+				case "4":
+					list.add(new DonnantDonnantDur());
+					break;
+				case "5":
+					list.add(new Mefiante());
+					break;
+				case "6":
+					list.add(new Rancuniere());
+					break;
+				case "7":
+					list.add(new PerGentille());
+					break;
+				case "8":
+					list.add(new PerMechant());
+					break;
+				default:
+					break;
+			}
+		}
+		return list;
 	}
 }
