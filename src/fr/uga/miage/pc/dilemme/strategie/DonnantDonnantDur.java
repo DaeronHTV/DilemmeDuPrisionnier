@@ -7,7 +7,7 @@ import fr.uga.miage.pc.dilemme.Strategie;
 public class DonnantDonnantDur extends Strategie{
 
 	public DonnantDonnantDur() {
-		super("Donnant-Donnat Dur", "Je coopere à la premiere partie, puis je coopère sauf si mon adversaire a trahi lors de l’une des deux parties precedentes.");
+		super("Donnant-Donnant Dur", "Je coopere à la premiere partie, puis je coopère sauf si mon adversaire a trahi lors de l’une des deux parties precedentes.");
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public class Tournoi {
 	
 	private int nbTours;
 	private int matchNum;
-	private String resumeTournoi = "";
+	private String resumeTournoi = "\t|";
 	//private boolean skipMenu;
 	//private boolean skipTournoi;
 	private ArrayList<Rencontre> confrontations;
@@ -46,7 +46,7 @@ public class Tournoi {
 			//}
 		}
 		System.out.println("Fin du Tournoi !\nResume du Tournoi : ");
-		System.out.println(this.resumeTournoi);
+		System.out.println(this.resumeTournoi());
 	}
 	
 	/*public void menu() throws IOException {
@@ -113,8 +113,9 @@ public class Tournoi {
 					this.confrontations.add(new Rencontre(this.strategies.get(j), this.strategies.get(i)));
 				}
 			}
-			this.resumeTournoi = this.resumeTournoi + this.strategies.get(j).getNomStrategie() + "\t|";
+			this.resumeTournoi = this.resumeTournoi + this.strategies.get(j).getNomStrategie() + "|";
 		}
+		this.resumeTournoi = this.resumeTournoi + "TOTAL\t|";
 	}
 
 	public String strategiesToString() {
@@ -149,6 +150,24 @@ public class Tournoi {
 	}
 	
 	public String resumeTournoi() {
+		String line = "\n--------------------------------------------------------------------------\n";
+		this.resumeTournoi = this.resumeTournoi + line;
+		for(Strategie s: this.strategies) {
+			int total = 0;
+			this.resumeTournoi = s.getNomStrategie().length() <= 15 
+					? this.resumeTournoi + s.getNomStrategie() + "|"
+					:this.resumeTournoi + s.getNomStrategie() + "|";
+			for(Rencontre r: this.confrontations) {
+				if(s.equals(r.getStrategie1())) {
+					total += r.getFinalScoreS1();
+					this.resumeTournoi = this.resumeTournoi + r.getFinalScoreS1() + "\t|";
+				}else if(s.equals(r.getStrategie2())){
+					total += r.getFinalScoreS2();
+					this.resumeTournoi = this.resumeTournoi + r.getFinalScoreS2() + "\t|";
+				}
+			}
+			this.resumeTournoi = this.resumeTournoi + total + "\t|" + line;
+		}
 		return this.resumeTournoi;
 	}
 	
