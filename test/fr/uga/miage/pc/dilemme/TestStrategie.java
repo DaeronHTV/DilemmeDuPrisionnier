@@ -68,16 +68,6 @@ class TestStrategie extends Strategie{
 	}
 	
 	@Test
-	void testGetValue2() {
-		this.setPlay("test1");
-		this.setPlay("test2");
-		this.setPlay("test3");
-		ArrayList<String> test = this.getPlayValue(1, 2);
-		assertEquals("test2", test.get(0));
-		assertEquals("test3", test.get(1));
-	}
-	
-	@Test
 	void TestSetPlay() {
 		this.setPlay("test");
 		assertEquals("test", this.getPlayValue(0));

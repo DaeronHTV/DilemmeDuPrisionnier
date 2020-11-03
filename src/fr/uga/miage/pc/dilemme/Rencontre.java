@@ -17,33 +17,17 @@ public class Rencontre {
 		this.scoresFinal = new int[] {0, 0};
 	}
 	
-	public Strategie getStrategie1() {
-		return this.s1;
-	}
+	public Strategie getStrategie1() { return this.s1; }
 	
-	public Strategie getStrategie2() {
-		return this.s2;
-	}
+	public Strategie getStrategie2() { return this.s2; }
 	
-	public void setStrategie1(Strategie s1) {
-		this.s1 = s1;
-	}
+	public void setStrategie1(Strategie s1) { this.s1 = s1; }
 	
-	public void setStrategie(Strategie s2) {
-		this.s2 = s2;
-	}
+	public void setStrategie(Strategie s2) { this.s2 = s2; }
 	
-	/*public int[] getFinalScores() {
-		return this.scoresFinal;
-	}*/
+	public int getFinalScoreS1() { return this.scoresFinal[0]; }
 	
-	public int getFinalScoreS1() {
-		return this.scoresFinal[0];
-	}
-	
-	public int getFinalScoreS2() {
-		return this.scoresFinal[1];
-	}
+	public int getFinalScoreS2() { return this.scoresFinal[1]; }
 	
 	public String scoreFinalToString() {
 		String result = "Le score final est de :\n" 
@@ -52,9 +36,7 @@ public class Rencontre {
 		return result;
 	}
 	
-	public String toString() {
-		return "La rencontre oppose " + this.s1.getNomStrategie() + " et " + this.s2.getNomStrategie();
-	}
+	public String toString() { return "La rencontre oppose " + this.s1.getNomStrategie() + " et " + this.s2.getNomStrategie(); }
 	
 	public void start(int nbTours) {
 		this.s1.clear();

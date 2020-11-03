@@ -19,7 +19,5 @@ public class PerMechant extends Strategie{
 	}	
 	
 	@Override
-	public Strategie clone() {
-		return new PerMechant();
-	}
+	public Strategie clone() { return new PerMechant(); }
 }

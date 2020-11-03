@@ -4,9 +4,7 @@ import fr.uga.miage.pc.dilemme.Strategie;
 
 public class Gentille extends Strategie{
 	
-	public Gentille() {
-		super("Gentille", "Je coopere toujours.");
-	}
+	public Gentille() { super("Gentille", "Je coopere toujours."); }
 
 	@Override
 	public String play() {
@@ -15,7 +13,5 @@ public class Gentille extends Strategie{
 	}
 	
 	@Override
-	public Strategie clone() {
-		return new Gentille();
-	}
+	public Strategie clone() { return new Gentille(); }
 }

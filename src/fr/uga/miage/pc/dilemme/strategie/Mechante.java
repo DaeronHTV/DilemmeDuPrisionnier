@@ -4,9 +4,7 @@ import fr.uga.miage.pc.dilemme.Strategie;
 
 public class Mechante extends Strategie{
 	
-	public Mechante() {
-		super("Mechante", "Je trahis toujours");
-	}
+	public Mechante() { super("Mechante", "Je trahis toujours"); }
 
 	@Override
 	public String play() {
@@ -15,7 +13,5 @@ public class Mechante extends Strategie{
 	}
 	
 	@Override
-	public Strategie clone() {
-		return new Mechante();
-	}
+	public Strategie clone() { return new Mechante(); }
 }

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class Tournoi {
 	
 	private int nbTours;
-	private int matchNum;
 	private String resumeTournoi = "\t|";
 	//private boolean skipMenu;
 	//private boolean skipTournoi;
@@ -27,22 +26,22 @@ public class Tournoi {
 			//this.skipTournoi = false;
 			this.confrontations = new ArrayList<Rencontre>();
 			this.nbTours = nbTours;
-			this.matchNum = 0;
 			this.setStrategies(strategies);
 		}
 	}
 	
-	public void start() throws IOException {
+	public void start() {
+		int num = 1;
 		for(Rencontre r: this.confrontations) {
 			//if(!this.skipTournoi) {
-				System.out.println("Rencontre N°" + (this.matchNum+1));
+				System.out.println("Rencontre N°" + num);
 				System.out.println(r.toString()+"\n");
 				/*if(!this.skipMenu) {
 					this.menu();
 				}*/
 				r.start(this.nbTours);
 				System.out.println(r.scoreFinalToString()+"\n");
-				this.rencontreIncrement();
+				num++;
 			//}
 		}
 		System.out.println("Fin du Tournoi !\nResume du Tournoi : ");
@@ -72,18 +71,18 @@ public class Tournoi {
 		
 	}*/
 	
-	public ArrayList<Rencontre> getConfrontations() {
-		return this.confrontations;
-	}
+	public ArrayList<Rencontre> getConfrontations() { return this.confrontations; }
 	
-	public Rencontre getConfrontation(int index) {
-		return this.confrontations.get(index);
-	}
+	public Rencontre getConfrontation(int index) { return this.confrontations.get(index); }
 
-	public void setConfrontations(ArrayList<Rencontre> confrontations) {
-		this.confrontations = confrontations;
-	}
+	public void setConfrontations(ArrayList<Rencontre> confrontations) { this.confrontations = confrontations; }
 	
+	/**
+	 * @description Return a String which show the list of the Rencontre of the Tournoi
+	 * @see Tournoi#confrontations
+	 * @see Rencontre#Rencontre(Strategie, Strategie)
+	 * @return String
+	 */
 	public String confrontationsToString() {
 		int i = 0;
 		String result = "Voici les differentes rencontres du tournoi : \n";
@@ -94,14 +93,33 @@ public class Tournoi {
 		return result;
 	}
 	
+	/**
+	 * return all the list of the participants
+	 * @see Tournoi#strategies
+	 * @see Strategie#Strategie(String, String)
+	 * @return ArrayList<Strategie>
+	 */
 	public ArrayList<Strategie> getStrategies(){
 		return this.strategies;
 	}
 	
+	/**
+	 * @description return the participant a the index position
+	 * @param int index
+	 * @see Tournoi#strategies
+	 * @see Strategie#Strategie(String, String)
+	 * @return Strategie
+	 */
 	public Strategie getStrategie(int index) {
 		return this.strategies.get(index);
 	}
 
+	/**
+	 * @description set a list of Strategie and change the list of Rencontre in function of this last
+	 * @param ArrayList<Strategie> strategies
+	 * @see Tournoi#strategies
+	 * @see Strategie#Strategie(String, String)
+	 */
 	public void setStrategies(ArrayList<Strategie> strategies) {
 		this.strategies = strategies;
 		this.confrontations.clear();
@@ -117,7 +135,12 @@ public class Tournoi {
 		}
 		this.resumeTournoi = this.resumeTournoi + "TOTAL\t|";
 	}
-
+	
+	/**
+	 * @description return a String which show all the participants of the Tournoi
+	 * @see Tournoi#strategies
+	 * @return String
+	 */
 	public String strategiesToString() {
 		String result = "Ce tournoi opposera les strategies suivantes : \n";
 		for(Strategie s: this.strategies) {
@@ -126,22 +149,18 @@ public class Tournoi {
 		return result;
 	}
 
-	/*public int getNbTours() {
+	public int getNbTours() {
 		return this.nbTours;
-	}*/
-
-	/*public void setNbTours(int nbTours) {
-		this.nbTours = nbTours;
-	}*/
-	
-	public void rencontreIncrement() {
-		this.matchNum++;
 	}
+
+	public void setNbTours(int nbTours) { this.nbTours = nbTours; }
 	
-	/*public int getNumRencontre() {
-		return this.matchNum;
-	}*/
-	
+	/**
+	 * @description Return a Tournoi's configuration sum up
+	 * @see Tournoi#nbTours
+	 * @see Tournoi#strategiesToString()
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return "Voici la configuration du tournoi actuelle : \n\nNombre de rencontre : " + this.confrontations.size() + "\n" +
@@ -149,6 +168,12 @@ public class Tournoi {
 				+ this.confrontationsToString();
 	}
 	
+	/**
+	 * @description Return a string which represent the table with all the scores of the different Rencontre
+	 * @see Tournoi#confrontations
+	 * @see Tournoi#strategies
+	 * @return String
+	 */
 	public String resumeTournoi() {
 		String line = "\n--------------------------------------------------------------------------\n";
 		this.resumeTournoi = this.resumeTournoi + line;
@@ -171,10 +196,15 @@ public class Tournoi {
 		return this.resumeTournoi;
 	}
 	
+	/**
+	 * @description Clean the Object and initialize the attributes with the default value
+	 * @see Tournoi#strategies
+	 * @see Tournoi#confrontations
+	 * @see Tournoi#matchNum
+	 */
 	public void clear() {
 		this.strategies = null;
 		this.confrontations = null;
-		this.matchNum = 0;
 		this.nbTours = 0;
 	}
 }

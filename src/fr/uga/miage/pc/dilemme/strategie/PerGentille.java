@@ -19,7 +19,5 @@ public class PerGentille extends Strategie{
 	}
 	
 	@Override
-	public Strategie clone() {
-		return new PerGentille();
-	}
+	public Strategie clone() { return new PerGentille(); }
 }

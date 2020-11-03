@@ -15,7 +15,5 @@ public class Rancuniere extends Strategie{
 	}
 	
 	@Override
-	public Strategie clone() {
-		return new Rancuniere();
-	}
+	public Strategie clone() { return new Rancuniere(); }
 }

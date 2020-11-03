@@ -16,7 +16,5 @@ public class DonnantDonnant extends Strategie{
 	}
 
 	@Override
-	public Strategie clone() {
-		return new DonnantDonnant();
-	}
+	public Strategie clone() { return new DonnantDonnant(); }
 }
