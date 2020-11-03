@@ -13,6 +13,7 @@ public class Main {
 		System.out.println("\nLe tournoi est initialisé !\n");
 		System.out.println(t.strategiesToString());
 		System.out.println(t.confrontationsToString());
+		t.start();
 	}
 	
 	/*public static void clearScreen() throws IOException {
@@ -43,7 +44,7 @@ public class Main {
 			}catch(IOException ioe) {
 				ioe.printStackTrace();
 			}
-			System.out.println("\n\n");
+			System.out.println();
 			afficherChoix(list);
 			System.out.print("Est-ce bien la liste désirée ? (y/n) : ");
 			br = new BufferedReader(new InputStreamReader(System.in));

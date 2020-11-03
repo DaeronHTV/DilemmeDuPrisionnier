@@ -33,22 +33,22 @@ class TestRencontre extends Rencontre{
 		
 	}
 	
-	@Test
+	/*@Test
 	void testGetFinalScores() {
-		this.lauch(20);
+		this.start(20);
 		assertEquals(0, this.getFinalScores()[0]);
 		assertEquals(100, this.getFinalScores()[1]);
-	}
+	}*/
 	
 	@Test
 	void testGetFinalScoreS1() {
-		this.lauch(20);
+		this.start(20);
 		assertEquals(0, this.getFinalScoreS1());
 	}
 	
 	@Test
 	void testGetFinalScoreS2() {
-		this.lauch(20);
+		this.start(20);
 		assertEquals(100, this.getFinalScoreS2());
 	}
 	
@@ -59,7 +59,7 @@ class TestRencontre extends Rencontre{
 	
 	@Test
 	void testLaunch() {
-		this.lauch(20);
+		this.start(20);
 		assertEquals(0, this.getFinalScoreS1());
 		assertEquals(100, this.getFinalScoreS2());
 	}

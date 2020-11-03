@@ -26,7 +26,11 @@ public class Tournoi {
 	
 	public void start() {
 		for(Rencontre r: this.confrontations) {
-			r.lauch(this.nbTours);
+			System.out.println("Rencontre N°" + (this.matchNum+1));
+			System.out.println(r.toString());
+			r.start(this.nbTours);
+			System.out.println(r.scoreFinalToString()+"\n");
+			this.rencontreIncrement();
 		}
 	}
 	
@@ -42,13 +46,6 @@ public class Tournoi {
 		this.confrontations = confrontations;
 	}
 	
-	public void setConfrontations(Rencontre[] confrontations) {
-		this.confrontations.clear();
-		for(Rencontre confrontation: confrontations) {
-			this.confrontations.add(confrontation);
-		}
-	}
-
 	public String confrontationsToString() {
 		int i = 0;
 		String result = "Voici les differentes rencontres du tournoi : \n";
@@ -76,17 +73,6 @@ public class Tournoi {
 			}
 		}
 	}
-	
-	public void setStrategies(Strategie[] strategies) {
-		this.strategies.clear();
-		this.confrontations.clear();
-		for(Strategie s: strategies) { this.strategies.add(s); }
-		for(int j = 0; j < this.strategies.size(); j++) {
-			for(int i = j; i < this.strategies.size(); i++) {
-				this.confrontations.add(new Rencontre(this.strategies.get(j), this.strategies.get(i)));
-			}
-		}
-	}
 
 	public String strategiesToString() {
 		String result = "Ce tournoi opposera les strategies suivantes : \n";
@@ -96,20 +82,21 @@ public class Tournoi {
 		return result;
 	}
 
-	public int getNbTours() {
+	/*public int getNbTours() {
 		return this.nbTours;
-	}
+	}*/
 
-	public void setNbTours(int nbTours) {
+	/*public void setNbTours(int nbTours) {
 		this.nbTours = nbTours;
-	}
+	}*/
 	
 	public void rencontreIncrement() {
 		this.matchNum++;
 	}
-	public int getNumRencontre() {
+	
+	/*public int getNumRencontre() {
 		return this.matchNum;
-	}
+	}*/
 	
 	@Override
 	public String toString() {

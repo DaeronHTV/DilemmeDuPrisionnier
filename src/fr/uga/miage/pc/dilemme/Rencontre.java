@@ -33,9 +33,9 @@ public class Rencontre {
 		this.s2 = s2;
 	}
 	
-	public int[] getFinalScores() {
+	/*public int[] getFinalScores() {
 		return this.scoresFinal;
-	}
+	}*/
 	
 	public int getFinalScoreS1() {
 		return this.scoresFinal[0];
@@ -45,11 +45,18 @@ public class Rencontre {
 		return this.scoresFinal[1];
 	}
 	
+	public String scoreFinalToString() {
+		String result = "Fin de la rencontre !\nLe score final est de :\n" 
+				+ this.s1.getNomStrategie() + " : " + this.scoresFinal[0] 
+				+ "\n" + this.s2.getNomStrategie() + " : " + this.scoresFinal[1];
+		return result;
+	}
+	
 	public String toString() {
 		return "La rencontre oppose " + this.s1.getNomStrategie() + " et " + this.s2.getNomStrategie();
 	}
 	
-	public void lauch(int nbTours) {
+	public void start(int nbTours) {
 		this.s1.clear();
 		this.s2.clear();
 		for(int i = 0; i < nbTours; i++) {
