@@ -13,9 +13,9 @@ public class DonnantDonnantDur extends Strategie{
 	@Override
 	public String play() {
 		String result = "c";
-		if(this.getNumTour() != 1) {
+		if(this.getNumTour() < 1) {
 			ArrayList<String> test = this.getPlayValue(this.sizeListPlay() - 1, this.sizeListPlay() - 2);
-			result = test.get(0).equals("t") || test.get(1).equals("t") ? "t" : "c";
+			result = test.get(0).equals("t") || test.get(1).equals("t") ? "t" : "c"; //MODIFIER CONDITIONS
 		}
 		this.incrementNumTour();
 		return result;
