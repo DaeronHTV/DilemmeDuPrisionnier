@@ -1,8 +1,5 @@
 package fr.uga.miage.pc.dilemme;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +11,7 @@ import java.util.ArrayList;
 public class Tournoi {
 	
 	private int nbTours;
-	private String resumeTournoi = "\t|";
+	private String resumeTournoi;
 	//private boolean skipMenu;
 	//private boolean skipTournoi;
 	private ArrayList<Rencontre> confrontations;
@@ -24,6 +21,7 @@ public class Tournoi {
 		if(strategies.size() >= 1) {
 			//this.skipMenu = false;
 			//this.skipTournoi = false;
+			this.resumeTournoi = "\t|";
 			this.confrontations = new ArrayList<Rencontre>();
 			this.nbTours = nbTours;
 			this.setStrategies(strategies);
@@ -74,8 +72,6 @@ public class Tournoi {
 	public ArrayList<Rencontre> getConfrontations() { return this.confrontations; }
 	
 	public Rencontre getConfrontation(int index) { return this.confrontations.get(index); }
-
-	public void setConfrontations(ArrayList<Rencontre> confrontations) { this.confrontations = confrontations; }
 	
 	/**
 	 * @description Return a String which show the list of the Rencontre of the Tournoi
@@ -123,17 +119,17 @@ public class Tournoi {
 	public void setStrategies(ArrayList<Strategie> strategies) {
 		this.strategies = strategies;
 		this.confrontations.clear();
-		for(int j = 0; j < this.strategies.size(); j++) {
-			for(int i = j; i < this.strategies.size(); i++) {
+		for(int j = 0; j < strategies.size(); j++) {
+			for(int i = j; i < strategies.size(); i++) {
 				if(i == j) {
-					this.confrontations.add(new Rencontre(this.strategies.get(j), this.strategies.get(j).clone()));
+					this.confrontations.add(new Rencontre(strategies.get(j), strategies.get(j).clone()));
 				}else {
-					this.confrontations.add(new Rencontre(this.strategies.get(j), this.strategies.get(i)));
+					this.confrontations.add(new Rencontre(strategies.get(j), strategies.get(i)));
 				}
 			}
-			this.resumeTournoi = this.resumeTournoi + this.strategies.get(j).getNomStrategie() + "|";
+			this.resumeTournoi += strategies.get(j).getNomStrategie() + "|";
 		}
-		this.resumeTournoi = this.resumeTournoi + "TOTAL\t|";
+		this.resumeTournoi += "TOTAL\t|";
 	}
 	
 	/**
@@ -143,15 +139,11 @@ public class Tournoi {
 	 */
 	public String strategiesToString() {
 		String result = "Ce tournoi opposera les strategies suivantes : \n";
-		for(Strategie s: this.strategies) {
-			result = result + s.getNomStrategie() + " : " + s.getDescription() + "\n";
-		}
+		for(Strategie s: this.strategies) { result += s.getNomStrategie() + " : " + s.getDescription() + "\n"; }
 		return result;
 	}
 
-	public int getNbTours() {
-		return this.nbTours;
-	}
+	public int getNbTours() { return this.nbTours; }
 
 	public void setNbTours(int nbTours) { this.nbTours = nbTours; }
 	
@@ -176,35 +168,21 @@ public class Tournoi {
 	 */
 	public String resumeTournoi() {
 		String line = "\n--------------------------------------------------------------------------\n";
-		this.resumeTournoi = this.resumeTournoi + line;
+		this.resumeTournoi += line;
 		for(Strategie s: this.strategies) {
 			int total = 0;
-			this.resumeTournoi = s.getNomStrategie().length() <= 15 
-					? this.resumeTournoi + s.getNomStrategie() + "|"
-					:this.resumeTournoi + s.getNomStrategie() + "|";
+			this.resumeTournoi += s.getNomStrategie() + "|";
 			for(Rencontre r: this.confrontations) {
 				if(s.equals(r.getStrategie1())) {
 					total += r.getFinalScoreS1();
-					this.resumeTournoi = this.resumeTournoi + r.getFinalScoreS1() + "\t|";
+					this.resumeTournoi += r.getFinalScoreS1() + "\t|";
 				}else if(s.equals(r.getStrategie2())){
 					total += r.getFinalScoreS2();
-					this.resumeTournoi = this.resumeTournoi + r.getFinalScoreS2() + "\t|";
+					this.resumeTournoi += r.getFinalScoreS2() + "\t|";
 				}
 			}
-			this.resumeTournoi = this.resumeTournoi + total + "\t|" + line;
+			this.resumeTournoi += total + "\t|" + line;
 		}
 		return this.resumeTournoi;
-	}
-	
-	/**
-	 * @description Clean the Object and initialize the attributes with the default value
-	 * @see Tournoi#strategies
-	 * @see Tournoi#confrontations
-	 * @see Tournoi#matchNum
-	 */
-	public void clear() {
-		this.strategies = null;
-		this.confrontations = null;
-		this.nbTours = 0;
 	}
 }

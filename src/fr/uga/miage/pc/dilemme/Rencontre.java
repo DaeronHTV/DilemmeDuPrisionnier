@@ -30,10 +30,7 @@ public class Rencontre {
 	public int getFinalScoreS2() { return this.scoresFinal[1]; }
 	
 	public String scoreFinalToString() {
-		String result = "Le score final est de :\n" 
-				+ this.s1.getNomStrategie() + " : " + this.scoresFinal[0] 
-				+ "\n" + this.s2.getNomStrategie() + " : " + this.scoresFinal[1];
-		return result;
+		return "Le score final est de :\n" + this.s1.getNomStrategie() + " : " + this.scoresFinal[0] + "\n" + this.s2.getNomStrategie() + " : " + this.scoresFinal[1];
 	}
 	
 	public String toString() { return "La rencontre oppose " + this.s1.getNomStrategie() + " et " + this.s2.getNomStrategie(); }
