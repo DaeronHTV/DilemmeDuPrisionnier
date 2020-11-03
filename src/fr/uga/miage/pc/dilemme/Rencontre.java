@@ -36,8 +36,7 @@ public class Rencontre {
 	public String toString() { return "La rencontre oppose " + this.s1.getNomStrategie() + " et " + this.s2.getNomStrategie(); }
 	
 	public void start(int nbTours) {
-		this.s1.clear();
-		this.s2.clear();
+		this.s1.clear(); this.s2.clear();
 		for(int i = 1; i <= nbTours; i++) {
 			String ps1 = this.s1.play();
 			String ps2 = this.s2.play();
@@ -58,11 +57,8 @@ public class Rencontre {
 			this.scoresFinal[0] += 2;
 			this.scoresFinal[1] += 2;
 		} else if ((ps1.equals("t") && ps2.equals("c")) || (ps1.equals("c") && ps2.equals("t"))) {
-			if(ps1.equals("t")) {
-				this.scoresFinal[0] += 5;
-			} else {
-				this.scoresFinal[1] += 5;
-			}
+			if(ps1.equals("t")) { this.scoresFinal[0] += 5; } 
+			else { this.scoresFinal[1] += 5; }
 		}
 	}
 }

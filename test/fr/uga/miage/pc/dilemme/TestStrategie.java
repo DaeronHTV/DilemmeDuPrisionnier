@@ -1,28 +1,18 @@
 package fr.uga.miage.pc.dilemme;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
-
 import fr.uga.miage.exception.ForfaitException;
 
 class TestStrategie extends Strategie{
 
-	public TestStrategie() {
-		super("Test", "Test Description");
-	}
+	public TestStrategie() { super("Test", "Test Description"); }
 
 	@Test
-	void testGetNomStrategie() {
-		assertEquals("Test", this.getNomStrategie());
-	}
+	void testGetNomStrategie() { assertEquals("Test", this.getNomStrategie()); }
 	
 	@Test
-	void testGetDescription() {
-		assertEquals("Test Description", this.getDescription());
-	}
+	void testGetDescription() { assertEquals("Test Description", this.getDescription()); }
 	
 	@Test
 	void testSetNomStrategie() {
@@ -41,9 +31,7 @@ class TestStrategie extends Strategie{
 		assertFalse(this.isForfait());
 		this.setForfait(true);
 		assertTrue(this.isForfait());
-		assertThrows(ForfaitException.class, () -> {
-            this.setForfait(false);;
-        });
+		assertThrows(ForfaitException.class, () -> { this.setForfait(false); });
 	}
 	
 	@Test
@@ -59,12 +47,6 @@ class TestStrategie extends Strategie{
 		this.incrementNumTour();
 		this.incrementNumTour();
 		assertEquals(3, this.getNumTour());
-	}
-	
-	@Test
-	void testGetValue1() {
-		this.setPlay("test");
-		assertEquals("test", this.getPlayValue(0));
 	}
 	
 	@Test
@@ -88,36 +70,19 @@ class TestStrategie extends Strategie{
 		this.setPlay("fge");
 		this.setPlay("gze,lg,");
 		assertEquals(2, this.sizeListPlay());
-		this.setPlay("gnok");
-		assertEquals(3, this.sizeListPlay());
 	}
 	
 	@Test
 	void TestClear() {
 		this.incrementNumTour();
-		this.incrementNumTour();
 		this.setPlay("bbbu");
-		this.setPlay("fef");
-		assertEquals(3, this.getNumTour());
-		assertEquals(2, this.sizeListPlay());
 		this.clear();
 		assertEquals(1, this.getNumTour());
 		assertEquals(0, this.sizeListPlay());
 	}
 	
 	@Test
-	void TestHashCode() {
-		int test1 = "Nouveau".hashCode();
-		int test2 = "test".hashCode();
-		this.setNomStrategie("Nouveau");
-		this.setDescription("test");
-		assertEquals(test1 ^ test2, this.hashCode());
-	}
-	
-	@Test
-	void TestToString() {
-		assertEquals("Stratégie : Test\nDescription : Test Description\nEst toujours dans la course !", this.toString());
-	}
+	void TestToString() { assertEquals("Stratégie : Test\nDescription : Test Description\nEst toujours dans la course !", this.toString()); }
 	
 	@Test
 	void TestEquals() {
@@ -128,14 +93,7 @@ class TestStrategie extends Strategie{
 	}
 
 	@Override
-	public String play() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	public String play() { return null; }
 	@Override
-	public Strategie clone() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Strategie clone() { return null; }
 }

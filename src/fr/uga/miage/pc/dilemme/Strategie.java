@@ -34,11 +34,8 @@ public abstract class Strategie {
 	public String getDescription() { return this.description; }
 
 	public void setForfait(boolean forfait) throws ForfaitException{
-		if(this.forfait == false) {
-			this.forfait = forfait;
-		}else {
-			throw new ForfaitException("Une strategie déclarant forfait ne peux plus participer au tournoi");
-		}
+		if(this.forfait == false) { this.forfait = forfait; }
+		else { throw new ForfaitException("Une strategie déclarant forfait ne peux plus participer au tournoi"); }
 	}
 	
 	public boolean isForfait() { return this.forfait; }
@@ -55,10 +52,7 @@ public abstract class Strategie {
 	
 	public int sizeListPlay() { return this.listPlay.size(); }
 	
-	public void clear() {
-		this.numTour = 1;
-		this.listPlay.clear();
-	}
+	public void clear() { this.numTour = 1; this.listPlay.clear(); }
 	
 	@Override
 	public String toString() {
