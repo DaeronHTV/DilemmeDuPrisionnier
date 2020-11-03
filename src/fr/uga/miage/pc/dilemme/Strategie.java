@@ -1,7 +1,6 @@
 package fr.uga.miage.pc.dilemme;
 
 import java.util.ArrayList;
-import fr.uga.miage.exception.ForfaitException;
 
 /**
  * @description This class implement all the features to describe a Strategie
@@ -33,9 +32,8 @@ public abstract class Strategie {
 	
 	public String getDescription() { return this.description; }
 
-	public void setForfait(boolean forfait) throws ForfaitException{
-		if(this.forfait == false) { this.forfait = forfait; }
-		else { throw new ForfaitException("Une strategie déclarant forfait ne peux plus participer au tournoi"); }
+	public void setForfait(boolean forfait) {
+		if(this.forfait == false) { this.forfait = forfait; } 
 	}
 	
 	public boolean isForfait() { return this.forfait; }

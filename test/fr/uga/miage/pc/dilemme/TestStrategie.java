@@ -2,7 +2,6 @@ package fr.uga.miage.pc.dilemme;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import fr.uga.miage.exception.ForfaitException;
 
 class TestStrategie extends Strategie{
 
@@ -27,15 +26,14 @@ class TestStrategie extends Strategie{
 	}
 	
 	@Test
-	void testSetForfait() throws ForfaitException {
+	void testSetForfait() {
 		assertFalse(this.isForfait());
 		this.setForfait(true);
 		assertTrue(this.isForfait());
-		assertThrows(ForfaitException.class, () -> { this.setForfait(false); });
 	}
 	
 	@Test
-	void testIsForfait() throws ForfaitException {
+	void testIsForfait() {
 		assertFalse(this.isForfait());
 		this.setForfait(true);
 		assertTrue(this.isForfait());
