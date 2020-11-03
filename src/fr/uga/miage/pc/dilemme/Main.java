@@ -16,12 +16,6 @@ public class Main {
 		t.start();
 	}
 	
-	/*public static void clearScreen() throws IOException {
-		Runtime runtime = Runtime.getRuntime ();
-		  String[] args = {"cmd.exe","/c","cls"};
-		  final Process p = runtime.exec(args);
-	}*/
-	
 	public static Tournoi init() throws IOException {
 		System.out.println("Bienvenue dans ce tournoi !\n");
 		ArrayList<Strategie> list = initList();
@@ -30,7 +24,6 @@ public class Main {
 	}
 	
 	public static ArrayList<Strategie> initList() throws IOException {
-		String[] result = null;
 		ArrayList<Strategie> list = null;
 		boolean confirm = false;
 		while(!confirm) {
@@ -39,32 +32,28 @@ public class Main {
 			System.out.print("Separe les numéros par un '-' : ");
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			try {
-				result = br.readLine().split("-");
+				String[] result = br.readLine().split("-");
 				list = fillListStrategie(result);
 			}catch(IOException ioe) {
 				ioe.printStackTrace();
 			}
-			System.out.println();
 			afficherChoix(list);
 			System.out.print("Est-ce bien la liste désirée ? (y/n) : ");
 			br = new BufferedReader(new InputStreamReader(System.in));
-			String choice = br.readLine();
-			confirm = choice.equals("y") || choice.equals("Y") ? true : false;
+			confirm = br.readLine().equals("y") || br.readLine().equals("Y") ? true : false;
 		}
 		return list;
 	}
 	
 	public static int initTour() throws NumberFormatException, IOException {
-		boolean confirm = false;
-		int result = 0;
+		boolean confirm = false; int result = 0;
 		while(!confirm) {
 			System.out.print("Veuillez maintenant indiquer le nombre de tours par Rencontre : ");
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			result = Integer.parseInt(br.readLine());
 			System.out.print("(" + result + ") est bien le nombre de tour voulu ? (y/n) : ");
 			br = new BufferedReader(new InputStreamReader(System.in));
-			String choice = br.readLine();
-			confirm = choice.equals("y") || choice.equals("Y") ? true : false;
+			confirm = br.readLine().equals("y") || br.readLine().equals("Y") ? true : false;
 		}
 		return result;
 	}
@@ -81,42 +70,22 @@ public class Main {
 	}
 	
 	public static void afficherChoix(ArrayList<Strategie> list) {
-		for(Strategie s : list) {
-			System.out.println(s.getNomStrategie());
-		}
+		for(Strategie s : list) { System.out.println(s.getNomStrategie()); }
 	}
 	
 	public static ArrayList<Strategie> fillListStrategie(String[] choice){
 		ArrayList<Strategie> list = new ArrayList<Strategie>();
 		for(String s: choice) {
 			switch(s) {
-				case "1":
-					list.add(new Gentille());
-					break;
-				case "2":
-					list.add(new Mechante());
-					break;
-				case "3":
-					list.add(new DonnantDonnant());
-					break;
-				case "4":
-					list.add(new DonnantDonnantDur());
-					break;
-				case "5":
-					list.add(new Mefiante());
-					break;
-				case "6":
-					list.add(new Rancuniere());
-					break;
-				case "7":
-					list.add(new PerGentille());
-					break;
-				case "8":
-					list.add(new PerMechant());
-					break;
-				default:
-					System.out.println("Ce choix ("+ s + ") n'existe pas");
-					break;
+				case "1": list.add(new Gentille()); break;
+				case "2": list.add(new Mechante()); break;
+				case "3": list.add(new DonnantDonnant()); break;
+				case "4": list.add(new DonnantDonnantDur()); break;
+				case "5": list.add(new Mefiante()); break;
+				case "6": list.add(new Rancuniere()); break;
+				case "7": list.add(new PerGentille()); break;
+				case "8": list.add(new PerMechant()); break;
+				default: break;
 			}
 		}
 		return list;

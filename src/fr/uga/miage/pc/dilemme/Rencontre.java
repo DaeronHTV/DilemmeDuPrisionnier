@@ -17,49 +17,27 @@ public class Rencontre {
 		this.scoresFinal = new int[] {0, 0};
 	}
 	
-	public Strategie getStrategie1() {
-		return this.s1;
-	}
+	public Strategie getStrategie1() { return this.s1; }
 	
-	public Strategie getStrategie2() {
-		return this.s2;
-	}
+	public Strategie getStrategie2() { return this.s2; }
 	
-	public void setStrategie1(Strategie s1) {
-		this.s1 = s1;
-	}
+	public void setStrategie1(Strategie s1) { this.s1 = s1; }
 	
-	public void setStrategie(Strategie s2) {
-		this.s2 = s2;
-	}
+	public void setStrategie(Strategie s2) { this.s2 = s2; }
 	
-	/*public int[] getFinalScores() {
-		return this.scoresFinal;
-	}*/
+	public int getFinalScoreS1() { return this.scoresFinal[0]; }
 	
-	public int getFinalScoreS1() {
-		return this.scoresFinal[0];
-	}
-	
-	public int getFinalScoreS2() {
-		return this.scoresFinal[1];
-	}
+	public int getFinalScoreS2() { return this.scoresFinal[1]; }
 	
 	public String scoreFinalToString() {
-		String result = "Fin de la rencontre !\nLe score final est de :\n" 
-				+ this.s1.getNomStrategie() + " : " + this.scoresFinal[0] 
-				+ "\n" + this.s2.getNomStrategie() + " : " + this.scoresFinal[1];
-		return result;
+		return "Le score final est de :\n" + this.s1.getNomStrategie() + " : " + this.scoresFinal[0] + "\n" + this.s2.getNomStrategie() + " : " + this.scoresFinal[1];
 	}
 	
-	public String toString() {
-		return "La rencontre oppose " + this.s1.getNomStrategie() + " et " + this.s2.getNomStrategie();
-	}
+	public String toString() { return "La rencontre oppose " + this.s1.getNomStrategie() + " et " + this.s2.getNomStrategie(); }
 	
 	public void start(int nbTours) {
-		this.s1.clear();
-		this.s2.clear();
-		for(int i = 0; i < nbTours; i++) {
+		this.s1.clear(); this.s2.clear();
+		for(int i = 1; i <= nbTours; i++) {
 			String ps1 = this.s1.play();
 			String ps2 = this.s2.play();
 			this.s1.setPlay(ps2);
@@ -79,11 +57,8 @@ public class Rencontre {
 			this.scoresFinal[0] += 2;
 			this.scoresFinal[1] += 2;
 		} else if ((ps1.equals("t") && ps2.equals("c")) || (ps1.equals("c") && ps2.equals("t"))) {
-			if(ps1.equals("t")) {
-				this.scoresFinal[0] += 5;
-			} else {
-				this.scoresFinal[1] += 5;
-			}
+			if(ps1.equals("t")) { this.scoresFinal[0] += 5; } 
+			else { this.scoresFinal[1] += 5; }
 		}
 	}
 }

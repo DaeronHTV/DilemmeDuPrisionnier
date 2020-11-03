@@ -11,41 +11,74 @@ import java.util.ArrayList;
 public class Tournoi {
 	
 	private int nbTours;
-	private int matchNum; 
+	private String resumeTournoi;
+	//private boolean skipMenu;
+	//private boolean skipTournoi;
 	private ArrayList<Rencontre> confrontations;
 	private ArrayList<Strategie> strategies;
 	
 	public Tournoi(int nbTours, ArrayList<Strategie> strategies){
 		if(strategies.size() >= 1) {
+			//this.skipMenu = false;
+			//this.skipTournoi = false;
+			this.resumeTournoi = "\t|";
 			this.confrontations = new ArrayList<Rencontre>();
 			this.nbTours = nbTours;
-			this.matchNum = 0;
 			this.setStrategies(strategies);
 		}
 	}
 	
 	public void start() {
+		int num = 1;
 		for(Rencontre r: this.confrontations) {
-			System.out.println("Rencontre N°" + (this.matchNum+1));
-			System.out.println(r.toString());
-			r.start(this.nbTours);
-			System.out.println(r.scoreFinalToString()+"\n");
-			this.rencontreIncrement();
+			//if(!this.skipTournoi) {
+				System.out.println("Rencontre N°" + num);
+				System.out.println(r.toString()+"\n");
+				/*if(!this.skipMenu) {
+					this.menu();
+				}*/
+				r.start(this.nbTours);
+				System.out.println(r.scoreFinalToString()+"\n");
+				num++;
+			//}
 		}
+		System.out.println("Fin du Tournoi !\nResume du Tournoi : ");
+		System.out.println(this.resumeTournoi());
 	}
 	
-	public ArrayList<Rencontre> getConfrontations() {
-		return this.confrontations;
-	}
+	/*public void menu() throws IOException {
+		System.out.println("Que souhaitez-vous faire ?");
+		System.out.println("1. Demarrez la rencontre");
+		System.out.println("2. Lancer toutes les rencontres (skipMenu)");
+		System.out.println("3. Déclarer forfait une strategie");
+		System.out.println("4. Quittez le tournoi");
+		System.out.println("\nVotre choix : ");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String choix = br.readLine();
+		switch(choix) {
+			case "1":
+				break;
+			case "2":
+				break;
+			case "3":
+				break;
+			case "4":
+				this.skipTournoi = true;
+				break;
+		}
+		
+	}*/
 	
-	public Rencontre getConfrontation(int index) {
-		return this.confrontations.get(index);
-	}
-
-	public void setConfrontations(ArrayList<Rencontre> confrontations) {
-		this.confrontations = confrontations;
-	}
+	public ArrayList<Rencontre> getConfrontations() { return this.confrontations; }
 	
+	public Rencontre getConfrontation(int index) { return this.confrontations.get(index); }
+	
+	/**
+	 * @description Return a String which show the list of the Rencontre of the Tournoi
+	 * @see Tournoi#confrontations
+	 * @see Rencontre#Rencontre(Strategie, Strategie)
+	 * @return String
+	 */
 	public String confrontationsToString() {
 		int i = 0;
 		String result = "Voici les differentes rencontres du tournoi : \n";
@@ -56,48 +89,70 @@ public class Tournoi {
 		return result;
 	}
 	
+	/**
+	 * return all the list of the participants
+	 * @see Tournoi#strategies
+	 * @see Strategie#Strategie(String, String)
+	 * @return ArrayList<Strategie>
+	 */
 	public ArrayList<Strategie> getStrategies(){
 		return this.strategies;
 	}
 	
+	/**
+	 * @description return the participant a the index position
+	 * @param int index
+	 * @see Tournoi#strategies
+	 * @see Strategie#Strategie(String, String)
+	 * @return Strategie
+	 */
 	public Strategie getStrategie(int index) {
 		return this.strategies.get(index);
 	}
 
+	/**
+	 * @description set a list of Strategie and change the list of Rencontre in function of this last
+	 * @param ArrayList<Strategie> strategies
+	 * @see Tournoi#strategies
+	 * @see Strategie#Strategie(String, String)
+	 */
 	public void setStrategies(ArrayList<Strategie> strategies) {
 		this.strategies = strategies;
 		this.confrontations.clear();
-		for(int j = 0; j < this.strategies.size(); j++) {
-			for(int i = j; i < this.strategies.size(); i++) {
-				this.confrontations.add(new Rencontre(this.strategies.get(j), this.strategies.get(i)));
+		for(int j = 0; j < strategies.size(); j++) {
+			for(int i = j; i < strategies.size(); i++) {
+				if(i == j) {
+					this.confrontations.add(new Rencontre(strategies.get(j), strategies.get(j).clone()));
+				}else {
+					this.confrontations.add(new Rencontre(strategies.get(j), strategies.get(i)));
+				}
 			}
+			this.resumeTournoi += strategies.get(j).getNomStrategie() + "|";
 		}
+		this.resumeTournoi += "TOTAL\t|";
 	}
-
+	
+	/**
+	 * @description return a String which show all the participants of the Tournoi
+	 * @see Tournoi#strategies
+	 * @return String
+	 */
 	public String strategiesToString() {
 		String result = "Ce tournoi opposera les strategies suivantes : \n";
-		for(Strategie s: this.strategies) {
-			result = result + s.getNomStrategie() + " : " + s.getDescription() + "\n";
-		}
+		for(Strategie s: this.strategies) { result += s.getNomStrategie() + " : " + s.getDescription() + "\n"; }
 		return result;
 	}
 
-	/*public int getNbTours() {
-		return this.nbTours;
-	}*/
+	public int getNbTours() { return this.nbTours; }
 
-	/*public void setNbTours(int nbTours) {
-		this.nbTours = nbTours;
-	}*/
+	public void setNbTours(int nbTours) { this.nbTours = nbTours; }
 	
-	public void rencontreIncrement() {
-		this.matchNum++;
-	}
-	
-	/*public int getNumRencontre() {
-		return this.matchNum;
-	}*/
-	
+	/**
+	 * @description Return a Tournoi's configuration sum up
+	 * @see Tournoi#nbTours
+	 * @see Tournoi#strategiesToString()
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return "Voici la configuration du tournoi actuelle : \n\nNombre de rencontre : " + this.confrontations.size() + "\n" +
@@ -105,4 +160,29 @@ public class Tournoi {
 				+ this.confrontationsToString();
 	}
 	
+	/**
+	 * @description Return a string which represent the table with all the scores of the different Rencontre
+	 * @see Tournoi#confrontations
+	 * @see Tournoi#strategies
+	 * @return String
+	 */
+	public String resumeTournoi() {
+		String line = "\n--------------------------------------------------------------------------\n";
+		this.resumeTournoi += line;
+		for(Strategie s: this.strategies) {
+			int total = 0;
+			this.resumeTournoi += s.getNomStrategie() + "|";
+			for(Rencontre r: this.confrontations) {
+				if(s.equals(r.getStrategie1())) {
+					total += r.getFinalScoreS1();
+					this.resumeTournoi += r.getFinalScoreS1() + "\t|";
+				}else if(s.equals(r.getStrategie2())){
+					total += r.getFinalScoreS2();
+					this.resumeTournoi += r.getFinalScoreS2() + "\t|";
+				}
+			}
+			this.resumeTournoi += total + "\t|" + line;
+		}
+		return this.resumeTournoi;
+	}
 }
