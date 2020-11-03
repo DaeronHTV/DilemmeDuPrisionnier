@@ -10,8 +10,13 @@ public class DonnantDonnant extends Strategie{
 
 	@Override
 	public String play() {
-		String result = this.getNumTour() != 1 ? this.getPlayValue(this.sizeListPlay() - 1) : "c";
+		String result = this.getNumTour() > 1 ? this.getPlayValue(this.sizeListPlay() - 1) : "c";
 		this.incrementNumTour();
 		return result;
+	}
+
+	@Override
+	public Strategie clone() {
+		return new DonnantDonnant();
 	}
 }

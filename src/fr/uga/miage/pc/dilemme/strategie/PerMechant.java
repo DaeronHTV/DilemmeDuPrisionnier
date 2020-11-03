@@ -17,4 +17,9 @@ public class PerMechant extends Strategie{
 		this.incrementNumTour();
 		return result;
 	}	
+	
+	@Override
+	public Strategie clone() {
+		return new PerMechant();
+	}
 }

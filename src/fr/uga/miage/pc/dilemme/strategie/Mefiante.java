@@ -15,4 +15,8 @@ public class Mefiante extends Strategie {
 		return result;
 	}
 	
+	@Override
+	public Strategie clone() {
+		return new Mefiante();
+	}
 }

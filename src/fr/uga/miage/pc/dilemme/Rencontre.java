@@ -46,7 +46,7 @@ public class Rencontre {
 	}
 	
 	public String scoreFinalToString() {
-		String result = "Fin de la rencontre !\nLe score final est de :\n" 
+		String result = "Le score final est de :\n" 
 				+ this.s1.getNomStrategie() + " : " + this.scoresFinal[0] 
 				+ "\n" + this.s2.getNomStrategie() + " : " + this.scoresFinal[1];
 		return result;
@@ -59,7 +59,7 @@ public class Rencontre {
 	public void start(int nbTours) {
 		this.s1.clear();
 		this.s2.clear();
-		for(int i = 0; i < nbTours; i++) {
+		for(int i = 1; i <= nbTours; i++) {
 			String ps1 = this.s1.play();
 			String ps2 = this.s2.play();
 			this.s1.setPlay(ps2);

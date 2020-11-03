@@ -136,10 +136,16 @@ class TestStrategie extends Strategie{
 		ts.setDescription("gjgjgjgj");
 		assertFalse(this.equals(ts));
 	}
-	
+
 	@Override
 	public String play() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public Strategie clone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

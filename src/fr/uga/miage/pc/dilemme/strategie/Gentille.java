@@ -13,4 +13,9 @@ public class Gentille extends Strategie{
 		this.incrementNumTour();
 		return "c";
 	}
+	
+	@Override
+	public Strategie clone() {
+		return new Gentille();
+	}
 }

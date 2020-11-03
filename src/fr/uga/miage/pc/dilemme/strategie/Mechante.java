@@ -13,4 +13,9 @@ public class Mechante extends Strategie{
 		this.incrementNumTour();
 		return "t";
 	}
+	
+	@Override
+	public Strategie clone() {
+		return new Mechante();
+	}
 }

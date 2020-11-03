@@ -1,5 +1,8 @@
 package fr.uga.miage.pc.dilemme;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -11,12 +14,17 @@ import java.util.ArrayList;
 public class Tournoi {
 	
 	private int nbTours;
-	private int matchNum; 
+	private int matchNum;
+	private String resumeTournoi = "";
+	//private boolean skipMenu;
+	//private boolean skipTournoi;
 	private ArrayList<Rencontre> confrontations;
 	private ArrayList<Strategie> strategies;
 	
 	public Tournoi(int nbTours, ArrayList<Strategie> strategies){
 		if(strategies.size() >= 1) {
+			//this.skipMenu = false;
+			//this.skipTournoi = false;
 			this.confrontations = new ArrayList<Rencontre>();
 			this.nbTours = nbTours;
 			this.matchNum = 0;
@@ -24,15 +32,45 @@ public class Tournoi {
 		}
 	}
 	
-	public void start() {
+	public void start() throws IOException {
 		for(Rencontre r: this.confrontations) {
-			System.out.println("Rencontre N°" + (this.matchNum+1));
-			System.out.println(r.toString());
-			r.start(this.nbTours);
-			System.out.println(r.scoreFinalToString()+"\n");
-			this.rencontreIncrement();
+			//if(!this.skipTournoi) {
+				System.out.println("Rencontre N°" + (this.matchNum+1));
+				System.out.println(r.toString()+"\n");
+				/*if(!this.skipMenu) {
+					this.menu();
+				}*/
+				r.start(this.nbTours);
+				System.out.println(r.scoreFinalToString()+"\n");
+				this.rencontreIncrement();
+			//}
 		}
+		System.out.println("Fin du Tournoi !\nResume du Tournoi : ");
+		System.out.println(this.resumeTournoi);
 	}
+	
+	/*public void menu() throws IOException {
+		System.out.println("Que souhaitez-vous faire ?");
+		System.out.println("1. Demarrez la rencontre");
+		System.out.println("2. Lancer toutes les rencontres (skipMenu)");
+		System.out.println("3. Déclarer forfait une strategie");
+		System.out.println("4. Quittez le tournoi");
+		System.out.println("\nVotre choix : ");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String choix = br.readLine();
+		switch(choix) {
+			case "1":
+				break;
+			case "2":
+				break;
+			case "3":
+				break;
+			case "4":
+				this.skipTournoi = true;
+				break;
+		}
+		
+	}*/
 	
 	public ArrayList<Rencontre> getConfrontations() {
 		return this.confrontations;
@@ -69,8 +107,13 @@ public class Tournoi {
 		this.confrontations.clear();
 		for(int j = 0; j < this.strategies.size(); j++) {
 			for(int i = j; i < this.strategies.size(); i++) {
-				this.confrontations.add(new Rencontre(this.strategies.get(j), this.strategies.get(i)));
+				if(i == j) {
+					this.confrontations.add(new Rencontre(this.strategies.get(j), this.strategies.get(j).clone()));
+				}else {
+					this.confrontations.add(new Rencontre(this.strategies.get(j), this.strategies.get(i)));
+				}
 			}
+			this.resumeTournoi = this.resumeTournoi + this.strategies.get(j).getNomStrategie() + "\t|";
 		}
 	}
 
@@ -105,4 +148,14 @@ public class Tournoi {
 				+ this.confrontationsToString();
 	}
 	
+	public String resumeTournoi() {
+		return this.resumeTournoi;
+	}
+	
+	public void clear() {
+		this.strategies = null;
+		this.confrontations = null;
+		this.matchNum = 0;
+		this.nbTours = 0;
+	}
 }

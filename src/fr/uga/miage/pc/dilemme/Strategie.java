@@ -102,7 +102,7 @@ public abstract class Strategie {
 		return "Stratégie : " + this.getNomStrategie() + "\nDescription : " + this.getDescription() + "\n" + isforfait;
 	}
 	
-	@Override
+	/*@Override
 	public int hashCode() { 
 		return this.nomStrategie.hashCode() ^ this.description.hashCode(); 
 	}
@@ -115,5 +115,7 @@ public abstract class Strategie {
 			result = this.nomStrategie.equals(test.getNomStrategie()) && this.description.equals(test.getDescription());
 		}
 		return result;
-	}
+	}*/
+	
+	public abstract Strategie clone();
 }

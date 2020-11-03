@@ -20,4 +20,9 @@ public class DonnantDonnantDur extends Strategie{
 		this.incrementNumTour();
 		return result;
 	}
+
+	@Override
+	public Strategie clone() {
+		return new DonnantDonnantDur();
+	}
 }
