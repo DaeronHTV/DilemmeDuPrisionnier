@@ -81,14 +81,6 @@ class TestStrategie extends Strategie{
 	
 	@Test
 	void TestToString() { assertEquals("Stratégie : Test\nDescription : Test Description\nEst toujours dans la course !", this.toString()); }
-	
-	@Test
-	void TestEquals() {
-		TestStrategie ts = new TestStrategie();
-		assertTrue(this.equals(ts));
-		ts.setDescription("gjgjgjgj");
-		assertFalse(this.equals(ts));
-	}
 
 	@Override
 	public String play() { return null; }
