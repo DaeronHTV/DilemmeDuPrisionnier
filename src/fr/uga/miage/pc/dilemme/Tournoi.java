@@ -10,13 +10,36 @@ import java.util.ArrayList;
 
 public class Tournoi {
 	
+	/**
+	 * @description Represent the number of tour for a Rencontre
+	 * @see Tournoi#setNbTours(int)
+	 */
 	private int nbTours;
+	
+	/**
+	 * @description String which use to show the final score at the end of the Tournoi
+	 * @see Tournoi#resumeTournoi()
+	 */
 	private String resumeTournoi;
 	//private boolean skipMenu;
 	//private boolean skipTournoi;
+	/**
+	 * @description A list of all the Rencontre of the Tournoi
+	 * @see Tournoi#start()
+	 */
 	private ArrayList<Rencontre> confrontations;
+	
+	/**
+	 * @description Represent all the participant of the Tournoi
+	 * @see Tournoi#Tournoi(int, ArrayList)
+	 */
 	private ArrayList<Strategie> strategies;
 	
+	/**
+	 * Constructor of a Tournoi which takes the number of tour for a Rencontre and a list of participant
+	 * @param int nbTours
+	 * @param ArrayList strategies
+	 */
 	public Tournoi(int nbTours, ArrayList<Strategie> strategies){
 		if(strategies.size() >= 1) {
 			//this.skipMenu = false;
@@ -28,6 +51,12 @@ public class Tournoi {
 		}
 	}
 	
+	/**
+	 * @description Launch the Tournoi and launch all the Rencontre in the list
+	 * @see Rencontre#Rencontre(Strategie, Strategie)
+	 * @see Strategie#Strategie(String, String)
+	 * @see Tournoi#confrontations
+	 */
 	public void start() {
 		int num = 1;
 		for(Rencontre r: this.confrontations) {
@@ -69,8 +98,19 @@ public class Tournoi {
 		
 	}*/
 	
+	/**
+	 * @description return the list of all the Rencontre of the Tournoi
+	 * @see Tournoi#confrontations
+	 * @return ArrayList
+	 */
 	public ArrayList<Rencontre> getConfrontations() { return this.confrontations; }
 	
+	/**
+	 * @description Get the Rencontre at the index position of the list
+	 * @param int index
+	 * @see Tournoi#confrontations
+	 * @return Rencontre
+	 */
 	public Rencontre getConfrontation(int index) { return this.confrontations.get(index); }
 	
 	/**
@@ -93,7 +133,7 @@ public class Tournoi {
 	 * return all the list of the participants
 	 * @see Tournoi#strategies
 	 * @see Strategie#Strategie(String, String)
-	 * @return ArrayList<Strategie>
+	 * @return ArrayList
 	 */
 	public ArrayList<Strategie> getStrategies(){
 		return this.strategies;
@@ -143,8 +183,18 @@ public class Tournoi {
 		return result;
 	}
 
+	/**
+	 * @description Return the number of tours for each Rencontre in the Tournoi
+	 * @see Tournoi#nbTours
+	 * @return int
+	 */
 	public int getNbTours() { return this.nbTours; }
 
+	/**
+	 * @description set the number of Tours for each Rencontre in the Tournoi
+	 * @see Tournoi#nbTours
+	 * @param int nbTours
+	 */
 	public void setNbTours(int nbTours) { this.nbTours = nbTours; }
 	
 	/**

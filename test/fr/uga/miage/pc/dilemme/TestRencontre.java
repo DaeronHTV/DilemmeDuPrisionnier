@@ -14,16 +14,7 @@ class TestRencontre extends Rencontre{
 	
 	@Test
 	void testGetStrategie2(){ Strategie s = this.getStrategie2(); assertTrue(s.equals(new Mechante())); }
-	
-	@Test
-	void testSetStrategie1() {
-		
-	}
-	
-	@Test
-	void testSetStrategie2() {
-		
-	}
+
 	
 	@Test
 	void testToString() {
