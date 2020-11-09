@@ -1,6 +1,5 @@
 package fr.uga.miage.pc.dilemme.strategie;
 
-import java.util.ArrayList;
 import fr.uga.miage.pc.dilemme.Strategie;
 
 public class DonnantDonnantDur extends Strategie{
@@ -13,11 +12,11 @@ public class DonnantDonnantDur extends Strategie{
 	public String play() {
 		String result = "c";
 		if(this.getNumTour() < 1) {
-			String test1 = this.getPlayValue(this.sizeListPlay() - 1);
-			String test2 = this.getPlayValue(this.sizeListPlay() - 2);
+			String test1 = getPlayValue(sizeListPlay() - 1);
+			String test2 = getPlayValue(sizeListPlay() - 2);
 			result = test1.equals("t") || test2.equals("t") ? "t" : "c";
 		}
-		this.incrementNumTour();
+		incrementNumTour();
 		return result;
 	}
 

@@ -8,16 +8,16 @@ import fr.uga.miage.pc.dilemme.strategie.*;
 
 public class Main {
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		Tournoi t = init();
-		System.out.println("\nLe tournoi est initialisé !\n");
-		System.out.println(t.strategiesToString());
-		System.out.println(t.confrontationsToString());
-		t.start();
+		System.out.println(t);
+		while(t.hasMoreElements()) {
+			System.out.println(t.nextElement());
+		}
+		System.out.println("Fin du Tournoi !\nResume du Tournoi : \n" + t.sumUpTournoi());
 	}
 	
-	public static Tournoi init() throws IOException {
-		System.out.println("Bienvenue dans ce tournoi !\n");
+	public static Tournoi init() throws Exception {
 		ArrayList<Strategie> list = initList();
  		int nbTours = initTour();
 		return new Tournoi(nbTours, list);
@@ -27,8 +27,8 @@ public class Main {
 		ArrayList<Strategie> list = null;
 		boolean confirm = false;
 		while(!confirm) {
-			System.out.println("Avant de commencer veuillez choisir les Strategies qui vont s'affronter :");
-			afficheListStrategie();
+			System.out.println("Veuillez choisir les Strategies qui vont s'affronter :\n1. Gentille\n2. Mechante\n3. Donnant-Donant\n"
+					+ "4. Donnant-Donnant Dur\n5. Mefiante\n6. Rancunière\n7. Periodique-Gentille\n8. Periodique-Mechante\n");
 			System.out.print("Separe les numéros par un '-' : ");
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			try {
@@ -37,8 +37,8 @@ public class Main {
 			}catch(IOException ioe) {
 				ioe.printStackTrace();
 			}
-			afficherChoix(list);
-			System.out.print("Est-ce bien la liste désirée ? (y/n) : ");
+			list.forEach(System.out::println);
+			System.out.print("Confirmez le choix ? (y/n) : ");
 			br = new BufferedReader(new InputStreamReader(System.in));
 			confirm = br.readLine().equals("y") || br.readLine().equals("Y") ? true : false;
 		}
@@ -51,27 +51,13 @@ public class Main {
 			System.out.print("Veuillez maintenant indiquer le nombre de tours par Rencontre : ");
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			result = Integer.parseInt(br.readLine());
-			System.out.print("(" + result + ") est bien le nombre de tour voulu ? (y/n) : ");
+			System.out.print("Confirmez le choix ? (y/n) : ");
 			br = new BufferedReader(new InputStreamReader(System.in));
 			confirm = br.readLine().equals("y") || br.readLine().equals("Y") ? true : false;
 		}
 		return result;
 	}
 	
-	public static void afficheListStrategie() {
-		System.out.println("1. Gentille");
-		System.out.println("2. Mechante");
-		System.out.println("3. Donnant-Donant");
-		System.out.println("4. Donnant-Donnant Dur");
-		System.out.println("5. Mefiante");
-		System.out.println("6. Rancunière");
-		System.out.println("7. Periodique-Gentille");
-		System.out.println("8. Periodique-Mechante\n");
-	}
-	
-	public static void afficherChoix(ArrayList<Strategie> list) {
-		for(Strategie s : list) { System.out.println(s.getNomStrategie()); }
-	}
 	
 	public static ArrayList<Strategie> fillListStrategie(String[] choice){
 		ArrayList<Strategie> list = new ArrayList<Strategie>();

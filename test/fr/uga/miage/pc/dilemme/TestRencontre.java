@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import fr.uga.miage.pc.dilemme.strategie.Gentille;
 import fr.uga.miage.pc.dilemme.strategie.Mechante;
 
-class TestRencontre extends Rencontre{
+class TestRencontre extends Confrontation{
 
 	public TestRencontre() { super(new Gentille(), new Mechante()); }
 
@@ -18,7 +18,7 @@ class TestRencontre extends Rencontre{
 	
 	@Test
 	void testToString() {
-		assertEquals("La rencontre oppose " + this.getStrategie1().getNomStrategie() + " et " + this.getStrategie2().getNomStrategie(), this.toString());
+		assertEquals("La rencontre oppose " + this.getStrategie1().getNom() + " et " + this.getStrategie2().getNom(), this.toString());
 	}
 	
 	@Test

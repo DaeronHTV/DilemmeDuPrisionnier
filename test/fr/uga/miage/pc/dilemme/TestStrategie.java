@@ -8,15 +8,15 @@ class TestStrategie extends Strategie{
 	public TestStrategie() { super("Test", "Test Description"); }
 
 	@Test
-	void testGetNomStrategie() { assertEquals("Test", this.getNomStrategie()); }
+	void testGetNomStrategie() { assertEquals("Test", this.getNom()); }
 	
 	@Test
 	void testGetDescription() { assertEquals("Test Description", this.getDescription()); }
 	
 	@Test
 	void testSetNomStrategie() {
-		this.setNomStrategie("NouveauTest");
-		assertEquals("NouveauTest", this.getNomStrategie());
+		this.setNom("NouveauTest");
+		assertEquals("NouveauTest", this.getNom());
 	}
 	
 	@Test

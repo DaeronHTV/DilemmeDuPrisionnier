@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public abstract class Strategie {
 	
-	private String nom;
+	private String nomStrategie;
 	private String description;
 	private boolean forfait;
 	private int numTour;
@@ -21,8 +21,8 @@ public abstract class Strategie {
 	 * @param String nomStrategie
 	 * @param String description
 	 */
-	public Strategie(String nom, String description) {
-		this.nom = nom;
+	public Strategie(String nomStrategie, String description) {
+		this.nomStrategie = nomStrategie;
 		this.description = description;
 		this.forfait = false;
 		this.numTour = 1;
@@ -33,12 +33,12 @@ public abstract class Strategie {
 	 * @description Return the name of the strategie
 	 * @return String
 	 */
-	public String getNom() { return this.nom; }
+	public String getNomStrategie() { return this.nomStrategie; }
 	
 	/**
 	 * @description Change the name of the Strategie
 	 */
-	public void setNom(String nom) { this.nom = nom; }
+	public void setNomStrategie(String nomStrategie) { this.nomStrategie = nomStrategie; }
 	
 	/**
 	 * @description Change the description of the Strategie
@@ -49,7 +49,7 @@ public abstract class Strategie {
 	 * @description Return the description of the Strategie
 	 * @return String
 	 */
-	public String getDescription() { return description; }
+	public String getDescription() { return this.description; }
 
 	/**
 	 * @description Says if the Strategie declare forfait or not
@@ -63,51 +63,51 @@ public abstract class Strategie {
 	 * @description Says if the Strategie declare forfait or not
 	 * @return boolean
 	 */
-	public boolean isForfait() { return forfait; }
+	public boolean isForfait() { return this.forfait; }
 	
 	/**
 	 * @description Increment by 1 the number of tour played
 	 */
-	public void incrementNumTour() { numTour += 1; }
+	public void incrementNumTour() { this.numTour += 1; }
 	
 	/**
 	 * @description return the number of the current tour
 	 * @return int
 	 */
-	public int getNumTour() { return numTour; }
+	public int getNumTour() { return this.numTour; }
 	
 	/**
 	 * @description Return true if the value given in parameter exist in the list
 	 * @param String value
 	 * @return boolean
 	 */
-	public boolean findValue(String value) { return listPlay.contains(value); }
+	public boolean findValue(String value) { return this.listPlay.contains(value); }
 	
 	/**
 	 * @description set the last value played byt the ennemi at the end of the list
 	 * @param String value
 	 */
-	public void setPlay(String value) { listPlay.add(value); }
+	public void setPlay(String value) { this.listPlay.add(value); }
 	
 	/**
 	 * @description Return the value at the index position of the list played by the ennemi
 	 * @param int index
 	 * @return String
 	 */
-	public String getPlayValue(int index) { return listPlay.get(index); }
+	public String getPlayValue(int index) { return this.listPlay.get(index); }
 	
 	/**
 	 * @description return the number of action played by the ennemie in the memorie of the Strategie
 	 * @see DonnantDonnantDur#play()
 	 * @return int
 	 */
-	public int sizeListPlay() { return listPlay.size(); }
+	public int sizeListPlay() { return this.listPlay.size(); }
 	
 	/**
 	 * @description Reset all the attributes of the object to the default value
-	 * @see Confrontation#start(int)
+	 * @see Rencontre#start(int)
 	 */
-	public void clear() { numTour = 1; listPlay.clear(); }
+	public void clear() { this.numTour = 1; this.listPlay.clear(); }
 	
 	/**
 	 * @description Shown the name and a brief description of the current Strategie
@@ -117,7 +117,7 @@ public abstract class Strategie {
 	@Override
 	public String toString() {
 		//String isforfait = this.forfait ? "A déclaré forfait pour ce tournoi !" : "Est toujours dans la course !";
-		return getNom() + " - " + getDescription();
+		return this.getNomStrategie() + " - " + this.getDescription();
 	}
 	
 	/**

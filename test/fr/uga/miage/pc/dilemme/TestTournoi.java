@@ -12,27 +12,26 @@ import fr.uga.miage.pc.dilemme.strategie.Mechante;
 class TestTournoi {
 	
 	@Test
-	void TestSetGetConfrontations() {
+	void TestSetGetConfrontations() throws Exception {
 		Tournoi t = new Tournoi(10, this.fillList());
 		Strategie s1 = t.getConfrontation(0).getStrategie1();
 		Strategie s2 = t.getConfrontation(0).getStrategie2();
-		assertEquals("Gentille", s1.getNomStrategie());
-		assertEquals("Gentille", s2.getNomStrategie());
+		assertEquals("Gentille", s1.getNom());
+		assertEquals("Gentille", s2.getNom());
 	}
 	
 	@Test
-	void TestSetGetStrategie() {
-		Gentille g = new Gentille();
+	void TestSetGetStrategie() throws Exception {
 		ArrayList<Strategie> s = new ArrayList<Strategie>();
 		Tournoi t = new Tournoi(10, this.fillList());
-		assertTrue(t.getStrategie(0).getNomStrategie().equals("Gentille"));
+		assertTrue(t.getStrategie(0).getNom().equals("Gentille"));
 		s.add(new Mechante());
 		t.setStrategies(s);
-		assertTrue(t.getStrategie(0).getNomStrategie().equals("Mechante"));
+		assertTrue(t.getStrategie(0).getNom().equals("Mechante"));
 	}
 
 	@Test
-	void testToString() {
+	void testToString() throws Exception {
 		Tournoi t = new Tournoi(10, this.fillList());
 		String test = t.toString();
 		String test2 = "Voici la configuration du tournoi actuelle : \n\nNombre de rencontre : " + t.getConfrontations().size() + "\n" +
@@ -54,21 +53,21 @@ class TestTournoi {
 	}*/
 	
 	@Test
-	void testConfrontationsToString() {
+	void testConfrontationsToString() throws Exception {
 		Gentille g = new Gentille();
 		Tournoi t = new Tournoi(10, this.fillList());
-		assertEquals("Voici les differentes rencontres du tournoi : \nRencontre 0 : " + g.getNomStrategie() + " - " + g.getNomStrategie() + "\n", t.confrontationsToString());
+		assertEquals("Voici les differentes rencontres du tournoi : \nRencontre 0 : " + g.getNom() + " - " + g.getNom() + "\n", t.confrontationsToString());
 	}
 	
 	@Test
-	void testStrategieToString() {
+	void testStrategieToString() throws Exception {
 		Gentille g = new Gentille();
 		Tournoi t = new Tournoi(10, this.fillList());
-		assertEquals("Ce tournoi opposera les strategies suivantes : \n" + g.getNomStrategie() + " : " + g.getDescription() + "\n", t.strategiesToString());
+		assertEquals("Ce tournoi opposera les strategies suivantes : \n" + g.getNom() + " : " + g.getDescription() + "\n", t.strategiesToString());
 	}
 
 	@Test
-	void testNbTours() {
+	void testNbTours() throws Exception {
 		Tournoi t = new Tournoi(10, this.fillList());
 		assertEquals(10, t.getNbTours());
 		t.setNbTours(30);

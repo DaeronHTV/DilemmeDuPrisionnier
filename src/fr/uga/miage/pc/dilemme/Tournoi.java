@@ -1,6 +1,8 @@
 package fr.uga.miage.pc.dilemme;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 /**
  * @description This class implement all the features to describe a Tournament
@@ -8,102 +10,55 @@ import java.util.ArrayList;
  * @version 1.0
  */
 
-public class Tournoi {
+public class Tournoi implements Enumeration<String>{
 	
-	/**
-	 * @description Represent the number of tour for a Rencontre
-	 * @see Tournoi#setNbTours(int)
-	 */
 	private int nbTours;
-	
-	/**
-	 * @description String which use to show the final score at the end of the Tournoi
-	 * @see Tournoi#resumeTournoi()
-	 */
+	private int currentConfrontation;
 	private String resumeTournoi;
-	//private boolean skipMenu;
-	//private boolean skipTournoi;
-	/**
-	 * @description A list of all the Rencontre of the Tournoi
-	 * @see Tournoi#start()
-	 */
-	private ArrayList<Rencontre> confrontations;
+	private List<Confrontation> confrontations;
+	private List<Strategie> strategies;
 	
 	/**
-	 * @description Represent all the participant of the Tournoi
-	 * @see Tournoi#Tournoi(int, ArrayList)
-	 */
-	private ArrayList<Strategie> strategies;
-	
-	/**
-	 * Constructor of a Tournoi which takes the number of tour for a Rencontre and a list of participant
+	 * Constructor of a Tournoi which takes the number of tour for a Confrontation and a list of participant
 	 * @param int nbTours
 	 * @param ArrayList strategies
+	 * @throws Exception 
 	 */
-	public Tournoi(int nbTours, ArrayList<Strategie> strategies){
-		if(strategies.size() >= 1) {
-			//this.skipMenu = false;
-			//this.skipTournoi = false;
-			this.resumeTournoi = "\t|";
-			this.confrontations = new ArrayList<Rencontre>();
-			this.nbTours = nbTours;
-			this.setStrategies(strategies);
-		}
+	public Tournoi(int nbTours, List<Strategie> strategies) throws Exception{
+		try {
+			if(strategies.size() >= 1) {
+				this.nbTours = nbTours;
+				resumeTournoi = "\t|";
+				currentConfrontation = 0;
+				setStrategies(strategies);
+			} else { throw new Exception("EmptyException : An tournament with nobody is impossible - Tournoi:line.47"); }
+		}catch(NullPointerException npe) { npe.printStackTrace(); }
 	}
 	
 	/**
-	 * @description Launch the Tournoi and launch all the Rencontre in the list
-	 * @see Rencontre#Rencontre(Strategie, Strategie)
-	 * @see Strategie#Strategie(String, String)
-	 * @see Tournoi#confrontations
+	 * @see Enumeration#hasMoreElements()
 	 */
-	public void start() {
-		int num = 1;
-		for(Rencontre r: this.confrontations) {
-			//if(!this.skipTournoi) {
-				System.out.println("Rencontre N°" + num);
-				System.out.println(r.toString()+"\n");
-				/*if(!this.skipMenu) {
-					this.menu();
-				}*/
-				r.start(this.nbTours);
-				System.out.println(r.scoreFinalToString()+"\n");
-				num++;
-			//}
-		}
-		System.out.println("Fin du Tournoi !\nResume du Tournoi : ");
-		System.out.println(this.resumeTournoi());
+	@Override
+	public boolean hasMoreElements() { return currentConfrontation < confrontations.size(); }
+	
+	/**
+	 * @see Enumeration#nextElement()
+	 */
+	@Override
+	public String nextElement() {
+		getConfrontation(currentConfrontation).start(nbTours);
+		String result = sumUpConfrontation();
+		currentConfrontation++;
+		return result;
 	}
 	
-	/*public void menu() throws IOException {
-		System.out.println("Que souhaitez-vous faire ?");
-		System.out.println("1. Demarrez la rencontre");
-		System.out.println("2. Lancer toutes les rencontres (skipMenu)");
-		System.out.println("3. Déclarer forfait une strategie");
-		System.out.println("4. Quittez le tournoi");
-		System.out.println("\nVotre choix : ");
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String choix = br.readLine();
-		switch(choix) {
-			case "1":
-				break;
-			case "2":
-				break;
-			case "3":
-				break;
-			case "4":
-				this.skipTournoi = true;
-				break;
-		}
-		
-	}*/
 	
 	/**
 	 * @description return the list of all the Rencontre of the Tournoi
 	 * @see Tournoi#confrontations
 	 * @return ArrayList
 	 */
-	public ArrayList<Rencontre> getConfrontations() { return this.confrontations; }
+	public List<Confrontation> getConfrontations() { return confrontations; }
 	
 	/**
 	 * @description Get the Rencontre at the index position of the list
@@ -111,19 +66,19 @@ public class Tournoi {
 	 * @see Tournoi#confrontations
 	 * @return Rencontre
 	 */
-	public Rencontre getConfrontation(int index) { return this.confrontations.get(index); }
+	public Confrontation getConfrontation(int index) { return confrontations.get(index); }
 	
 	/**
 	 * @description Return a String which show the list of the Rencontre of the Tournoi
 	 * @see Tournoi#confrontations
-	 * @see Rencontre#Rencontre(Strategie, Strategie)
+	 * @see Confrontation#Rencontre(Strategie, Strategie)
 	 * @return String
 	 */
 	public String confrontationsToString() {
 		int i = 0;
 		String result = "Voici les differentes rencontres du tournoi : \n";
-		for(Rencontre r: this.confrontations) {
-			result = result + "Rencontre " + i + " : " + r.getStrategie1().getNomStrategie() + " - " + r.getStrategie2().getNomStrategie() + "\n";
+		for(Confrontation confrontation: confrontations) {
+			result += "Rencontre " + i + " : " + confrontation.toString() + "\n";
 			i++;
 		}
 		return result;
@@ -135,9 +90,7 @@ public class Tournoi {
 	 * @see Strategie#Strategie(String, String)
 	 * @return ArrayList
 	 */
-	public ArrayList<Strategie> getStrategies(){
-		return this.strategies;
-	}
+	public List<Strategie> getStrategies(){ return strategies; }
 	
 	/**
 	 * @description return the participant a the index position
@@ -146,9 +99,7 @@ public class Tournoi {
 	 * @see Strategie#Strategie(String, String)
 	 * @return Strategie
 	 */
-	public Strategie getStrategie(int index) {
-		return this.strategies.get(index);
-	}
+	public Strategie getStrategie(int index) { return strategies.get(index); }
 
 	/**
 	 * @description set a list of Strategie and change the list of Rencontre in function of this last
@@ -156,20 +107,20 @@ public class Tournoi {
 	 * @see Tournoi#strategies
 	 * @see Strategie#Strategie(String, String)
 	 */
-	public void setStrategies(ArrayList<Strategie> strategies) {
+	public void setStrategies(List<Strategie> strategies) {
 		this.strategies = strategies;
-		this.confrontations.clear();
+		confrontations = new ArrayList<Confrontation>();
 		for(int j = 0; j < strategies.size(); j++) {
 			for(int i = j; i < strategies.size(); i++) {
 				if(i == j) {
-					this.confrontations.add(new Rencontre(strategies.get(j), strategies.get(j).clone()));
+					confrontations.add(new Confrontation(strategies.get(j), strategies.get(j).clone()));
 				}else {
-					this.confrontations.add(new Rencontre(strategies.get(j), strategies.get(i)));
+					confrontations.add(new Confrontation(strategies.get(j), strategies.get(i)));
 				}
 			}
-			this.resumeTournoi += strategies.get(j).getNomStrategie() + "|";
+			resumeTournoi += strategies.get(j).getNom() + "|";
 		}
-		this.resumeTournoi += "TOTAL\t|";
+		resumeTournoi += "TOTAL\t|";
 	}
 	
 	/**
@@ -179,7 +130,7 @@ public class Tournoi {
 	 */
 	public String strategiesToString() {
 		String result = "Ce tournoi opposera les strategies suivantes : \n";
-		for(Strategie s: this.strategies) { result += s.getNomStrategie() + " : " + s.getDescription() + "\n"; }
+		for(Strategie s: this.strategies) { result += s.toString() + "\n"; }
 		return result;
 	}
 
@@ -205,9 +156,14 @@ public class Tournoi {
 	 */
 	@Override
 	public String toString() {
-		return "Voici la configuration du tournoi actuelle : \n\nNombre de rencontre : " + this.confrontations.size() + "\n" +
-				"Nombre de Tours par rencontre : " + this.nbTours + "\n\n" +this.strategiesToString() + "\n" 
-				+ this.confrontationsToString();
+		return "Voici la configuration du tournoi actuelle : \n\nNombre de rencontre : " + confrontations.size() + "\n" +
+				"Nombre de Tours par rencontre : " + this.nbTours + "\n\n" + strategiesToString() + "\n" 
+				+ confrontationsToString();
+	}
+	
+	public String sumUpConfrontation() {
+		Confrontation confrontation = getConfrontation(currentConfrontation);
+		return "Rencontre N°" + (currentConfrontation + 1) + "\n" + confrontation.toString()+"\n" + confrontation.scoreFinalToString()+"\n";
 	}
 	
 	/**
@@ -216,19 +172,19 @@ public class Tournoi {
 	 * @see Tournoi#strategies
 	 * @return String
 	 */
-	public String resumeTournoi() {
+	public String sumUpTournoi() {
 		String line = "\n--------------------------------------------------------------------------\n";
-		this.resumeTournoi += line;
-		for(Strategie s: this.strategies) {
+		resumeTournoi += line;
+		for(Strategie strategie: strategies) {
 			int total = 0;
-			this.resumeTournoi += s.getNomStrategie() + "|";
-			for(Rencontre r: this.confrontations) {
-				if(s.equals(r.getStrategie1())) {
-					total += r.getFinalScoreS1();
-					this.resumeTournoi += r.getFinalScoreS1() + "\t|";
-				}else if(s.equals(r.getStrategie2())){
-					total += r.getFinalScoreS2();
-					this.resumeTournoi += r.getFinalScoreS2() + "\t|";
+			resumeTournoi += strategie.getNom() + "|";
+			for(Confrontation confrontation: confrontations) {
+				if(strategie.equals(confrontation.getStrategie1())) {
+					total += confrontation.getFinalScoreS1();
+					resumeTournoi += confrontation.getFinalScoreS1() + "\t|";
+				}else if(strategie.equals(confrontation.getStrategie2())){
+					total += confrontation.getFinalScoreS2();
+					resumeTournoi += confrontation.getFinalScoreS2() + "\t|";
 				}
 			}
 			this.resumeTournoi += total + "\t|" + line;
