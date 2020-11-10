@@ -3,6 +3,7 @@ package fr.uga.miage.pc.dilemme;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import fr.uga.miage.pc.dilemme.strategie.Strategie;
 
 /**
  * @description This class implement all the features to describe a Tournament
@@ -16,7 +17,7 @@ public class Tournoi implements Enumeration<String>{
 	private int currentConfrontation;
 	private String resumeTournoi;
 	private List<Confrontation> confrontations;
-	private List<Strategie> strategies;
+	private List<? extends IStrategie> strategies;
 	
 	/**
 	 * Constructor of a Tournoi which takes the number of tour for a Confrontation and a list of participant
@@ -24,7 +25,7 @@ public class Tournoi implements Enumeration<String>{
 	 * @param ArrayList strategies
 	 * @throws Exception 
 	 */
-	public Tournoi(int nbTours, List<Strategie> strategies) throws Exception{
+	public Tournoi(int nbTours, List<? extends IStrategie> strategies) throws Exception{
 		try {
 			if(strategies.size() >= 1) {
 				this.nbTours = nbTours;
@@ -90,7 +91,7 @@ public class Tournoi implements Enumeration<String>{
 	 * @see Strategie#Strategie(String, String)
 	 * @return ArrayList
 	 */
-	public List<Strategie> getStrategies(){ return strategies; }
+	public List<? extends IStrategie> getStrategies(){ return strategies; }
 	
 	/**
 	 * @description return the participant a the index position
@@ -99,7 +100,7 @@ public class Tournoi implements Enumeration<String>{
 	 * @see Strategie#Strategie(String, String)
 	 * @return Strategie
 	 */
-	public Strategie getStrategie(int index) { return strategies.get(index); }
+	public IStrategie getStrategie(int index) { return strategies.get(index); }
 
 	/**
 	 * @description set a list of Strategie and change the list of Rencontre in function of this last
@@ -107,18 +108,18 @@ public class Tournoi implements Enumeration<String>{
 	 * @see Tournoi#strategies
 	 * @see Strategie#Strategie(String, String)
 	 */
-	public void setStrategies(List<Strategie> strategies) {
+	public void setStrategies(List<? extends IStrategie> strategies) {
 		this.strategies = strategies;
 		confrontations = new ArrayList<Confrontation>();
 		for(int j = 0; j < strategies.size(); j++) {
 			for(int i = j; i < strategies.size(); i++) {
 				if(i == j) {
-					confrontations.add(new Confrontation(strategies.get(j), strategies.get(j).clone()));
+					confrontations.add(new Confrontation(getStrategie(j), (IStrategie)getStrategie(j).clone()));
 				}else {
-					confrontations.add(new Confrontation(strategies.get(j), strategies.get(i)));
+					confrontations.add(new Confrontation(getStrategie(j), getStrategie(i)));
 				}
 			}
-			resumeTournoi += strategies.get(j).getNom() + "|";
+			resumeTournoi += getStrategie(j).getNom() + "|";
 		}
 		resumeTournoi += "TOTAL\t|";
 	}
@@ -130,7 +131,7 @@ public class Tournoi implements Enumeration<String>{
 	 */
 	public String strategiesToString() {
 		String result = "Ce tournoi opposera les strategies suivantes : \n";
-		for(Strategie s: this.strategies) { result += s.toString() + "\n"; }
+		for(IStrategie strategie: strategies) { result += strategie.toString() + "\n"; }
 		return result;
 	}
 
@@ -139,7 +140,7 @@ public class Tournoi implements Enumeration<String>{
 	 * @see Tournoi#nbTours
 	 * @return int
 	 */
-	public int getNbTours() { return this.nbTours; }
+	public int getNbTours() { return nbTours; }
 
 	/**
 	 * @description set the number of Tours for each Rencontre in the Tournoi
@@ -157,7 +158,7 @@ public class Tournoi implements Enumeration<String>{
 	@Override
 	public String toString() {
 		return "Voici la configuration du tournoi actuelle : \n\nNombre de rencontre : " + confrontations.size() + "\n" +
-				"Nombre de Tours par rencontre : " + this.nbTours + "\n\n" + strategiesToString() + "\n" 
+				"Nombre de Tours par rencontre : " + nbTours + "\n\n" + strategiesToString() + "\n" 
 				+ confrontationsToString();
 	}
 	
@@ -175,7 +176,7 @@ public class Tournoi implements Enumeration<String>{
 	public String sumUpTournoi() {
 		String line = "\n--------------------------------------------------------------------------\n";
 		resumeTournoi += line;
-		for(Strategie strategie: strategies) {
+		for(IStrategie strategie: strategies) {
 			int total = 0;
 			resumeTournoi += strategie.getNom() + "|";
 			for(Confrontation confrontation: confrontations) {
@@ -187,8 +188,8 @@ public class Tournoi implements Enumeration<String>{
 					resumeTournoi += confrontation.getFinalScoreS2() + "\t|";
 				}
 			}
-			this.resumeTournoi += total + "\t|" + line;
+			resumeTournoi += total + "\t|" + line;
 		}
-		return this.resumeTournoi;
+		return resumeTournoi;
 	}
 }

@@ -1,7 +1,5 @@
 package fr.uga.miage.pc.dilemme.strategie;
 
-import fr.uga.miage.pc.dilemme.Strategie;
-
 public class PerMechant extends Strategie{
 	
 	public PerMechant() {
@@ -9,15 +7,11 @@ public class PerMechant extends Strategie{
 	}
 
 	@Override
-	public String play() {
-		String result = "t";
-		if(this.getNumTour() % 3 == 0) {
-			result = "c";
-		}
-		this.incrementNumTour();
-		return result;
+	public void play() {
+		setPlay(getNumTour() % 3 == 0 ? "c" : "t");
+		incrementNumTour();
 	}	
 	
 	@Override
-	public Strategie clone() { return new PerMechant(); }
+	public Object clone() { return new PerMechant(); }
 }

@@ -1,17 +1,15 @@
 package fr.uga.miage.pc.dilemme.strategie;
 
-import fr.uga.miage.pc.dilemme.Strategie;
-
 public class Gentille extends Strategie{
 	
-	public Gentille() { super("Gentille", "Je coopere toujours."); }
+	public Gentille() { 
+		super("Gentille", "Je coopere toujours."); 
+		setPlay("c");
+	}
 
 	@Override
-	public String play() {
-		this.incrementNumTour();
-		return "c";
-	}
+	public void play() { this.incrementNumTour(); }
 	
 	@Override
-	public Strategie clone() { return new Gentille(); }
+	public Object clone() { return new Gentille(); }
 }

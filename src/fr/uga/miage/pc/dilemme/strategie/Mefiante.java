@@ -1,7 +1,5 @@
 package fr.uga.miage.pc.dilemme.strategie;
 
-import fr.uga.miage.pc.dilemme.Strategie;
-
 public class Mefiante extends Strategie {
 
 	public Mefiante() {
@@ -9,12 +7,11 @@ public class Mefiante extends Strategie {
 	}
 
 	@Override
-	public String play() {
-		String result = this.getNumTour() != 1 ? this.getPlayValue(this.sizeListPlay() - 1) : "t";
+	public void play() {
+		setPlay(getNumTour() != 1 ? getOppPlay(sizeOppPlay() - 1) : "t");
 		this.incrementNumTour();
-		return result;
 	}
 	
 	@Override
-	public Strategie clone() { return new Mefiante(); }
+	public Object clone() { return new Mefiante(); }
 }

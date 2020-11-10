@@ -3,6 +3,8 @@ package fr.uga.miage.pc.dilemme;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import fr.uga.miage.pc.dilemme.strategie.Strategie;
+
 class TestStrategie extends Strategie{
 
 	public TestStrategie() { super("Test", "Test Description"); }

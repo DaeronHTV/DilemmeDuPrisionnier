@@ -1,17 +1,15 @@
 package fr.uga.miage.pc.dilemme.strategie;
 
-import fr.uga.miage.pc.dilemme.Strategie;
-
 public class Mechante extends Strategie{
 	
-	public Mechante() { super("Mechante", "Je trahis toujours"); }
+	public Mechante() { 
+		super("Mechante", "Je trahis toujours"); 
+		setPlay("t");
+	}
 
 	@Override
-	public String play() {
-		this.incrementNumTour();
-		return "t";
-	}
+	public void play() { this.incrementNumTour(); }
 	
 	@Override
-	public Strategie clone() { return new Mechante(); }
+	public Object clone() { return new Mechante(); }
 }

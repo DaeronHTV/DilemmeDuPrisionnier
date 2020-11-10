@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import fr.uga.miage.pc.dilemme.strategie.Gentille;
 import fr.uga.miage.pc.dilemme.strategie.Mechante;
+import fr.uga.miage.pc.dilemme.strategie.Strategie;
 
 class TestTournoi {
 	

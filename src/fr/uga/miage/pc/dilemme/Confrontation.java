@@ -1,5 +1,7 @@
 package fr.uga.miage.pc.dilemme;
 
+import fr.uga.miage.pc.dilemme.strategie.Strategie;
+
 /**
  * @description This class implement all the features to describe a Rencontre
  * @author Avanzino Aurélien - Gourdon Stéphanie
@@ -7,8 +9,8 @@ package fr.uga.miage.pc.dilemme;
  */
 
 public class Confrontation {
-	private Strategie strategie1;
-	private Strategie strategie2;
+	private IStrategie strategie1;
+	private IStrategie strategie2;
 	private int[] scoresFinal;
 	
 	/**
@@ -16,7 +18,7 @@ public class Confrontation {
 	 * @param Strategie s1
 	 * @param Strategie s2
 	 */
-	public Confrontation(Strategie s1, Strategie s2) {
+	public Confrontation(IStrategie s1, IStrategie s2) {
 		this.strategie1 = s1;
 		this.strategie2 = s2;
 		this.scoresFinal = new int[] {0, 0};
@@ -26,13 +28,13 @@ public class Confrontation {
 	 * @description Return the first opponent of the Rencontre
 	 * @return Strategie
 	 */
-	public Strategie getStrategie1() { return strategie1; }
+	public IStrategie getStrategie1() { return strategie1; }
 	
 	/**
 	 * @description Return the second opponent of the Rencontre
 	 * @return Strategie
 	 */
-	public Strategie getStrategie2() { return strategie2; }
+	public IStrategie getStrategie2() { return strategie2; }
 	
 	/**
 	 * @description Change the first opponent of the Rencontre
@@ -77,10 +79,12 @@ public class Confrontation {
 	public void start(int nbTours) {
 		strategie1.clear(); strategie2.clear();
 		for(int i = 1; i <= nbTours; i++) {
-			String ps1 = strategie1.play();
-			String ps2 = strategie2.play();
-			strategie1.setPlay(ps2);
-			strategie2.setPlay(ps1);
+			strategie1.play();
+			strategie2.play();
+			String ps1 = strategie1.getPlay();
+			String ps2 = strategie2.getPlay();
+			strategie1.setOppPlay(ps2);
+			strategie2.setOppPlay(ps1);
 			scoreTour(ps1, ps2);
 		}
 	}

@@ -18,13 +18,13 @@ public class Main {
 	}
 	
 	public static Tournoi init() throws Exception {
-		ArrayList<Strategie> list = initList();
+		ArrayList<IStrategie> list = initList();
  		int nbTours = initTour();
 		return new Tournoi(nbTours, list);
 	}
 	
-	public static ArrayList<Strategie> initList() throws IOException {
-		ArrayList<Strategie> list = null;
+	public static ArrayList<IStrategie> initList() throws IOException {
+		ArrayList<IStrategie> list = null;
 		boolean confirm = false;
 		while(!confirm) {
 			System.out.println("Veuillez choisir les Strategies qui vont s'affronter :\n1. Gentille\n2. Mechante\n3. Donnant-Donant\n"
@@ -59,8 +59,8 @@ public class Main {
 	}
 	
 	
-	public static ArrayList<Strategie> fillListStrategie(String[] choice){
-		ArrayList<Strategie> list = new ArrayList<Strategie>();
+	public static ArrayList<IStrategie> fillListStrategie(String[] choice){
+		ArrayList<IStrategie> list = new ArrayList<IStrategie>();
 		for(String s: choice) {
 			switch(s) {
 				case "1": list.add(new Gentille()); break;

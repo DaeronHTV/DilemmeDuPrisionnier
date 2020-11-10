@@ -1,5 +1,4 @@
 package fr.uga.miage.pc.dilemme.strategie;
-import fr.uga.miage.pc.dilemme.Strategie;
 
 public class Rancuniere extends Strategie{
 
@@ -8,12 +7,11 @@ public class Rancuniere extends Strategie{
 	}
 
 	@Override
-	public String play() {
-		String result = this.findValue("t") && this.getNumTour() != 1 ? "t" : "c";
-		this.incrementNumTour();
-		return result;
+	public void play() {
+		setPlay(findValue("t") && getNumTour() != 1 ? "t" : "c");
+		incrementNumTour();
 	}
 	
 	@Override
-	public Strategie clone() { return new Rancuniere(); }
+	public Object clone() { return new Rancuniere(); }
 }
