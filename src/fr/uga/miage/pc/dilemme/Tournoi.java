@@ -3,12 +3,14 @@ package fr.uga.miage.pc.dilemme;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import fr.uga.miage.pc.dilemme.strategie.Strategie;
 
 /**
- * @description This class implement all the features to describe a Tournament
+ * This class allows to construct a object tournament. It can be use in order to launch different fight between two opponent
+ * or more which implement IStrategie interface.
+ * This class was created for an french university project
  * @author Avanzino Aurélien - Gourdon Stéphanie
- * @version 1.0
+ * @since 1.0
+ * @version 2.0
  */
 
 public class Tournoi implements Enumeration<String>{
@@ -20,10 +22,12 @@ public class Tournoi implements Enumeration<String>{
 	private List<IStrategie> strategies;
 	
 	/**
-	 * Constructor of a Tournoi which takes the number of tour for a Confrontation and a list of participant
-	 * @param int nbTours
-	 * @param ArrayList strategies
-	 * @throws Exception 
+	 * Constructs a tournament with the number of round for the fight and a participant's list.
+	 * Declare a Exception if the list is null or the size equals zero
+	 * @param int - The number of round
+	 * @param ArrayList<IStrategie> - The list of participant
+	 * @see Exception#Exception(String)
+	 * @throws Exception
 	 */
 	public Tournoi(int nbTours, List<IStrategie> strategies) throws Exception{
 		try {
@@ -32,18 +36,25 @@ public class Tournoi implements Enumeration<String>{
 				resumeTournoi = "\t|";
 				currentConfrontation = 0;
 				setStrategies(strategies);
-			} else { throw new Exception("EmptyException : An tournament with nobody is impossible - Tournoi:line.47"); }
+			} else { 
+				throw new Exception("EmptyException : An tournament with nobody is impossible\n.at Tournoi(int nbTours, List<IStrategie> strategies) - Tournoi:line.47"); 
+			}
 		}catch(NullPointerException npe) { npe.printStackTrace(); }
 	}
 	
 	/**
-	 * @see Enumeration#hasMoreElements()
+	 * Allows to know if the tournament still have fight
+	 * @see java.util.Enumeration#hasMoreElements()
+	 * @return boolean - Says if the tournament continues
 	 */
 	@Override
 	public boolean hasMoreElements() { return currentConfrontation < confrontations.size(); }
 	
 	/**
-	 * @see Enumeration#nextElement()
+	 * Launch the next fight of the tournament and give a sum up of this last at the end
+	 * @see java.util.Enumeration#nextElement()
+	 * @see Tournoi#sumUpConfrontation()
+	 * @return String - The sum up of the fight
 	 */
 	@Override
 	public String nextElement() {
@@ -55,14 +66,14 @@ public class Tournoi implements Enumeration<String>{
 	
 	
 	/**
-	 * @description return the list of all the Rencontre of the Tournoi
+	 * return the list of all the Rencontre of the Tournoi
 	 * @see Tournoi#confrontations
 	 * @return ArrayList
 	 */
 	public List<Confrontation> getConfrontations() { return confrontations; }
 	
 	/**
-	 * @description Get the Rencontre at the index position of the list
+	 * Get the Rencontre at the index position of the list
 	 * @param int index
 	 * @see Tournoi#confrontations
 	 * @return Rencontre
@@ -70,10 +81,8 @@ public class Tournoi implements Enumeration<String>{
 	public Confrontation getConfrontation(int index) { return confrontations.get(index); }
 	
 	/**
-	 * @description Return a String which show the list of the Rencontre of the Tournoi
-	 * @see Tournoi#confrontations
-	 * @see Confrontation#Rencontre(Strategie, Strategie)
-	 * @return String
+	 * Return a String which show the list of the Rencontre of the Tournoi
+	 * @return String - The list of all the fight of the tournament
 	 */
 	public String confrontationsToString() {
 		int i = 0;
@@ -86,27 +95,21 @@ public class Tournoi implements Enumeration<String>{
 	}
 	
 	/**
-	 * return all the list of the participants
-	 * @see Tournoi#strategies
-	 * @see Strategie#Strategie(String, String)
-	 * @return ArrayList
+	 * Give all the opponent
+	 * @return List<IStrategie> - All the opponent of the tournament
 	 */
 	public List<IStrategie> getStrategies(){ return strategies; }
 	
 	/**
-	 * @description return the participant a the index position
-	 * @param int index
-	 * @see Tournoi#strategies
-	 * @see Strategie#Strategie(String, String)
-	 * @return Strategie
+	 * Give the opponent saved at the index position of the list
+	 * @param int index - position in the list
+	 * @return IStrategie - The opponent number index
 	 */
 	public IStrategie getStrategie(int index) { return strategies.get(index); }
 
 	/**
-	 * @description set a list of Strategie and change the list of Rencontre in function of this last
-	 * @param ArrayList<Strategie> strategies
-	 * @see Tournoi#strategies
-	 * @see Strategie#Strategie(String, String)
+	 * Set the different opponent and theirs fights too
+	 * @param List<IStrategie> - Opponent of the tournament
 	 */
 	public void setStrategies(List<IStrategie> strategies) {
 		this.strategies = strategies;
@@ -125,9 +128,8 @@ public class Tournoi implements Enumeration<String>{
 	}
 	
 	/**
-	 * @description return a String which show all the participants of the Tournoi
-	 * @see Tournoi#strategies
-	 * @return String
+	 * Return all the opponent of the tournament
+	 * @return String containing all the opponent during this tournament
 	 */
 	public String strategiesToString() {
 		String result = "Ce tournoi opposera les strategies suivantes : \n";
@@ -136,24 +138,20 @@ public class Tournoi implements Enumeration<String>{
 	}
 
 	/**
-	 * @description Return the number of tours for each Rencontre in the Tournoi
-	 * @see Tournoi#nbTours
-	 * @return int
+	 * Return the number of round for each fight in the tournament
+	 * @return int - The number of round for a fight
 	 */
 	public int getNbTours() { return nbTours; }
 
 	/**
-	 * @description set the number of Tours for each Rencontre in the Tournoi
-	 * @see Tournoi#nbTours
-	 * @param int nbTours
+	 * Set the number of round for the tournament
+	 * @param int - The number of round for a fight
 	 */
 	public void setNbTours(int nbTours) { this.nbTours = nbTours; }
 	
 	/**
-	 * @description Return a Tournoi's configuration sum up
-	 * @see Tournoi#nbTours
-	 * @see Tournoi#strategiesToString()
-	 * @return String
+	 * Return the configuration of the tournament
+	 * @return String which contains the number of fight and round, the different opponent and fight
 	 */
 	@Override
 	public String toString() {
@@ -162,16 +160,18 @@ public class Tournoi implements Enumeration<String>{
 				+ confrontationsToString();
 	}
 	
+	/**
+	 * Return a sum up of the current fight
+	 * @return String which contains the two opponent and the final score
+	 */
 	public String sumUpConfrontation() {
 		Confrontation confrontation = getConfrontation(currentConfrontation);
 		return "Rencontre N°" + (currentConfrontation + 1) + "\n" + confrontation.toString()+"\n" + confrontation.scoreFinalToString()+"\n";
 	}
 	
 	/**
-	 * @description Return a string which represent the table with all the scores of the different Rencontre
-	 * @see Tournoi#confrontations
-	 * @see Tournoi#strategies
-	 * @return String
+	 * Return the table of scores for the current tournament
+	 * @return String which shows the score for each fight and the final score for the tournament for each opponent
 	 */
 	public String sumUpTournoi() {
 		String line = "\n--------------------------------------------------------------------------\n";

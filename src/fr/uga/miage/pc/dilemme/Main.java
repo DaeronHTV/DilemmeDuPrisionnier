@@ -4,7 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import fr.uga.miage.pc.dilemme.strategie.*;
+import fr.uga.miage.pc.dilemme.strategie.DonnantDonnant;
+import fr.uga.miage.pc.dilemme.strategie.DonnantDonnantDur;
+import fr.uga.miage.pc.dilemme.strategie.Gentille;
+import fr.uga.miage.pc.dilemme.strategie.Mechante;
+import fr.uga.miage.pc.dilemme.strategie.Mefiante;
+import fr.uga.miage.pc.dilemme.strategie.PerGentille;
+import fr.uga.miage.pc.dilemme.strategie.PerMechant;
+import fr.uga.miage.pc.dilemme.strategie.Rancuniere;
 
 public class Main {
 	
@@ -58,7 +65,11 @@ public class Main {
 		return result;
 	}
 	
-	
+	/**
+	 * 
+	 * @param choice
+	 * @return The List of IStrategie that the user given
+	 */
 	public static ArrayList<IStrategie> fillListStrategie(String[] choice){
 		ArrayList<IStrategie> list = new ArrayList<IStrategie>();
 		for(String s: choice) {

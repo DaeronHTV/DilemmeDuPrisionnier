@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"fr.uga.miage.pc.dilemme"},{"l":"fr.uga.miage.pc.dilemme.strategie"}]

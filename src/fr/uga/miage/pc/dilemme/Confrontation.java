@@ -3,7 +3,7 @@ package fr.uga.miage.pc.dilemme;
 import fr.uga.miage.pc.dilemme.strategie.Strategie;
 
 /**
- * @description This class implement all the features to describe a Rencontre
+ * This class implement all the features to describe a Rencontre
  * @author Avanzino Aurélien - Gourdon Stéphanie
  * @version 1.0
  */
@@ -14,7 +14,7 @@ public class Confrontation {
 	private int[] scoresFinal;
 	
 	/**
-	 * @description Construct the Renncontre with the two opponents
+	 * Construct the Renncontre with the two opponents
 	 * @param Strategie s1
 	 * @param Strategie s2
 	 */
@@ -25,13 +25,13 @@ public class Confrontation {
 	}
 	
 	/**
-	 * @description Return the first opponent of the Rencontre
+	 * Return the first opponent of the Rencontre
 	 * @return Strategie
 	 */
 	public IStrategie getStrategie1() { return strategie1; }
 	
 	/**
-	 * @description Return the second opponent of the Rencontre
+	 * Return the second opponent of the Rencontre
 	 * @return Strategie
 	 */
 	public IStrategie getStrategie2() { return strategie2; }
@@ -42,24 +42,24 @@ public class Confrontation {
 	public void setStrategie1(Strategie strategie1) { this.strategie1 = strategie1; }
 	
 	/**
-	 * @description Change the second opponent of the Rencontre
+	 * Change the second opponent of the Rencontre
 	 */
 	public void setStrategie2(Strategie strategie2) { this.strategie2 = strategie2; }
 	
 	/**
-	 * @description Return the final score of the Rencontre for the first Opponent
+	 * Return the final score of the Rencontre for the first Opponent
 	 * @return int
 	 */
 	public int getFinalScoreS1() { return scoresFinal[0]; }
 	
 	/**
-	 * @description Return the final score of the Rencontre for the second Opponent
+	 * Return the final score of the Rencontre for the second Opponent
 	 * @return int
 	 */
 	public int getFinalScoreS2() { return scoresFinal[1]; }
 	
 	/**
-	 * @description Return a String which resume the Rencontre
+	 * Return a String which resume the Rencontre
 	 * @return String
 	 */
 	public String scoreFinalToString() {
@@ -67,13 +67,13 @@ public class Confrontation {
 	}
 	
 	/**
-	 * @description Give a brief description of the Rencontre
+	 * Give a brief description of the Rencontre
 	 * @return String
 	 */
 	public String toString() { return strategie1.getNom() + " VS " + strategie2.getNom(); }
 	
 	/**
-	 * @description Launch the Rencontre
+	 * Launch the Rencontre
 	 * @param int nbTours
 	 */
 	public void start(int nbTours) {
@@ -90,7 +90,7 @@ public class Confrontation {
 	}
 	
 	/**
-	 * @description Give the point for the different opponnet in function of what they played
+	 * Give the point for the different opponnet in function of what they played
 	 * @param String ps1
 	 * @param String ps2
 	 */
