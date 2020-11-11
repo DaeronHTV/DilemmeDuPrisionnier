@@ -17,7 +17,7 @@ public class Tournoi implements Enumeration<String>{
 	private int currentConfrontation;
 	private String resumeTournoi;
 	private List<Confrontation> confrontations;
-	private List<? extends IStrategie> strategies;
+	private List<IStrategie> strategies;
 	
 	/**
 	 * Constructor of a Tournoi which takes the number of tour for a Confrontation and a list of participant
@@ -25,7 +25,7 @@ public class Tournoi implements Enumeration<String>{
 	 * @param ArrayList strategies
 	 * @throws Exception 
 	 */
-	public Tournoi(int nbTours, List<? extends IStrategie> strategies) throws Exception{
+	public Tournoi(int nbTours, List<IStrategie> strategies) throws Exception{
 		try {
 			if(strategies.size() >= 1) {
 				this.nbTours = nbTours;
@@ -91,7 +91,7 @@ public class Tournoi implements Enumeration<String>{
 	 * @see Strategie#Strategie(String, String)
 	 * @return ArrayList
 	 */
-	public List<? extends IStrategie> getStrategies(){ return strategies; }
+	public List<IStrategie> getStrategies(){ return strategies; }
 	
 	/**
 	 * @description return the participant a the index position
@@ -108,7 +108,7 @@ public class Tournoi implements Enumeration<String>{
 	 * @see Tournoi#strategies
 	 * @see Strategie#Strategie(String, String)
 	 */
-	public void setStrategies(List<? extends IStrategie> strategies) {
+	public void setStrategies(List<IStrategie> strategies) {
 		this.strategies = strategies;
 		confrontations = new ArrayList<Confrontation>();
 		for(int j = 0; j < strategies.size(); j++) {
@@ -157,8 +157,8 @@ public class Tournoi implements Enumeration<String>{
 	 */
 	@Override
 	public String toString() {
-		return "Voici la configuration du tournoi actuelle : \n\nNombre de rencontre : " + confrontations.size() + "\n" +
-				"Nombre de Tours par rencontre : " + nbTours + "\n\n" + strategiesToString() + "\n" 
+		return "Voici la configuration du tournoi actuelle : \nNombre de rencontre : " + confrontations.size() + "\n" +
+				"Nombre de Tours par rencontre : " + nbTours + "\n" + strategiesToString() + "\n" 
 				+ confrontationsToString();
 	}
 	
