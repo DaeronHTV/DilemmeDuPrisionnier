@@ -66,8 +66,9 @@ public class Main {
 	}
 	
 	/**
-	 * 
-	 * @param choice
+	 * Create the list of IStrategie in function of the coices of the user
+	 * @param choice List of choices
+	 * @see fr.uga.miage.pc.dilemme.strategie
 	 * @return The List of IStrategie that the user given
 	 */
 	public static ArrayList<IStrategie> fillListStrategie(String[] choice){
