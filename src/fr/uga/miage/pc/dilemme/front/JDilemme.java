@@ -164,9 +164,9 @@ public final class JDilemme extends FrameBase implements IObserver{
 
     @Override
     public void notifier(){
-        List<Integer> result = paramFrame.getListCheckSelected();
-        int nbTours = paramFrame.getNbTours();
         try {
+            List<Integer> result = paramFrame.getListCheckSelected();
+            int nbTours = paramFrame.getNbTours();
             int i = 1;
             List<IStrategie> strategies = ApiDilemme.createListStrategie(result);
             Enumeration<Confrontation> test = ApiDilemme.createTournoi(strategies, nbTours);
