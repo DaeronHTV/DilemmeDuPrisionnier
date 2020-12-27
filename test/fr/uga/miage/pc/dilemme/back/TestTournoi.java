@@ -20,7 +20,7 @@ class TestTournoi {
 	@Order(1)
 	@SuppressWarnings("unused")
 	void testConstructeur() {
-		assertThrows(Exception.class, () -> {
+		assertThrows(EmptyException.class, () -> {
 			Tournoi t = new Tournoi(10, new ArrayList<IStrategie>());
 		});
 	}

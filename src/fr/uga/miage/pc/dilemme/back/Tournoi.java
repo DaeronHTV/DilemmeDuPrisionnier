@@ -39,7 +39,6 @@ public class Tournoi implements Enumeration<Confrontation>{
 	 */
 	public Tournoi(int nbTours, List<IStrategie> strategies) throws EmptyException, NullPointerException, StrategieNotSupportedException {
 		if(strategies.size() >= 1) {
-			//this.nbStrategies = strategies.size();
 			setNbTours(nbTours);
 			currentConfrontation = 0;
 			setStrategies(strategies);
@@ -134,23 +133,17 @@ public class Tournoi implements Enumeration<Confrontation>{
 	public void setNbTours(int nbTours) { this.nbTours = nbTours; }
 	
 	/**
-	 * Return the configuration of the tournament
+	 * Return the confrontation of the tournament
 	 * @see Object#toString()
 	 * @return String which contains the number of fight and round, the different opponent and fight
 	 */
-	//TODO Passer une partie du formatage dans l'Api Dilleme (priorité moyenne)
 	@Override
 	public String toString() {
-		String result = "Voici la configuration du tournoi actuelle :\nNombre de rencontre : " 
-		+ confrontations.size() + "\nNombre de Tours par rencontre : " + nbTours + "\n" +
-		"\nCe Tournoi opposera les strategies suivantes :\n";
-		for(IStrategie strategie: strategies) { result += strategie.toString() + "\n"; }
-		int i = 0;
-		result += "Voici les differentes rencontres du tournoi : \n";
+		String result = ""; int i = 0;
 		for(Confrontation confrontation: confrontations) {
 			result += "Rencontre " + i + " : " + confrontation.toString() + "\n";
 			i++;
 		}
-		return result + "\n";
+		return result;
 	}
 }

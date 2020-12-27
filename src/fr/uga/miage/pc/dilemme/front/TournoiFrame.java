@@ -58,12 +58,14 @@ public final class TournoiFrame implements IObserver{
      * @param url - The link of the web page to open in the web browser
      * @throws ClassNotSupportedException Throw if the Desktop class is not supported on the user system
      */
-    private static final void openWebPage(String url) throws ClassNotSupportedException, Exception {
-        if(Desktop.isDesktopSupported()){ Desktop.getDesktop().browse(new java.net.URI(url)); } 
+    protected final boolean openWebPage(String url) throws ClassNotSupportedException, Exception {
+		boolean opened = false;
+        if(Desktop.isDesktopSupported()){ Desktop.getDesktop().browse(new java.net.URI(url)); opened = true;} 
         else { throw new ClassNotSupportedException("The class used to open web pages isn't supported on your system !"); }
+		return opened;
 	}
 	
-	private static final void menu(int choix) throws Exception{
+	private void menu(int choix) throws Exception{
 		switch(choix){
 			case 1:parametres.reset();parametres.initParametres();break;
 			case 2:openWebPage(javadoc);break;

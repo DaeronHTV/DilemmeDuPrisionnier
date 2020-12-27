@@ -25,49 +25,39 @@ public final class StringHelper {
 		    + tournoi.getConfrontations().size() + "\nNombre de Tours par rencontre : " + tournoi.getNbTours() + "\n" +
 		    "\nCe Tournoi opposera les strategies suivantes :\n";
 		    for(IStrategie strategie: tournoi.getStrategies()) { result += strategie.toString() + "\n"; }
-		    int i = 0;
-		    result += "\nVoici les differentes rencontres du tournoi : \n";
-		    for(Confrontation confrontation: tournoi.getConfrontations()) {
-			    result += "Rencontre " + i + " : " + confrontation.toString() + "\n";
-		    	i++;
-		    }
+		    result += "\nVoici les differentes rencontres du tournoi : \n" + tournoi.toString();
         }
 		return result;
     }
     
     public static String sumUpTournoi(boolean isHtml, Tournoi tournoi){
-        List<IStrategie> strategies = tournoi.getStrategies();
         String line = "\n--------------------------------------------------------------------------\n";
         String result = isHtml ? "<table><tr border: 1px solid black;><td></td>" : "\t|";
-        for(IStrategie strategie: strategies){
-            result += isHtml ? "<td border: 1px solid black;><b>" + strategie.getNom() + "</b></td>" 
-                : strategie.getNom() + "|" ;
-        }
-        result += isHtml ? "<td border: 1px solid black;><b color='red'>TOTAL</b></td></tr>" : line;
-        for(IStrategie strategie: strategies) {
-			int total = 0;
-            result += isHtml ? "<tr border: 1px solid black;><td border: 1px solid black;><b>" +strategie.getNom() + "</b></td>"
-            : strategie.getNom() + "|";
+        String resultTmp = "";
+        for(IStrategie strategie: tournoi.getStrategies()){
+            int total = 0; String nom = strategie.getNom();
+            result += isHtml ? "<td border: 1px solid black;><b>" + nom + "</b></td>" : nom + "|" ;
+            resultTmp += isHtml ? "<tr border: 1px solid black;><td border: 1px solid black;><b>" + nom + "</b></td>" : nom + "|";
 			for(Confrontation confrontation: tournoi.getConfrontations()) {
 				if(strategie.equals(confrontation.getStrategie(ConfrontationConstants.STRATEGIE_1))) {
 					total += confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_1);
-                    result += isHtml ? "<td border: 1px solid black;>"+ confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_1) + "</td>"
+                    resultTmp += isHtml ? "<td border: 1px solid black;>"+ confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_1) + "</td>"
                     : confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_1) + "\t|";
 				}else if(strategie.equals(confrontation.getStrategie(ConfrontationConstants.STRATEGIE_2))){
 					total += confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_2);
-                    result += isHtml ? "<td border: 1px solid black;>"+confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_2) + "</td>"
+                    resultTmp += isHtml ? "<td border: 1px solid black;>"+confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_2) + "</td>"
                     :confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_2) + "\t|";
 				}
 			}
-			result += isHtml ? "<td border: 1px solid black;>" +total + "</td></tr>" : total + "\t|" + line;
-		}
-        return result;
+			resultTmp += isHtml ? "<td border: 1px solid black;>" +total + "</td></tr>" : total + "\t|" + line;
+        }
+        result += isHtml ? "<td border: 1px solid black;><b color='red'>TOTAL</b></td></tr>" : line;
+        return result + resultTmp;
     }
 
     public static String sumUpConfrontation(boolean isHtml, int num, Confrontation confrontation){
         IStrategie s1 = confrontation.getStrategie(ConfrontationConstants.STRATEGIE_1);
         IStrategie s2 = confrontation.getStrategie(ConfrontationConstants.STRATEGIE_2);
-        //Definition of the default message return by the API
         String result = "Rencontre N°" + num + " - " + confrontation.toString()
         +"\n" + "Le score final est de : \n" + s1.getNom()+ " : "
         + confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_1) + "\n" + s2.getNom() 
