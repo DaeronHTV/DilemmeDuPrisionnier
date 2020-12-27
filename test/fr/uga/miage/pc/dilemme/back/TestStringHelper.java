@@ -1,4 +1,4 @@
-package fr.uga.miage.pc.dilemme.back.strategie;
+package fr.uga.miage.pc.dilemme.back;
 
 public class TestStringHelper {
     

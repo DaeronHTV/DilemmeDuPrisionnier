@@ -22,17 +22,11 @@ public final class ApiDilemme {
         return instance;
     }
 
-    public static String tournoiHtml(){ return StringHelper.tournoi(true, instance);}
+    public static String tournoiText(){ return StringHelper.tournoi(instance);}
 
-    public static String tournoiText(){ return StringHelper.tournoi(false, instance);}
+    public static String confrontationText(int num, Confrontation confrontation){return StringHelper.sumUpConfrontation(num, confrontation);}
 
-    public static String confrontationHtml(int num, Confrontation confrontation){return StringHelper.sumUpConfrontation(true, num, confrontation);}
-
-    public static String confrontationText(int num, Confrontation confrontation){return StringHelper.sumUpConfrontation(false, num, confrontation);}
-
-    public static String sumUpTournoiHtml(){return StringHelper.sumUpTournoi(true, instance);}
-
-    public static String sumUpTournoiText(){return StringHelper.sumUpTournoi(false, instance);}
+    public static String sumUpTournoiText(){return StringHelper.sumUpTournoi(instance);}
 
     public static List<IStrategie> createListStrategie(int... choices){
         ArrayList<Integer> copyChoices = new ArrayList<Integer>();
