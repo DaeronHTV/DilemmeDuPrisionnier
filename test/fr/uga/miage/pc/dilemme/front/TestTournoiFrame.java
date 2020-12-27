@@ -8,11 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.Test;
 import org.junit.jupiter.api.Order;
 
+@Deprecated
 public class TestTournoiFrame {
     private static volatile TournoiFrame instance = TournoiFrame.getInstance();
 
     @Test
     @Order(1)
+    @Deprecated
     public void testGetInstance(){
         assertTrue(instance != null);
         assertTrue(instance instanceof TournoiFrame);
@@ -20,6 +22,7 @@ public class TestTournoiFrame {
 
     @Test
     @Order(2)
+    @Deprecated
     public void testInstance(){
         ParamFrame instanceParam = ParamFrame.getInstance();
         assertTrue(instanceParam.getObservers() != null);
@@ -29,6 +32,7 @@ public class TestTournoiFrame {
 
     @Test
     @Order(3)
+    @Deprecated
     public void testOpenWebPage() throws Exception{
         boolean test = false;
         test = instance.openWebPage("https://www.google.com/");

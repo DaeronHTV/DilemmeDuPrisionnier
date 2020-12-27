@@ -11,6 +11,7 @@ import fr.uga.miage.pc.dilemme.exception.ClassNotSupportedException;
 import fr.uga.miage.pc.dilemme.back.ApiDilemme;
 import fr.uga.miage.pc.dilemme.back.Confrontation;
 
+@Deprecated
 public final class TournoiFrame implements IObserver{
 	/* Links of the different web pages */
     private static final String gitRepositorie = "https://gitlab.com/AurelienAVZN/pc_dilemmeduprisonnier";
@@ -18,6 +19,7 @@ public final class TournoiFrame implements IObserver{
 	private static volatile TournoiFrame instance = null;
 	private static ParamFrame parametres = null;
 
+	@Deprecated
 	private TournoiFrame(){
 		parametres = ParamFrame.getInstance();
 		parametres.addObserver(this);
@@ -28,6 +30,7 @@ public final class TournoiFrame implements IObserver{
      * respect the <i><u>Singleton</u></i> design pattern
      * @return The instance of the <code>JDilemme</code> Frame
      */
+	@Deprecated
     public static final TournoiFrame getInstance() {
         if (TournoiFrame.instance == null) {
             synchronized (TournoiFrame.class) {
@@ -39,6 +42,7 @@ public final class TournoiFrame implements IObserver{
         return TournoiFrame.instance;
     }
 
+	@Deprecated
 	public final void afficheMenu(){
 		while(true){
 			try{
@@ -58,6 +62,7 @@ public final class TournoiFrame implements IObserver{
      * @param url - The link of the web page to open in the web browser
      * @throws ClassNotSupportedException Throw if the Desktop class is not supported on the user system
      */
+	@Deprecated
     protected final boolean openWebPage(String url) throws ClassNotSupportedException, Exception {
 		boolean opened = false;
         if(Desktop.isDesktopSupported()){ Desktop.getDesktop().browse(new java.net.URI(url)); opened = true;} 
@@ -65,6 +70,7 @@ public final class TournoiFrame implements IObserver{
 		return opened;
 	}
 	
+	@Deprecated
 	private void menu(int choix) throws Exception{
 		switch(choix){
 			case 1:parametres.reset();parametres.initParametres();break;

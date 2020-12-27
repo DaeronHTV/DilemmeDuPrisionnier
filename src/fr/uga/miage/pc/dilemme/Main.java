@@ -6,7 +6,5 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		JDilemme test = JDilemme.getInstance();
 		test.showFrame();
-		TournoiFrame tournoi = TournoiFrame.getInstance();
-		tournoi.afficheMenu();
 	}
 }

@@ -6,9 +6,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import fr.uga.miage.pc.dilemme.back.Confrontation;
 import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
-import fr.uga.miage.pc.dilemme.back.Tournoi;
 import fr.uga.miage.pc.dilemme.back.Confrontation.ConfrontationConstants;
 import fr.uga.miage.pc.dilemme.exception.EmptyException;
 import fr.uga.miage.pc.dilemme.back.strategie.Gentille;
@@ -32,8 +30,9 @@ class TestTournoi {
 		t = new Tournoi(10, fillList());
 		assertTrue(t.hasMoreElements());
 		Confrontation Result = t.nextElement();
-		assertEquals("Rencontre N�1\nGentille VS Gentille\nLe score final est de :\nGentille : 30\nGentille : 30\n", Result);
 		assertFalse(t.hasMoreElements());
+		assertEquals("Rencontre N°1 - Gentille VS Gentille\nLe score final est de :\nGentille : 30\nGentille : 30", 
+		ApiDilemme.confrontationText(1, Result)); //LE TEST NE PASSE PAS ?????
 	}
 	
 	@Test
@@ -62,13 +61,14 @@ class TestTournoi {
 	@Test
 	@Order(5)
 	void testToString() throws Exception {
-		//TODO Attendre l'envoie du formattage dans l'ApiDilemme pour faire le test (priorité haute)
 		Tournoi t = new Tournoi(10, this.fillList());
 		String test = t.toString();
-		String test2 = "Voici la configuration du tournoi actuelle : \n\nNombre de rencontre : " + t.getConfrontations().size() + "\n" +
-				"Nombre de Tours par rencontre : " + t.getNbTours() + "\n\n" + t.strategiesToString() + "\n" 
-				+ t.confrontationsToString();
-		assertEquals(test2, test);
+		String result = ""; int i = 0;
+		for(Confrontation confrontation: t.getConfrontations()) {
+			result += "Rencontre " + i + " : " + confrontation.toString() + "\n";
+			i++;
+		}
+		assertEquals(result, test);
 	}
 
 	@Test
@@ -85,5 +85,6 @@ class TestTournoi {
 		s.add(new Gentille());
 		return s;
 	}
+
 
 }

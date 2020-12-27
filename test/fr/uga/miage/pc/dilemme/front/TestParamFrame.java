@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Order;
 /**SI UTILISE VISUAL STUDIO CODE NE PAS LANCER UN RUN TEST GLOBAL**/
 /**NE PREND PAS EN COMPTE LE PARAMETRE ORDER DONNE SUR LES TESTS**/
 
+@Deprecated
 public class TestParamFrame {
     private static final ParamFrame instance = ParamFrame.getInstance();
 
@@ -26,6 +27,7 @@ public class TestParamFrame {
 
     @Test
     @Order(1)
+    @Deprecated
     public void testGetInstance(){
         assertTrue(instance != null);
         assertTrue(instance instanceof ParamFrame);
@@ -33,10 +35,12 @@ public class TestParamFrame {
 
     @Test
     @Order(2)
+    @Deprecated
     public void testGetNbTours(){ assertEquals(0, instance.getNbTours()); }
 
     @Test
     @Order(3)
+    @Deprecated
     public void testGetList(){
         assertEquals(0, instance.getList().size());
         assertTrue(instance.getList() != null);
@@ -45,6 +49,7 @@ public class TestParamFrame {
 
     @Test
     @Order(4)
+    @Deprecated
     public void testGetObservers(){
         assertEquals(0, instance.getObservers().size());
         assertTrue(instance.getObservers() != null);
@@ -53,6 +58,7 @@ public class TestParamFrame {
 
     @Test
     @Order(5)
+    @Deprecated
     public void testInstance(){
         assertEquals(0, instance.getNbTours());
         assertTrue(instance.getList() != null);
@@ -64,6 +70,7 @@ public class TestParamFrame {
     /**PERMET DE TESTER INITPARAMETER***/
     @Test
     @Order(6)
+    @Deprecated
     public void testSetList(){
         String[] result = new String[]{"1","2","3","4"};
         assertEquals(4, result.length);
@@ -76,6 +83,7 @@ public class TestParamFrame {
 
     @Test
     @Order(7)
+    @Deprecated
     public void testSetNbTours(){
         instance.setNbTours(20);
         assertEquals(20, instance.getNbTours());
@@ -85,6 +93,7 @@ public class TestParamFrame {
 
     @Test
     @Order(8)
+    @Deprecated
     public void testAddObserver(){
         IObserver observer = new testObserver();
         instance.addObserver(observer);
@@ -96,6 +105,7 @@ public class TestParamFrame {
 
     @Test
     @Order(9)
+    @Deprecated
     public void testRemoveObserver(){
         IObserver observer = new testObserver();
         instance.addObserver(observer);
@@ -106,6 +116,7 @@ public class TestParamFrame {
 
     @Test
     @Order(10)
+    @Deprecated
     public void testReset(){
         instance.reset();
         assertEquals(0, instance.getNbTours());
@@ -116,6 +127,7 @@ public class TestParamFrame {
 
     @Test
     @Order(11)
+    @Deprecated
     public void testNotifierAll(){
         testObserver observer = new testObserver();
         instance.addObserver(observer);

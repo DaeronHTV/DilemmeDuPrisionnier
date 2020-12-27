@@ -1,4 +1,4 @@
-package fr.uga.miage.pc.dilemme.back.strategie;
+package fr.uga.miage.pc.dilemme.back;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,7 +18,7 @@ public class TestStringHelper {
     @Order(1)
     public void testTournoi() throws NullPointerException, EmptyException, StrategieNotSupportedException {
         Tournoi t = new Tournoi(20, fillList());
-        String actual = StringHelper.tournoi(t);
+        String actual = StringHelper.tournoi(false, t);
         String expected = "Voici la configuration du tournoi actuelle :\nNombre de rencontre : " 
 		    + t.getConfrontations().size() + "\nNombre de Tours par rencontre : " + t.getNbTours() + "\n" +
 		    "\nCe Tournoi opposera les strategies suivantes :\n";
@@ -32,7 +32,7 @@ public class TestStringHelper {
     @Order(2)
     public void testSumUpTournoi() throws NullPointerException, EmptyException, StrategieNotSupportedException {
         Tournoi t = new Tournoi(20, fillList());
-        String actual = StringHelper.sumUpTournoi(t);
+        String actual = StringHelper.sumUpTournoi(false, t);
         String expected = "";
         assertEquals(expected, actual);
     }
@@ -43,7 +43,7 @@ public class TestStringHelper {
         Confrontation confrontation = new Confrontation(new Gentille(), new Gentille());
         confrontation.start(20);
         String expected = "Rencontre N°1 - Gentille VS Gentille\nLe score final est de : \nGentille : 60\nGentille : 60";
-        String actual = StringHelper.sumUpConfrontation(1, confrontation);
+        String actual = StringHelper.sumUpConfrontation(false, 1, confrontation);
         assertEquals(expected, actual);
     }
 
