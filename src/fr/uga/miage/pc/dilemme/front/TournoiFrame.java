@@ -10,6 +10,13 @@ import fr.uga.miage.pc.dilemme.back.strategie.*;
 import fr.uga.miage.pc.dilemme.back.ApiDilemme;
 import fr.uga.miage.pc.dilemme.back.Confrontation;
 
+/**
+ * This class is used like a window, it shows the menu and the possibility for the
+ * user on the console
+ * @author Avanzino Aurélien - Stéphanie Gourdon
+ * @version 1.0
+ * @since 3.0
+ */
 public final class TournoiFrame implements IObserver{
 	/* Links of the different web pages */
     private static final String gitRepositorie = "https://gitlab.com/AurelienAVZN/pc_dilemmeduprisonnier";
@@ -17,6 +24,12 @@ public final class TournoiFrame implements IObserver{
 	private static volatile TournoiFrame instance = null;
 	private static ParamFrame parametres = null;
 
+	/**
+	 * Create a object that contains the object in order to give
+	 * the parameter for the tournament and which function like
+	 * a window but on the console
+	 * @since 3.0
+	 */
 	private TournoiFrame(){
 		parametres = ParamFrame.getInstance();
 		parametres.addObserver(this);
@@ -26,6 +39,7 @@ public final class TournoiFrame implements IObserver{
      * @implSpec This method was impleted in order to 
      * respect the <i><u>Singleton</u></i> design pattern
      * @return The instance of the <code>JDilemme</code> Frame
+	 * @since 3.0
      */
     public static final TournoiFrame getInstance() {
         if (TournoiFrame.instance == null) {
@@ -38,6 +52,11 @@ public final class TournoiFrame implements IObserver{
         return TournoiFrame.instance;
     }
 
+	/**
+	 * Show the menu of the object in order to let the user choose
+	 * what it wants to do
+	 * @since 3.0
+	 */
 	public final void afficheMenu(){
 		while(true){
 			try{
@@ -55,7 +74,8 @@ public final class TournoiFrame implements IObserver{
      * Open a web page to the link given in parameter if the Desktop class is supported
      * @since 3.0
      * @param url - The link of the web page to open in the web browser
-     * @throws ClassNotSupportedException Throw if the Desktop class is not supported on the user system
+     * @throws Exception Throw if the Desktop class is not supported on the user system
+	 * @throws Exception If the url is null
      */
     protected final boolean openWebPage(String url) throws Exception {
 		boolean opened = false;
@@ -64,6 +84,12 @@ public final class TournoiFrame implements IObserver{
 		return opened;
 	}
 	
+	/**
+	 * Launch the process ask by the user 
+	 * @param choix choice made by the user
+	 * @since 3.0
+	 * @throws Exception Exception throw by the openWebPage funcion
+	 */
 	private void menu(int choix) throws Exception{
 		switch(choix){
 			case 1:parametres.reset();parametres.initParametres();break;
@@ -74,6 +100,7 @@ public final class TournoiFrame implements IObserver{
 		}
 	}
 
+	/**{@inheritDoc} */
 	@Override
 	public void notifier() {
 		List<Integer> result = parametres.getList();

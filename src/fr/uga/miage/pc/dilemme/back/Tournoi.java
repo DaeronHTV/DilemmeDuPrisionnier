@@ -33,7 +33,7 @@ public class Tournoi implements Enumeration<Confrontation>{
 	 * @param strategies The list of participant
 	 * @see IStrategie
 	 * @see List
-	 * @throws EmptyException If the user doesn't give at least one Strategie
+	 * @throws Exception If the user doesn't give at least one Strategie
 	 */
 	public Tournoi(int nbTours, List<IStrategie> strategies) throws NullPointerException, Exception {
 		if(strategies.size() >= 1) {
