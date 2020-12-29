@@ -9,14 +9,12 @@ import org.junit.jupiter.api.Order;
 
 import fr.uga.miage.pc.dilemme.back.strategie.Gentille;
 import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
-import fr.uga.miage.pc.dilemme.exception.EmptyException;
-import fr.uga.miage.pc.dilemme.exception.StrategieNotSupportedException;
 
 public class TestStringHelper {
 
     @Test
     @Order(1)
-    public void testTournoi() throws NullPointerException, EmptyException, StrategieNotSupportedException {
+    public void testTournoi() throws NullPointerException, Exception {
         Tournoi t = new Tournoi(20, fillList());
         String actual = StringHelper.tournoi(false, t);
         String expected = "Voici la configuration du tournoi actuelle :\nNombre de rencontre : " 
@@ -30,7 +28,7 @@ public class TestStringHelper {
     //TODO TERMINER LE TEST
     @Test
     @Order(2)
-    public void testSumUpTournoi() throws NullPointerException, EmptyException, StrategieNotSupportedException {
+    public void testSumUpTournoi() throws NullPointerException, Exception {
         Tournoi t = new Tournoi(20, fillList());
         String actual = StringHelper.sumUpTournoi(false, t);
         String expected = "";

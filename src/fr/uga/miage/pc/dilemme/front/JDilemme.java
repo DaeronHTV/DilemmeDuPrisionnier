@@ -14,7 +14,6 @@ import java.awt.Dimension;
 import fr.uga.miage.pc.dilemme.back.ApiDilemme;
 import fr.uga.miage.pc.dilemme.back.Confrontation;
 import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
-import fr.uga.miage.pc.dilemme.exception.ClassNotSupportedException;
 
 /*Java Util Import*/
 import java.util.Enumeration;
@@ -157,9 +156,9 @@ public final class JDilemme extends FrameBase implements IObserver{
      * @param url - The link of the web page to open in the web browser
      * @throws ClassNotSupportedException Throw if the Desktop class is not supported on the user system
      */
-    private static final void openWebPage(String url) throws ClassNotSupportedException, Exception {
+    private static final void openWebPage(String url) throws Exception {
         if(Desktop.isDesktopSupported()){ Desktop.getDesktop().browse(new java.net.URI(url)); } 
-        else { throw new ClassNotSupportedException("The class used to open web pages isn't supported on your system !"); }
+        else { throw new Exception("The class used to open web pages isn't supported on your system !"); }
     }
 
     @Override

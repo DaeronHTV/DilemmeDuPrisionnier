@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
 import fr.uga.miage.pc.dilemme.back.Confrontation.ConfrontationConstants;
-import fr.uga.miage.pc.dilemme.exception.EmptyException;
 import fr.uga.miage.pc.dilemme.back.strategie.Gentille;
 import fr.uga.miage.pc.dilemme.back.strategie.Mechante;
 
@@ -18,7 +17,7 @@ class TestTournoi {
 	@Order(1)
 	@SuppressWarnings("unused")
 	void testConstructeur() {
-		assertThrows(EmptyException.class, () -> {
+		assertThrows(Exception.class, () -> {
 			Tournoi t = new Tournoi(10, new ArrayList<IStrategie>());
 		});
 	}

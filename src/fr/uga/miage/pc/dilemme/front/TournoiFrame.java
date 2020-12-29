@@ -7,7 +7,6 @@ import java.util.List;
 import java.awt.Desktop;
 
 import fr.uga.miage.pc.dilemme.back.strategie.*;
-import fr.uga.miage.pc.dilemme.exception.ClassNotSupportedException;
 import fr.uga.miage.pc.dilemme.back.ApiDilemme;
 import fr.uga.miage.pc.dilemme.back.Confrontation;
 
@@ -63,10 +62,10 @@ public final class TournoiFrame implements IObserver{
      * @throws ClassNotSupportedException Throw if the Desktop class is not supported on the user system
      */
 	@Deprecated
-    protected final boolean openWebPage(String url) throws ClassNotSupportedException, Exception {
+    protected final boolean openWebPage(String url) throws Exception {
 		boolean opened = false;
         if(Desktop.isDesktopSupported()){ Desktop.getDesktop().browse(new java.net.URI(url)); opened = true;} 
-        else { throw new ClassNotSupportedException("The class used to open web pages isn't supported on your system !"); }
+        else { throw new Exception("The class used to open web pages isn't supported on your system !"); }
 		return opened;
 	}
 	
