@@ -1,7 +1,5 @@
 package fr.uga.miage.pc.dilemme.back.strategie;
 
-import fr.uga.miage.pc.dilemme.exception.StrategieNotSupportedException;
-
 /**
  * This class is used in order to create a clone 
  * @author Aurélien Avanzino - Stéphanie Gourdo
@@ -48,7 +46,7 @@ public final class CloneHelper {
      * @throws StrategieNotSupportedException If the name of the strategie isn't known
      * @since 3.0  
      */
-    public static IStrategie clone(String name) throws StrategieNotSupportedException {
+    public static IStrategie clone(String name) throws Exception {
         IStrategie clone = null;
         switch(name){
             case "Gentille": clone = new Gentille(); break;
@@ -59,12 +57,12 @@ public final class CloneHelper {
             case "Donnant-Donnant Dur": clone = new DonnantDonnantDur(); break;
             case "Periodique-Mechant": clone = new PerMechant(); break;
             case "Rancuniere": clone = new Rancuniere(); break;
-            default: throw new StrategieNotSupportedException("The Strategie that you want to clone is not available !");
+            default: throw new Exception("The Strategie that you want to clone is not available !");
         }
         return clone;
     }
 
-    public static IStrategie clone(IStrategie strategie) throws StrategieNotSupportedException {
+    public static IStrategie clone(IStrategie strategie) throws Exception {
         //TODO Lorsque les stragies de Mariia et Marie-José seront récupérées
         //Penser à rajouter une condition instanceof Strategie, ce qui permettra
         //de différencier les stratgies venant de chez nous avec celles venant de
@@ -78,7 +76,7 @@ public final class CloneHelper {
         else if(strategie instanceof DonnantDonnantDur){ clone = new DonnantDonnantDur(); }
         else if(strategie instanceof PerGentille){ clone = new PerGentille(); }
         else if(strategie instanceof PerMechant){ clone = new PerMechant(); }
-        else{ throw new StrategieNotSupportedException("The strategie that you want to clone is not available");}
+        else{ throw new Exception("The strategie that you want to clone is not available");}
         return clone;
     }
 }
