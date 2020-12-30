@@ -1,8 +1,6 @@
 package fr.uga.miage.pc.dilemme.back;
 
 import fr.uga.miage.pc.dilemme.back.strategie.CloneHelper;
-import fr.uga.miage.pc.dilemme.exception.EmptyException;
-import fr.uga.miage.pc.dilemme.exception.StrategieNotSupportedException;
 import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
 
 
@@ -35,15 +33,15 @@ public class Tournoi implements Enumeration<Confrontation>{
 	 * @param strategies The list of participant
 	 * @see IStrategie
 	 * @see List
-	 * @throws EmptyException If the user doesn't give at least one Strategie
+	 * @throws Exception If the user doesn't give at least one Strategie
 	 */
-	public Tournoi(int nbTours, List<IStrategie> strategies) throws EmptyException, NullPointerException, StrategieNotSupportedException {
+	public Tournoi(int nbTours, List<IStrategie> strategies) throws NullPointerException, Exception {
 		if(strategies.size() >= 1) {
 			setNbTours(nbTours);
 			currentConfrontation = 0;
 			setStrategies(strategies);
 		} else { 
-			throw new EmptyException("EmptyException : An tournament with nobody is impossible\n.at Tournoi(int nbTours, List<IStrategie> strategies) - Tournoi:line.47"); 
+			throw new Exception("EmptyException : An tournament with nobody is impossible\n.at Tournoi(int nbTours, List<IStrategie> strategies) - Tournoi:line.47"); 
 		}
 	}
 	
@@ -106,7 +104,7 @@ public class Tournoi implements Enumeration<Confrontation>{
 	 * @see Confrontation#Confrontation(IStrategie, IStrategie)
 	 * @see IStrategie
 	 */
-	public void setStrategies(List<IStrategie> strategies) throws StrategieNotSupportedException{
+	public void setStrategies(List<IStrategie> strategies) throws Exception{
 		this.strategies = strategies;
 		confrontations = new ArrayList<Confrontation>();
 		for(int j = 0; j < strategies.size(); j++) {

@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public final class ParamFrame implements IObservable{
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static volatile ParamFrame instance = null;
@@ -13,6 +14,7 @@ public final class ParamFrame implements IObservable{
     private List<Integer> strategies;
     private int nbTours;
 
+    @Deprecated
     private ParamFrame(){
         observers = new ArrayList<IObserver>();
         strategies = new ArrayList<Integer>();
@@ -24,6 +26,7 @@ public final class ParamFrame implements IObservable{
      * respect the <i><u>Singleton</u></i> design pattern
      * @return The instance of the <code>JDilemme</code> Frame
      */
+    @Deprecated
     public static final ParamFrame getInstance() {
         if (ParamFrame.instance == null) {
             synchronized (ParamFrame.class) {
@@ -33,6 +36,7 @@ public final class ParamFrame implements IObservable{
         return ParamFrame.instance;
     }
 
+    @Deprecated
     public void initParametres() throws Exception{
 		System.out.println("Veuillez choisir les Strategies qui vont s'affronter :\n1. Gentille\n2. Mechante\n3. Donnant-Donant\n"
 			+ "4. Donnant-Donnant Dur\n5. Mefiante\n6. Rancuni�re\n7. Periodique-Gentille\n8. Periodique-Mechante\n");
@@ -43,27 +47,36 @@ public final class ParamFrame implements IObservable{
         notifierAll();
     }
 
+    @Deprecated
     public int getNbTours(){ return nbTours;}
 
+    @Deprecated
     public void setNbTours(int nbtours){ this.nbTours = nbtours;}
 
+    @Deprecated
     public void reset(){ nbTours = 0; strategies.clear(); }
 
+    @Deprecated
     public List<IObserver> getObservers(){ return observers; }
 
+    @Deprecated
     public List<Integer> getList(){ return strategies; }
 
+    @Deprecated
     public void setList(String[] result){for(int i = 0; i < result.length; i++){ strategies.add(Integer.parseInt(result[i]));}}
 
     /**{@inheritDoc}**/
+    @Deprecated
     @Override
     public void addObserver(IObserver observer){observers.add(observer);}
 
     /**{@inheritDoc}**/
+    @Deprecated
     @Override
     public void removeObserver(IObserver observer){observers.remove(observer);}
 
     /**{@inheritDoc}**/
+    @Deprecated
     @Override
     public void notifierAll(){for(IObserver observer: observers){observer.notifier();}}
 }

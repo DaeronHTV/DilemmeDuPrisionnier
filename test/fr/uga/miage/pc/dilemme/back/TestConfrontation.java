@@ -16,12 +16,14 @@ class TestConfrontation extends Confrontation{
 
 	public TestConfrontation() { super(new Gentille(), new Mechante()); }
 
+	//TODO Modifier la méthode equals pour le test
 	@Test
 	@Order(1)
-	void testGetterStrategie() { 
-		IStrategie s1 = getStrategie(ConfrontationConstants.STRATEGIE_1);
+	void testGetterStrategie() {
+		TestConfrontation test = new TestConfrontation();
+		IStrategie s1 = test.getStrategie(ConfrontationConstants.STRATEGIE_1);
 		assertTrue(s1.equals(new Gentille())); 
-		IStrategie s2 = getStrategie(ConfrontationConstants.STRATEGIE_2); 
+		IStrategie s2 = test.getStrategie(ConfrontationConstants.STRATEGIE_2); 
 		assertTrue(s2.equals(new Mechante()));
 	}
 	
