@@ -81,6 +81,7 @@ public final class TournoiFrame implements IObserver{
      * @param url - The link of the web page to open in the web browser
      * @throws Exception Throw if the Desktop class is not supported on the user system
 	 * @throws Exception If the url is null
+	 * @return true if the web page is open
      */
 	@Deprecated
     protected final boolean openWebPage(String url) throws Exception {

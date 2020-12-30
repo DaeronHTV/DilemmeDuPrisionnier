@@ -20,7 +20,8 @@ public interface IStrategie {
 	 * Rename the current object
 	 * @param nom New name
 	 */
-	public void setNom(String nom);
+	/*@Deprecated
+	public void setNom(String nom);*/
 	
 	/**
 	 * Give the description
@@ -33,7 +34,8 @@ public interface IStrategie {
 	 * Change the description of the strategie
 	 * @param description New description
 	 */
-	public void setDescription(String description);
+	/*@Deprecated
+	public void setDescription(String description);*/
 	
 	/**
 	 * Launch and save the action played by the strategie
@@ -58,27 +60,8 @@ public interface IStrategie {
 	public void clear();
 	
 	/**
-	 * Return the action played by the opponent
-	 * @param index Position in the list
-	 * @return String Action played at the index position
-	 */
-	public String getOppPlay(int index);
-	
-	/**
 	 * Add the action played by the opponent at the current round
 	 * @param value Action played by the opponent
 	 */
 	public void setOppPlay(String value);
-	
-	/**
-	 * Return True if the value is in the list
-	 * @param value Forfait status
-	 * @return boolean The value is present or not
-	 */
-	public boolean findValue(String value);
-
-	/*@Deprecated
-	public int getNumTour();
-	@Deprecated
-	public void incrementTour();*/
 }

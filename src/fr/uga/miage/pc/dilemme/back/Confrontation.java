@@ -86,6 +86,7 @@ public class Confrontation {
 	 * @param numStrategie The strategie that we want the final score
 	 * @since 3.0
 	 * @see ConfrontationConstants
+	 * @return the final of a strategie
 	 */
 	public int getFinalScore(int numStrategie){
 		int result = -1;
@@ -149,6 +150,7 @@ public class Confrontation {
 
 	/**
 	 * Change the first opponent of the fight
+	 * @param IStrategie a strategie
 	 * @deprecated Use setStrategie(int numStrategie, IStrategie strategie)
 	 */
 	@Deprecated
@@ -156,6 +158,7 @@ public class Confrontation {
 	
 	/**
 	 * Change the second opponent of the fight
+	 * @param IStrategie a strategie
 	 * @deprecated Use setStrategie(int numStrategie, IStrategie strategie) instead
 	 */
 	@Deprecated

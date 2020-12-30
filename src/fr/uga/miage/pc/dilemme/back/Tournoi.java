@@ -47,7 +47,7 @@ public class Tournoi implements Enumeration<Confrontation>{
 	
 	/**
 	 * Allows to know if the tournament still have fight
-	 * @see java.util.Iterator#hasNext()
+	 * @see java.util.Enumeration#hasMoreElements()
 	 * @return boolean Says if the tournament continues
 	 */
 	@Override
@@ -55,8 +55,7 @@ public class Tournoi implements Enumeration<Confrontation>{
 	
 	/**
 	 * Launch the next fight of the tournament and give a sum up of this last at the end
-	 * @see java.util.Iterator#next()
-	 * @see Tournoi#sumUpConfrontation()
+	 * @see java.util.Enumaration#nextElement()
 	 * @return String The sum up of the fight
 	 */
 	@Override

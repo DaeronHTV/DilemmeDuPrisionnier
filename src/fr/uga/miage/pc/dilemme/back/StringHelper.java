@@ -1,6 +1,5 @@
 package fr.uga.miage.pc.dilemme.back;
 
-import java.util.List;
 import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
 import fr.uga.miage.pc.dilemme.back.Confrontation.ConfrontationConstants;
 
@@ -97,7 +96,7 @@ public final class StringHelper {
     }
 
     /********************DEPRECATED METHOD********************************/
-    @Deprecated
+    /*@Deprecated
     public static String sumUpTournoi(Tournoi tournoi){
         List<IStrategie> strategies = tournoi.getStrategies();
         String result = "\t|";
@@ -119,6 +118,5 @@ public final class StringHelper {
 			result += total + "\t|" + line;
 		}
 		return result;
-    }
-
+    }*/
 }

@@ -39,12 +39,12 @@ public abstract class Strategie implements IStrategie{
 	public String getNom() { return nom; }
 	
 	/** {@inheritDoc} */
-	@Override
-	public void setNom(String nom) { this.nom = nom; }
+	/*@Override
+	public void setNom(String nom) { this.nom = nom; }*/
 	
 	/** {@inheritDoc} */
-	@Override
-	public void setDescription(String description) { this.description = description; }
+	/*@Override
+	public void setDescription(String description) { this.description = description; }*/
 	
 	/** {@inheritDoc} */
 	@Override
@@ -67,21 +67,26 @@ public abstract class Strategie implements IStrategie{
 	
 	/**
 	 * Return the number of action played by the opponent in the memory of the Strategie
-	 * @see IStrategie#sizeOppPlay()
 	 * @return int The size of the list
 	 */
 	public int sizeOppPlay() { return listOppPlay.size(); }
 	
-	/** {@inheritDoc} */
-	@Override
+	/**
+	 * Return the action played by the opponent
+	 * @param index Position in the list
+	 * @return String Action played at the index position
+	 */
 	public String getOppPlay(int index) { return listOppPlay.get(index); }
 	
 	/** {@inheritDoc} */
 	@Override
 	public void setOppPlay(String value) { listOppPlay.add(value); }
 		
-	/** {@inheritDoc} */
-	@Override
+	/**
+	 * Return True if the value is in the list
+	 * @param value Forfait status
+	 * @return boolean The value is present or not
+	 */
 	public boolean findValue(String value) { return listOppPlay.contains(value); }
 	
 	/**

@@ -67,7 +67,7 @@ public final class CloneHelper {
     /**
      * Create the a clone of the Strategie with the code given in parameter
      * @param name The code of the strategie to clone
-     * @return IStrategie - Clone of the Strategie
+     * @return Clone of the Strategie
      * @throws Exception If the name of the strategie isn't known
      * @since 3.0  
      */
@@ -90,15 +90,11 @@ public final class CloneHelper {
     /**
      * Create the a clone of the Strategie with the Strategie given in parameter
      * @param IStrategie The Strategie to clone
-     * @return IStrategie - Clone of the Strategie
+     * @return Clone of the Strategie
      * @throws Exception If the instance is unknow
      * @since 3.0  
      */
     public static IStrategie clone(IStrategie strategie) throws Exception {
-        //TODO Lorsque les stragies de Mariia et Marie-José seront récupérées
-        //Penser à rajouter une condition instanceof Strategie, ce qui permettra
-        //de différencier les stratgies venant de chez nous avec celles venant de
-        //chez elles
         IStrategie clone = null;
         if(strategie instanceof Gentille){ clone = new Gentille(); }
         else if(strategie instanceof Mechante){ clone = new Mechante(); }
