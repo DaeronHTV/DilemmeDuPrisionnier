@@ -8,8 +8,8 @@ public class PerMechant extends Strategie{
 
 	/** {@inheritDoc} */
 	@Override
-	public void play() {
-		setPlay(numTour % 3 == 0 ? "c" : "t");
+	public void compareComportements() {
+		setComportement(numTour % 3 == 0 ? "c" : "t");
 		numTour++;
 	}	
 }

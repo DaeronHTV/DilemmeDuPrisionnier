@@ -36,30 +36,26 @@ public abstract class Strategie implements IStrategie{
 	
 	/** {@inheritDoc} */
 	@Override
-	public String getNom() { return nom; }
+	public String getStrategyName() { return nom; }
 	
 	/** {@inheritDoc} */
-	/*@Override
-	public void setNom(String nom) { this.nom = nom; }*/
-	
-	/** {@inheritDoc} */
-	/*@Override
-	public void setDescription(String description) { this.description = description; }*/
+	@Override
+	public void setDescription(String description) { this.description = description; }
 	
 	/** {@inheritDoc} */
 	@Override
 	public String getDescription() { return description; }
 
 	/** {@inheritDoc} */
-	public abstract void play();
+	public abstract void compareComportements();
 	
 	/** {@inheritDoc} */
 	@Override
-	public String getPlay() { return play; }
+	public String getComportement() { return play; }
 	
 	/** {@inheritDoc} */
 	@Override
-	public void setPlay(String play) { this.play = play; }
+	public void setComportement(String play) { this.play = play; } //Créer une énumération
 	
 	/** {@inheritDoc} */
 	@Override
@@ -80,7 +76,7 @@ public abstract class Strategie implements IStrategie{
 	
 	/** {@inheritDoc} */
 	@Override
-	public void setOppPlay(String value) { listOppPlay.add(value); }
+	public void opponentComportement(String value) { listOppPlay.add(value); }
 		
 	/**
 	 * Return True if the value is in the list
@@ -96,7 +92,7 @@ public abstract class Strategie implements IStrategie{
 	 */
 	@Override
 	public String toString() {
-		return getNom() + " - " + getDescription();
+		return getStrategyName()+ " - " + getDescription();
 	}
 
 	/*@Override

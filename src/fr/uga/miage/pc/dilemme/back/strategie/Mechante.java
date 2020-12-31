@@ -4,10 +4,10 @@ public class Mechante extends Strategie{
 	
 	public Mechante() { 
 		super("Mechante", "Je trahis toujours"); 
-		setPlay("t");
+		setComportement("t");
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void play() { numTour++;}
+	public void compareComportements() { numTour++;}
 }

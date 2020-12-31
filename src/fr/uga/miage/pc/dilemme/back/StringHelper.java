@@ -54,7 +54,7 @@ public final class StringHelper {
         String result = isHtml ? "<table><tr border: 1px solid black;><td></td>" : "\t|";
         String resultTmp = "";
         for(IStrategie strategie: tournoi.getStrategies()){
-            int total = 0; String nom = strategie.getNom();
+            int total = 0; String nom = strategie.getStrategyName();
             result += isHtml ? "<td border: 1px solid black;><b>" + nom + "</b></td>" : nom + "|" ;
             resultTmp += isHtml ? "<tr border: 1px solid black;><td border: 1px solid black;><b>" + nom + "</b></td>" : nom + "|";
 			for(Confrontation confrontation: tournoi.getConfrontations()) {
@@ -85,8 +85,8 @@ public final class StringHelper {
         IStrategie s1 = confrontation.getStrategie(ConfrontationConstants.STRATEGIE_1);
         IStrategie s2 = confrontation.getStrategie(ConfrontationConstants.STRATEGIE_2);
         String result = "Rencontre N°" + num + " - " + confrontation.toString()
-        +"\n" + "Le score final est de : \n" + s1.getNom()+ " : "
-        + confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_1) + "\n" + s2.getNom() 
+        +"\n" + "Le score final est de : \n" + s1.getStrategyName()+ " : "
+        + confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_1) + "\n" + s2.getStrategyName() 
         + " : " + confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_2);
         if(isHtml){
             result = "<p>" + result + "</p>";

@@ -12,7 +12,6 @@ package fr.uga.miage.pc.dilemme.back.strategie;
  * @since 3.0
  * @version 1.0
  */
-
 public final class CloneHelper {
 
     /**
@@ -31,13 +30,13 @@ public final class CloneHelper {
          * @param strategie - Strategie to clone
          */
         public strategieClone(IStrategie strategie){ 
-            super(strategie.getNom(), strategie.getDescription());
-            setPlay(strategie.getPlay());
+            super(strategie.getStrategyName(), strategie.getDescription());
+            setComportement(strategie.getComportement());
         }
 
         /** {@inheritDoc} */
         @Override
-        public void play(){
+        public void compareComportements(){
 
         }
     }
@@ -56,9 +55,9 @@ public final class CloneHelper {
     public static IStrategie cloneTest(IStrategie strategie) {
         IStrategie clone = new CloneHelper.strategieClone(strategie){
             @Override
-            public void play(){
+            public void compareComportements(){
                 //int tourTmp = strategie.getNumTour();
-                strategie.play();
+                strategie.compareComportements();
             }
         };
         return clone;

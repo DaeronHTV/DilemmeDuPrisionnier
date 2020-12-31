@@ -8,8 +8,8 @@ public class Rancuniere extends Strategie{
 
 	/** {@inheritDoc} */
 	@Override
-	public void play() {
-		setPlay(findValue("t") && numTour != 1 ? "t" : "c");
+	public void compareComportements() {
+		setComportement(findValue("t") && numTour != 1 ? "t" : "c");
 		numTour++;
 	}
 }

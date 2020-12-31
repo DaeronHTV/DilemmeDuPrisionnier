@@ -8,8 +8,8 @@ public class Mefiante extends Strategie {
 
 	/** {@inheritDoc} */
 	@Override
-	public void play() {
-		setPlay(numTour != 1 ? getOppPlay(sizeOppPlay() - 1) : "t");
+	public void compareComportements() {
+		setComportement(numTour != 1 ? getOppPlay(sizeOppPlay() - 1) : "t");
 		numTour++;
 	}
 }
