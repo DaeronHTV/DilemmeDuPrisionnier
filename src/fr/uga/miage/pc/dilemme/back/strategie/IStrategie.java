@@ -14,13 +14,8 @@ public interface IStrategie {
 	 * Return the name of the strategie
 	 * @return String Name of strategie
 	 */
-	public String getNom();
-	
-	/**
-	 * Rename the current object
-	 * @param nom New name
-	 */
-	public void setNom(String nom);
+	public String getStrategyName();
+
 	
 	/**
 	 * Give the description
@@ -38,19 +33,19 @@ public interface IStrategie {
 	/**
 	 * Launch and save the action played by the strategie
 	 */
-	public void play();
+	public void compareComportements();
 	
 	/**
 	 * Give the action played at the current round
 	 * @return String The action played by the strategie
 	 */
-	public String getPlay();
+	public String getComportement();
 	
 	/**
 	 * Change the action played by the strategie
 	 * @param play New action played
 	 */
-	public void setPlay(String play);
+	public void setComportement(String play);
 	
 	/**
 	 * Reset all the attributes of the strategie
@@ -68,17 +63,5 @@ public interface IStrategie {
 	 * Add the action played by the opponent at the current round
 	 * @param value Action played by the opponent
 	 */
-	public void setOppPlay(String value);
-	
-	/**
-	 * Return True if the value is in the list
-	 * @param value Forfait status
-	 * @return boolean The value is present or not
-	 */
-	public boolean findValue(String value);
-
-	/*@Deprecated
-	public int getNumTour();
-	@Deprecated
-	public void incrementTour();*/
+	public void opponentComportement(String value); //opponentComportement
 }

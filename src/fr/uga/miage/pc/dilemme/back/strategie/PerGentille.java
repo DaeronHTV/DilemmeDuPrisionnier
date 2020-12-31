@@ -8,8 +8,8 @@ public class PerGentille extends Strategie{
 
 	/** {@inheritDoc} */
 	@Override
-	public void play() {
-		setPlay(numTour % 3 == 0 ? "t" : "c");
+	public void compareComportements() {
+		setComportement(numTour % 3 == 0 ? "t" : "c");
 		numTour++;
 	}
 }

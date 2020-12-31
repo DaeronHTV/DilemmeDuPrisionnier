@@ -4,10 +4,10 @@ public class Gentille extends Strategie{
 	
 	public Gentille() { 
 		super("Gentille", "Je coopere toujours."); 
-		setPlay("c");
+		setComportement("c");
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void play() { numTour++; }
+	public void compareComportements() { numTour++; }
 }

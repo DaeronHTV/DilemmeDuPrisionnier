@@ -8,8 +8,8 @@ public class DonnantDonnant extends Strategie{
 
 	/** {@inheritDoc} */
 	@Override
-	public void play() {
-		setPlay(numTour > 1 ? getOppPlay(sizeOppPlay() - 1) : "c");
+	public void compareComportements() {
+		setComportement(numTour > 1 ? getOppPlay(sizeOppPlay() - 1) : "c");
 		numTour++;
 	}
 }

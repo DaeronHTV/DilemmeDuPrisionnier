@@ -38,8 +38,8 @@ public final class StringHelper {
         String resultTmp = "";
         for(IStrategie strategie: tournoi.getStrategies()){
             int total = 0;
-            result += strategie.getNom() + "|" ;
-            resultTmp += strategie.getNom() + "|";
+            result += strategie.getStrategyName() + "|" ;
+            resultTmp += strategie.getStrategyName() + "|";
 			for(Confrontation confrontation: tournoi.getConfrontations()) {
 				if(strategie.equals(confrontation.getStrategie(ConfrontationConstants.STRATEGIE_1))) {
 					total += confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_1);
@@ -65,8 +65,8 @@ public final class StringHelper {
         IStrategie s1 = confrontation.getStrategie(ConfrontationConstants.STRATEGIE_1);
         IStrategie s2 = confrontation.getStrategie(ConfrontationConstants.STRATEGIE_2);
         String result = "Rencontre N°" + num + " - " + confrontation.toString()
-        +"\n" + "Le score final est de : \n" + s1.getNom()+ " : "
-        + confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_1) + "\n" + s2.getNom() 
+        +"\n" + "Le score final est de : \n" + s1.getStrategyName()+ " : "
+        + confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_1) + "\n" + s2.getStrategyName() 
         + " : " + confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_2);
         return result;
     }

@@ -4,14 +4,14 @@ public class DonnantDonnantDur extends Strategie{
 
 	public DonnantDonnantDur() {
 		super("Donnant-Donnant Dur", "Je coopere a la premiere partie, puis je coopere sauf si mon adversaire a trahi lors de l'une des deux parties precedentes.");
-		setPlay("c");
+		setComportement("c");
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void play() {
+	public void compareComportements() {
 		if(numTour > 1) {
-			setPlay(getOppPlay(sizeOppPlay() -1).equals("t") || (sizeOppPlay() > 1 && getOppPlay(sizeOppPlay() - 2).equals("t")) ? "t" : "c");
+			setComportement(getOppPlay(sizeOppPlay() -1).equals("t") || (sizeOppPlay() > 1 && getOppPlay(sizeOppPlay() - 2).equals("t")) ? "t" : "c");
 		}
 		numTour++;
 	}

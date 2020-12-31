@@ -102,7 +102,7 @@ public class Confrontation {
 	 * @see IStrategie#getNom()
 	 * @return String The versus of this fight
 	 */
-	public String toString() { return strategie1.getNom() + " VS " + strategie2.getNom(); }
+	public String toString() { return strategie1.getStrategyName() + " VS " + strategie2.getStrategyName(); }
 	
 	/**
 	 * Start the fight between the two opponents
@@ -113,12 +113,12 @@ public class Confrontation {
 	public void start(int nbTours) {
 		strategie1.clear(); strategie2.clear();
 		for(int i = 1; i <= nbTours; i++) {
-			strategie1.play();
-			strategie2.play();
-			String ps1 = strategie1.getPlay();
-			String ps2 = strategie2.getPlay();
-			strategie1.setOppPlay(ps2);
-			strategie2.setOppPlay(ps1);
+			strategie1.compareComportements();
+			strategie2.compareComportements();
+			String ps1 = strategie1.getComportement();
+			String ps2 = strategie2.getComportement();
+			strategie1.opponentComportement(ps2);
+			strategie2.opponentComportement(ps1);
 			scoreTour(ps1, ps2);
 		}
 	}
