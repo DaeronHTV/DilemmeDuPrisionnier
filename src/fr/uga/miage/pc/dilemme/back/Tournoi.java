@@ -1,18 +1,16 @@
 package fr.uga.miage.pc.dilemme.back;
 
-import fr.uga.miage.pc.dilemme.back.strategie.CloneHelper;
-import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
-
-
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
+import fr.uga.miage.pc.interfaces.IStrategie;
 
 /**
  * This class allows to construct a object tournament. It can be use in order to launch different fight between two opponent
  * or more which implement <code>IStrategie</code> interface.
  * This class was created for an french university project
- * @author Avanzino AurÃ©lien - Gourdon StÃ©phanie
+ * @author Avanzino Aurélien - Gourdon Stéphanie
  * @since 1.0
  * @version 2.0
  * @see Enumeration
@@ -40,9 +38,8 @@ public class Tournoi implements Enumeration<Confrontation>{
 			setNbTours(nbTours);
 			currentConfrontation = 0;
 			setStrategies(strategies);
-		} else { 
-			throw new Exception("EmptyException : An tournament with nobody is impossible\n.at Tournoi(int nbTours, List<IStrategie> strategies) - Tournoi:line.47"); 
-		}
+		} 
+		else{throw new Exception("EmptyException : An tournament with nobody is impossible\n.at Tournoi(int nbTours, List<IStrategie> strategies) - Tournoi:line.47"); }
 	}
 	
 	/**
@@ -109,11 +106,8 @@ public class Tournoi implements Enumeration<Confrontation>{
 		confrontations = new ArrayList<Confrontation>();
 		for(int j = 0; j < strategies.size(); j++) {
 			for(int i = j; i < strategies.size(); i++) {
-				if(i == j) {
-					confrontations.add(new Confrontation(getStrategie(j), CloneHelper.clone(getStrategie(j))));
-				}else {
-					confrontations.add(new Confrontation(getStrategie(j), getStrategie(i)));
-				}
+				if(i == j) {confrontations.add(new Confrontation(getStrategie(j), CloneHelper.clone(getStrategie(j))));}
+				else {confrontations.add(new Confrontation(getStrategie(j), getStrategie(i)));}
 			}
 		}
 	}
@@ -139,8 +133,7 @@ public class Tournoi implements Enumeration<Confrontation>{
 	public String toString() {
 		String result = ""; int i = 0;
 		for(Confrontation confrontation: confrontations) {
-			result += "Rencontre " + i + " : " + confrontation.toString() + "\n";
-			i++;
+			result += "Rencontre " + i + " : " + confrontation.toString() + "\n";i++;
 		}
 		return result;
 	}

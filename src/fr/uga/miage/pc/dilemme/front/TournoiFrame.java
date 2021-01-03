@@ -6,7 +6,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.awt.Desktop;
 
-import fr.uga.miage.pc.dilemme.back.strategie.*;
+import fr.uga.miage.pc.interfaces.IStrategie;
 import fr.uga.miage.pc.dilemme.back.ApiDilemme;
 import fr.uga.miage.pc.dilemme.back.Confrontation;
 

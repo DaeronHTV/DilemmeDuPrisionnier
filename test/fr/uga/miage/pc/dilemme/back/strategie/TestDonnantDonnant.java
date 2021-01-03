@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+import fr.uga.miage.pc.interfaces.Comportement;
+
 class TestDonnantDonnant {
 
 	@Test
@@ -13,18 +15,18 @@ class TestDonnantDonnant {
 		DonnantDonnant dd = new DonnantDonnant();
 		dd.numTour = 10;
 		assertEquals(1, dd.numTour);
-		dd.play();
-		String result = dd.getPlay();
-		assertEquals("c", result);
+		dd.compareComportements();
+		Comportement result = dd.getComportement();
+		assertEquals(Comportement.COOPERER, result);
 		assertEquals(2, dd.numTour);
-		dd.setOppPlay("t");
-		dd.play();
-		result = dd.getPlay();
-		assertEquals("t", result);
+		dd.opponentComportement(Comportement.TRAHIR);
+		dd.compareComportements();
+		result = dd.getComportement();
+		assertEquals(Comportement.TRAHIR, result);
 		assertEquals(3, dd.numTour);
-		dd.setOppPlay("bonjour");
-		dd.play();
-		result = dd.getPlay();
-		assertEquals("bonjour", result);
+		dd.opponentComportement(Comportement.COOPERER);
+		dd.compareComportements();
+		result = dd.getComportement();
+		assertEquals(Comportement.COOPERER, result);
 	}
 }
