@@ -34,8 +34,9 @@ public final class ParamFrame implements IObservable{
     }
 
     public void initParametres() throws Exception{
-		System.out.println("Veuillez choisir les Strategies qui vont s'affronter :\n1. Gentille\n2. Mechante\n3. Donnant-Donant\n"
-			+ "4. Donnant-Donnant Dur\n5. Mefiante\n6. Rancuni�re\n7. Periodique-Gentille\n8. Periodique-Mechante\n");
+		System.out.print("Veuillez choisir les Strategies qui vont s'affronter :\n1. Gentille\n2. Mechante\n3. Donnant-Donant\n"
+            + "4. Donnant-Donnant Dur\n5. Mefiante\n6. Rancuni�re\n7. Periodique-Gentille\n8. Periodique-Mechante\n");
+        System.out.println("Strategie de Mariia et Marie-Josée :\n9. Gentille\n10. Mechante\n11. Rancunière");
 		System.out.print("Separe les numeros par un '-' : ");
 		setList(br.readLine().split("-"));
         System.out.print("Veuillez maintenant indiquer le nombre de tours par Rencontre : ");
