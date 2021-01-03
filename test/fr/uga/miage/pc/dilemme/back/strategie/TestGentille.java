@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+import fr.uga.miage.pc.interfaces.Comportement;
+
 class TestGentille {
 
 	@Test
@@ -12,9 +14,9 @@ class TestGentille {
 	void testPlay() {
 		Gentille g = new Gentille();
 		assertEquals(1, g.numTour);
-		g.play();
-		String result = g.getPlay();
-		assertEquals("c", result);
+		g.compareComportements();
+		Comportement result = g.getComportement();
+		assertEquals(Comportement.COOPERER, result);
 		assertEquals(2, g.numTour);
 	}
 }

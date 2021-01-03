@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+import fr.uga.miage.pc.interfaces.Comportement;
+
 class TestMechante {
 
 	@Test
@@ -12,9 +14,9 @@ class TestMechante {
 	void testPlay() {
 		Mechante g = new Mechante();
 		assertEquals(1, g.numTour);
-		g.play();
-		String result = g.getPlay();
-		assertEquals("t", result);
+		g.compareComportements();
+		Comportement result = g.getComportement();
+		assertEquals(Comportement.TRAHIR, result);
 		assertEquals(2, g.numTour);
 	}
 }

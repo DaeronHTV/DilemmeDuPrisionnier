@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+import fr.uga.miage.pc.interfaces.Comportement;
+
 class TestMefiante {
 
 	@Test
@@ -12,18 +14,18 @@ class TestMefiante {
 	void testPlay() {
 		Mefiante mf = new Mefiante();
 		assertEquals(1, mf.numTour);
-		mf.play();
-		String result = mf.getPlay();
-		assertEquals("t", result);
+		mf.compareComportements();
+		Comportement result = mf.getComportement();
+		assertEquals(Comportement.TRAHIR, result);
 		assertEquals(2, mf.numTour);
-		mf.setOppPlay("t");
-		mf.play();
-		result = mf.getPlay();
-		assertEquals("t", result);
+		mf.opponentComportement(Comportement.TRAHIR);
+		mf.compareComportements();
+		result = mf.getComportement();
+		assertEquals(Comportement.TRAHIR, result);
 		assertEquals(3, mf.numTour);
-		mf.setOppPlay("bonjour");
-		mf.play();
-		result = mf.getPlay();
-		assertEquals("bonjour", result);
+		mf.opponentComportement(Comportement.RENONCER);
+		mf.compareComportements();
+		result = mf.getComportement();
+		assertEquals(Comportement.RENONCER, result);
 	}
 }
