@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.Order;
 
 import fr.uga.miage.pc.dilemme.back.strategie.Gentille;
-import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
+import fr.uga.miage.pc.interfaces.IStrategie;
 
 public class TestStringHelper {
 

@@ -1,15 +1,31 @@
 package fr.uga.miage.pc.dilemme.back.strategie;
 
+import fr.uga.miage.pc.interfaces.Comportement;
+
+/**
+ * 
+ * @author Avanzino Aurélien - Stéphanie Gourdon
+ * @since 1.0
+ * @version 3.0
+ */
 public class Rancuniere extends Strategie{
 
 	public Rancuniere() {
 		super("Rancuniere", "Je coopere a la premiere partie, mais des que mon adversaire trahit, je trahis toujours.");
+		setComportement(Comportement.COOPERER);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void compareComportements() {
-		setComportement(findValue("t") && numTour != 1 ? "t" : "c");
+		setComportement(findValue(Comportement.TRAHIR) && numTour != 1 ? Comportement.TRAHIR : Comportement.COOPERER);
 		numTour++;
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public void clear() {
+		super.clear();
+		setComportement(Comportement.COOPERER);
 	}
 }

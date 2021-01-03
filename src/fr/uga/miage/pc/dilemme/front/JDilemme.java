@@ -13,7 +13,7 @@ import java.awt.Dimension;
 /*Local import*/
 import fr.uga.miage.pc.dilemme.back.ApiDilemme;
 import fr.uga.miage.pc.dilemme.back.Confrontation;
-import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
+import fr.uga.miage.pc.interfaces.IStrategie;
 
 /*Java Util Import*/
 import java.util.Enumeration;

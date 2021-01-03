@@ -1,4 +1,7 @@
-package fr.uga.miage.pc.dilemme.back.strategie;
+package fr.uga.miage.pc.dilemme.back;
+
+import fr.uga.miage.pc.dilemme.back.strategie.*;
+import fr.uga.miage.pc.interfaces.IStrategie;
 
 /**
  * This class is used in order to create a clone of a Strategie for the creation of Confrontation
@@ -8,7 +11,7 @@ package fr.uga.miage.pc.dilemme.back.strategie;
  * or on the type of instance<br/>
  * For a futher development, we should change that by using a new system to do the clone
  * without these tests in order to get a generic software</p>
- * @author AurÃ©lien Avanzino - StÃ©phanie Gourdon
+ * @author Aurélien Avanzino - Stéphanie Gourdon
  * @since 3.0
  * @version 1.0
  */
@@ -36,9 +39,7 @@ public final class CloneHelper {
 
         /** {@inheritDoc} */
         @Override
-        public void compareComportements(){
-
-        }
+        public void compareComportements(){}
     }
 
     //TODO Une fois les versions 2.5 et 3.0 terminÃ© faire cette partie
@@ -103,6 +104,13 @@ public final class CloneHelper {
         else if(strategie instanceof DonnantDonnantDur){ clone = new DonnantDonnantDur(); }
         else if(strategie instanceof PerGentille){ clone = new PerGentille(); }
         else if(strategie instanceof PerMechant){ clone = new PerMechant(); }
+        //Ajout des strategies de Mariia Selivanova et Marie-Josée Bassil
+        else if(strategie instanceof fr.uga.miage.pc.strategies.Gentille) { clone = new fr.uga.miage.pc.strategies.Gentille();}
+        else if(strategie instanceof fr.uga.miage.pc.strategies.Mechante) {clone = new fr.uga.miage.pc.strategies.Mechante();}
+        else if(strategie instanceof fr.uga.miage.pc.strategies.Rancuniere) {clone = new fr.uga.miage.pc.strategies.Rancuniere();}
+        else if(strategie instanceof fr.uga.miage.pc.strategies.DonnantDonnantDur) {clone = new fr.uga.miage.pc.strategies.DonnantDonnantDur();}
+        else if(strategie instanceof fr.uga.miage.pc.strategies.DonnantDonnant) {clone = new fr.uga.miage.pc.strategies.DonnantDonnant();}
+        else if(strategie instanceof fr.uga.miage.pc.strategies.Mefiante) {clone = new fr.uga.miage.pc.strategies.Mefiante();}
         else{ throw new Exception("The strategie that you want to clone is not available");}
         return clone;
     }

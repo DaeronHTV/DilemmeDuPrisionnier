@@ -1,4 +1,4 @@
-package fr.uga.miage.pc.dilemme.back.strategie;
+package fr.uga.miage.pc.interfaces;
 
 /**
  * This interface allows to create object which can represent a players or others in a tournament or during games.
@@ -39,13 +39,13 @@ public interface IStrategie {
 	 * Give the action played at the current round
 	 * @return String The action played by the strategie
 	 */
-	public String getComportement();
+	public Comportement getComportement();
 	
 	/**
 	 * Change the action played by the strategie
 	 * @param play New action played
 	 */
-	public void setComportement(String play);
+	public void setComportement(Comportement play);
 	
 	/**
 	 * Reset all the attributes of the strategie
@@ -56,5 +56,5 @@ public interface IStrategie {
 	 * Add the action played by the opponent at the current round
 	 * @param value Action played by the opponent
 	 */
-	public void opponentComportement(String value); //opponentComportement
+	public void opponentComportement(Comportement value); //opponentComportement
 }

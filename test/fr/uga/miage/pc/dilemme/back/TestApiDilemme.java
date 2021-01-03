@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.Order;
 
 import fr.uga.miage.pc.dilemme.back.strategie.Gentille;
-import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
+import fr.uga.miage.pc.interfaces.IStrategie;
 
 public class TestApiDilemme {
 
@@ -48,56 +48,77 @@ public class TestApiDilemme {
     @Order(4)
     public void testCreateGentille(){
         IStrategie s = ApiDilemme.createGentille();
-        assertEquals("Gentille", s.getNom());
+        assertEquals("Gentille", s.getStrategyName());
     }
 
     @Test
     @Order(5)
     public void testCreateMechante(){
         IStrategie s = ApiDilemme.createMechante();
-        assertEquals("Mechante", s.getNom());
+        assertEquals("Mechante", s.getStrategyName());
     }
 
     @Test
     @Order(6)
     public void testCreateDonnantDonnant(){
         IStrategie s = ApiDilemme.createDonnantDonnant();
-        assertEquals("Donnant-Donnant", s.getNom());
+        assertEquals("Donnant-Donnant", s.getStrategyName());
     }
 
     @Test
     @Order(7)
     public void testCreateDonnantDonnantDur(){
         IStrategie s = ApiDilemme.createDonnantDonnantDur();
-        assertEquals("Donnant-Donnant Dur", s.getNom());
+        assertEquals("Donnant-Donnant Dur", s.getStrategyName());
     }
 
     @Test
     @Order(8)
     public void testCreateMefiante(){
         IStrategie s = ApiDilemme.createMefiante();
-        assertEquals("Mefiante", s.getNom());
+        assertEquals("Mefiante", s.getStrategyName());
     }
 
     @Test
     @Order(9)
     public void testCreatePerGentille(){
         IStrategie s = ApiDilemme.createPerGentille();
-        assertEquals("Periodique-Gentille", s.getNom());
+        assertEquals("Periodique-Gentille", s.getStrategyName());
     }
 
     @Test
     @Order(10)
     public void testCreatePerMechante(){
         IStrategie s = ApiDilemme.createPerMechante();
-        assertEquals("Periodique-Mechante", s.getNom());
+        assertEquals("Periodique-Mechante", s.getStrategyName());
     }
 
     @Test
     @Order(11)
     public void testCreateRancuniere(){
         IStrategie s = ApiDilemme.createRancuniere();
-        assertEquals("Rancuniere", s.getNom());
+        assertEquals("Rancuniere", s.getStrategyName());
+    }
+    
+    @Test
+    @Order(12)
+    public void testCreateRancuniere2(){
+        IStrategie s = ApiDilemme.createRancuniere2();
+        assertEquals("Rancuniere", s.getStrategyName());
+    }
+    
+    @Test
+    @Order(12)
+    public void testCreateGentille2(){
+        IStrategie s = ApiDilemme.createGentille2();
+        assertEquals("Rancuniere", s.getStrategyName());
+    }
+    
+    @Test
+    @Order(13)
+    public void testCreateMechante2(){
+        IStrategie s = ApiDilemme.createMechante2();
+        assertEquals("Rancuniere", s.getStrategyName());
     }
 
     private ArrayList<IStrategie> fillList(){

@@ -6,10 +6,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
+
 import fr.uga.miage.pc.dilemme.back.Confrontation.ConfrontationConstants;
 import fr.uga.miage.pc.dilemme.back.strategie.Gentille;
 import fr.uga.miage.pc.dilemme.back.strategie.Mechante;
+import fr.uga.miage.pc.interfaces.IStrategie;
 
 class TestTournoi {
 
@@ -41,8 +42,8 @@ class TestTournoi {
 		List<Confrontation> list = t.getConfrontations();
 		IStrategie s1 = t.getConfrontation(0).getStrategie(ConfrontationConstants.STRATEGIE_1);
 		IStrategie s2 = t.getConfrontation(0).getStrategie(ConfrontationConstants.STRATEGIE_2);
-		assertEquals("Gentille", s1.getNom());
-		assertEquals("Gentille", s2.getNom());
+		assertEquals("Gentille", s1.getStrategyName());
+		assertEquals("Gentille", s2.getStrategyName());
 		assertEquals(1, list.size());
 	}
 	
@@ -51,10 +52,10 @@ class TestTournoi {
 	void TestSetGetStrategie() throws Exception {
 		ArrayList<IStrategie> s = new ArrayList<IStrategie>();
 		Tournoi t = new Tournoi(10, this.fillList());
-		assertTrue(t.getStrategie(0).getNom().equals("Gentille"));
+		assertTrue(t.getStrategie(0).getStrategyName().equals("Gentille"));
 		s.add(new Mechante());
 		t.setStrategies(s);
-		assertTrue(t.getStrategie(0).getNom().equals("Mechante"));
+		assertTrue(t.getStrategie(0).getStrategyName().equals("Mechante"));
 	}
 
 	@Test

@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
-import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
 import fr.uga.miage.pc.dilemme.back.strategie.DonnantDonnant;
 import fr.uga.miage.pc.dilemme.back.strategie.DonnantDonnantDur;
 import fr.uga.miage.pc.dilemme.back.strategie.Gentille;
 import fr.uga.miage.pc.dilemme.back.strategie.Mechante;
+import fr.uga.miage.pc.interfaces.IStrategie;
 
 class TestConfrontation extends Confrontation{
 
@@ -47,8 +47,8 @@ class TestConfrontation extends Confrontation{
 	@Test
 	@Order(4)
 	void testToString() {
-		assertEquals(getStrategie(ConfrontationConstants.STRATEGIE_1).getNom() + " VS " 
-		+ getStrategie(ConfrontationConstants.STRATEGIE_2).getNom(), toString());
+		assertEquals(getStrategie(ConfrontationConstants.STRATEGIE_1).getStrategyName() + " VS " 
+		+ getStrategie(ConfrontationConstants.STRATEGIE_2).getStrategyName(), toString());
 	}
 	
 	@Test

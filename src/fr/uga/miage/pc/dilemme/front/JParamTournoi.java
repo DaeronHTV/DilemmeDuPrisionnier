@@ -39,22 +39,34 @@ public final class JParamTournoi extends FrameBase {
     }
 
     private void initJCheckBoxs(){
-        JLabel label = new JLabel("Choose the strategies : ");
+        JLabel label = new JLabel("Choose the strategies");
+        JLabel titre = new JLabel("Strategies of software :");
+        JLabel titre2 = new JLabel("Strategies from Mariia and Marie-Josée");
         label.setBounds(25, 10, 150, 25);
+        titre.setBounds(25, 35, 150, 25);
+        titre2.setBounds(250, 35, 250, 25);
         JPanel panel = new JPanel();
+        JPanel panel2 = new JPanel();
         //One CheckBox per Strategie
         checkBoxs.add(new JCheckBox("Gentille"));
         checkBoxs.add(new JCheckBox("Mechante"));
         checkBoxs.add(new JCheckBox("Donnant-Donnant"));
         checkBoxs.add(new JCheckBox("Donnant-Donnant Dur"));
         checkBoxs.add(new JCheckBox("Mefiante"));
-        checkBoxs.add(new JCheckBox("RancuniÃ¨re"));
+        checkBoxs.add(new JCheckBox("Rancunière"));
         checkBoxs.add(new JCheckBox("Periodique-Gentille"));
         checkBoxs.add(new JCheckBox("Periodique-Mechante"));
-        panel.setLayout(new GridLayout(checkBoxs.size(),1));
-        panel.setBounds(25, 35, 130, 25*checkBoxs.size());
-        for(JCheckBox checkBox: checkBoxs){ panel.add(checkBox); }
-        add(label); add(panel);
+        //Strategie de Mariia et Marie-Josée
+        checkBoxs.add(new JCheckBox("Gentille"));
+        checkBoxs.add(new JCheckBox("Mechante"));
+        checkBoxs.add(new JCheckBox("Rancunière"));
+        panel.setLayout(new GridLayout(8,1));
+        panel.setBounds(25, 60, 200, 25*8);
+        panel2.setLayout(new GridLayout(3, 1));
+        panel2.setBounds(250, 60, 130, 25*3);
+        for(int i = 0; i < 8; i++){ panel.add(checkBoxs.get(i)); }
+        for(int i = 8; i < 11; i++){ panel2.add(checkBoxs.get(i)); }
+        add(label); add(titre); add(panel);add(titre2);add(panel2);
     }
     
     @Override
@@ -69,8 +81,8 @@ public final class JParamTournoi extends FrameBase {
     private void initJTextPane(){
         JLabel label = new JLabel("Nombre de tour par rencontre : ");
         nbTours = new JTextField("0");
-        label.setBounds(265, 10, 200, 25);
-        nbTours.setBounds(265, 40, 150, 25);
+        label.setBounds(250, 175, 200, 25);
+        nbTours.setBounds(250, 205, 150, 25);
         add(label); add(nbTours);
 
     }

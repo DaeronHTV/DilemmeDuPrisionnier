@@ -1,0 +1,10 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar"
+        ],
+        "exclude": [
+            "c:\\Users\\IM2AG\\Desktop\\junit-platform-testkit-1.4.0.jar"
+        ]
+    }
+}

@@ -2,24 +2,25 @@ package fr.uga.miage.pc.dilemme.back.strategie;
 
 import java.util.ArrayList;
 
+import fr.uga.miage.pc.interfaces.Comportement;
+import fr.uga.miage.pc.interfaces.IStrategie;
+
 /**
  * This class constructs a object Strategie which implements the interface IStrategie.
  * A Strategie represents a way of thinking for a certain situation, a certain context.
  * Example : A Strategie "Good" could represent a person who always cooperate.
  * This class was created for a french university project
- * @author Avanzino Aur�lien - Gourdon St�phanie
+ * @author Avanzino Aur�lien - Gourdon St�phanie
  * @since 1.0
  * @version 1.5
  * @see IStrategie
  */
-
 public abstract class Strategie implements IStrategie{
-	
 	private String nom;
 	private String description;
-	private String play;
+	private Comportement play;
 	protected int numTour;
-	private ArrayList<String> listOppPlay;
+	private ArrayList<Comportement> listOppPlay;
 	
 	/**
 	 * Constructs a Strategie with it name and it description
@@ -31,7 +32,7 @@ public abstract class Strategie implements IStrategie{
 		this.nom = nom;
 		this.description = description;
 		numTour = 1;
-		listOppPlay = new ArrayList<String>();
+		listOppPlay = new ArrayList<Comportement>();
 	}
 	
 	/** {@inheritDoc} */
@@ -51,11 +52,11 @@ public abstract class Strategie implements IStrategie{
 	
 	/** {@inheritDoc} */
 	@Override
-	public String getComportement() { return play; }
+	public Comportement getComportement() { return play; }
 	
 	/** {@inheritDoc} */
 	@Override
-	public void setComportement(String play) { this.play = play; } //Créer une énumération
+	public void setComportement(Comportement play) { this.play = play; } //Créer une énumération
 	
 	/** {@inheritDoc} */
 	@Override
@@ -72,18 +73,18 @@ public abstract class Strategie implements IStrategie{
 	 * @param index Position in the list
 	 * @return String Action played at the index position
 	 */
-	public String getOppPlay(int index) { return listOppPlay.get(index); }
+	public Comportement getOppPlay(int index) { return listOppPlay.get(index); }
 	
 	/** {@inheritDoc} */
 	@Override
-	public void opponentComportement(String value) { listOppPlay.add(value); }
+	public void opponentComportement(Comportement value) { listOppPlay.add(value); }
 		
 	/**
 	 * Return True if the value is in the list
 	 * @param value Forfait status
 	 * @return boolean The value is present or not
 	 */
-	public boolean findValue(String value) { return listOppPlay.contains(value); }
+	public boolean findValue(Comportement value) { return listOppPlay.contains(value); }
 	
 	/**
 	 * Give the name and a description of the Strategie
@@ -95,11 +96,10 @@ public abstract class Strategie implements IStrategie{
 		return getStrategyName()+ " - " + getDescription();
 	}
 
-	/*@Override
+	/****************************DEPRECATED METHOD****************************/
 	@Deprecated
 	public int getNumTour(){ return numTour;}
 
-	@Override
 	@Deprecated
-	public void incrementTour() { numTour++; }*/
+	public void incrementTour() { numTour++; }
 }

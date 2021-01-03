@@ -1,11 +1,12 @@
 package fr.uga.miage.pc.dilemme.back;
 
-import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
+import fr.uga.miage.pc.interfaces.Comportement;
+import fr.uga.miage.pc.interfaces.IStrategie;
 
 /**
  * This class allows to construct a object fight. This object describes all the features of a fight, the opponent, name and others.
  * This class was created for a french university project
- * @author Avanzino AurÃ©lien - Gourdon StÃ©phanie
+ * @author Avanzino Aurélien - Gourdon Stéphanie
  * @since 1.0
  * @version 2.0
  */
@@ -116,8 +117,8 @@ public class Confrontation {
 		for(int i = 1; i <= nbTours; i++) {
 			strategie1.compareComportements();
 			strategie2.compareComportements();
-			String ps1 = strategie1.getComportement();
-			String ps2 = strategie2.getComportement();
+			Comportement ps1 = strategie1.getComportement();
+			Comportement ps2 = strategie2.getComportement();
 			strategie1.opponentComportement(ps2);
 			strategie2.opponentComportement(ps1);
 			scoreTour(ps1, ps2);
@@ -130,18 +131,18 @@ public class Confrontation {
 	 * @param ps2 Choice played by the second opponent
 	 * @see Confrontation#start(int)
 	 */
-	private void scoreTour(String ps1, String ps2) {
-		if(ps1.equals("c") && ps2.equals("c")) {
+	private void scoreTour(Comportement ps1, Comportement ps2) {
+		if(ps1 == Comportement.COOPERER && ps2 == Comportement.COOPERER) {
 			scoresFinal[0] += 3;
 			scoresFinal[1] += 3;
-		} else if (ps1.equals("t") && ps2.equals("t")) {
+		} else if (ps1 == Comportement.TRAHIR && ps2 == Comportement.TRAHIR) {
 			scoresFinal[0]++;
 			scoresFinal[1]++;
-		} else if (ps1.equals("n") || ps2.equals("n")) {
+		} else if (ps1 == Comportement.RENONCER || ps2 == Comportement.RENONCER) {
 			scoresFinal[0] += 2;
 			scoresFinal[1] += 2;
-		} else if ((ps1.equals("t") && ps2.equals("c")) || (ps1.equals("c") && ps2.equals("t"))) {
-			if(ps1.equals("t")) { scoresFinal[0] += 5; } 
+		} else if (((ps1 == Comportement.TRAHIR) && ps2 == Comportement.COOPERER) || (ps1.equals(Comportement.COOPERER) && ps2.equals(Comportement.TRAHIR))) {
+			if(ps1 == Comportement.TRAHIR) { scoresFinal[0] += 5; } 
 			else { scoresFinal[1] += 5; }
 		}
 	}

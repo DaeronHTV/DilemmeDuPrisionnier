@@ -1,12 +1,13 @@
 package fr.uga.miage.pc.dilemme.back;
 
-import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
 import fr.uga.miage.pc.dilemme.back.Confrontation.ConfrontationConstants;
+import fr.uga.miage.pc.interfaces.IStrategie;
 
 /**
- * 
+ * This class allows the back to format the result it has into a text that
+ * can be used by the front to show them to the user
  * @implSpec This is a static class
- * @author Avanzino AurÃ©lien - StÃ©phanie Gourdon
+ * @author Avanzino Aurélien - Stéphanie Gourdon
  * @since 3.0
  * @version 1.0
  */
@@ -84,7 +85,7 @@ public final class StringHelper {
     public static String sumUpConfrontation(boolean isHtml, int num, Confrontation confrontation){
         IStrategie s1 = confrontation.getStrategie(ConfrontationConstants.STRATEGIE_1);
         IStrategie s2 = confrontation.getStrategie(ConfrontationConstants.STRATEGIE_2);
-        String result = "Rencontre NÂ°" + num + " - " + confrontation.toString()
+        String result = "Rencontre N°" + num + " - " + confrontation.toString()
         +"\n" + "Le score final est de : \n" + s1.getStrategyName()+ " : "
         + confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_1) + "\n" + s2.getStrategyName() 
         + " : " + confrontation.getFinalScore(ConfrontationConstants.STRATEGIE_2);
