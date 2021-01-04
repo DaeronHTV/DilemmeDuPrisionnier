@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.GridLayout;
 
-public final class JParamTournoi extends FrameBase {
+public final class JParamTournoi extends FrameBase implements IObservable{
     private static final long serialVersionUID = 5056606608631535808L;
     /*List of Observer which need to change when JParam is modified*/
     List<IObserver> observers;
@@ -41,7 +41,7 @@ public final class JParamTournoi extends FrameBase {
     private void initJCheckBoxs(){
         JLabel label = new JLabel("Choose the strategies");
         JLabel titre = new JLabel("Strategies of software :");
-        JLabel titre2 = new JLabel("Strategies from Mariia and Marie-Josée");
+        JLabel titre2 = new JLabel("Strategies from Mariia and Marie-Josï¿½e");
         label.setBounds(25, 10, 150, 25);
         titre.setBounds(25, 35, 150, 25);
         titre2.setBounds(250, 35, 250, 25);
@@ -53,13 +53,13 @@ public final class JParamTournoi extends FrameBase {
         checkBoxs.add(new JCheckBox("Donnant-Donnant"));
         checkBoxs.add(new JCheckBox("Donnant-Donnant Dur"));
         checkBoxs.add(new JCheckBox("Mefiante"));
-        checkBoxs.add(new JCheckBox("Rancunière"));
+        checkBoxs.add(new JCheckBox("Rancuniï¿½re"));
         checkBoxs.add(new JCheckBox("Periodique-Gentille"));
         checkBoxs.add(new JCheckBox("Periodique-Mechante"));
-        //Strategie de Mariia et Marie-Josée
+        //Strategie de Mariia et Marie-Josï¿½e
         checkBoxs.add(new JCheckBox("Gentille"));
         checkBoxs.add(new JCheckBox("Mechante"));
-        checkBoxs.add(new JCheckBox("Rancunière"));
+        checkBoxs.add(new JCheckBox("Rancuniï¿½re"));
         panel.setLayout(new GridLayout(8,1));
         panel.setBounds(25, 60, 200, 25*8);
         panel2.setLayout(new GridLayout(3, 1));
