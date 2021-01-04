@@ -41,7 +41,7 @@ public final class JParamTournoi extends FrameBase implements IObservable{
     private void initJCheckBoxs(){
         JLabel label = new JLabel("Choose the strategies");
         JLabel titre = new JLabel("Strategies of software :");
-        JLabel titre2 = new JLabel("Strategies from Mariia and Marie-Josï¿½e");
+        JLabel titre2 = new JLabel("Strategies from Mariia and Marie-Josée");
         label.setBounds(25, 10, 150, 25);
         titre.setBounds(25, 35, 150, 25);
         titre2.setBounds(250, 35, 250, 25);
@@ -53,13 +53,13 @@ public final class JParamTournoi extends FrameBase implements IObservable{
         checkBoxs.add(new JCheckBox("Donnant-Donnant"));
         checkBoxs.add(new JCheckBox("Donnant-Donnant Dur"));
         checkBoxs.add(new JCheckBox("Mefiante"));
-        checkBoxs.add(new JCheckBox("Rancuniï¿½re"));
+        checkBoxs.add(new JCheckBox("Rancuniére"));
         checkBoxs.add(new JCheckBox("Periodique-Gentille"));
         checkBoxs.add(new JCheckBox("Periodique-Mechante"));
         //Strategie de Mariia et Marie-Josï¿½e
         checkBoxs.add(new JCheckBox("Gentille"));
         checkBoxs.add(new JCheckBox("Mechante"));
-        checkBoxs.add(new JCheckBox("Rancuniï¿½re"));
+        checkBoxs.add(new JCheckBox("Rancuniére"));
         panel.setLayout(new GridLayout(8,1));
         panel.setBounds(25, 60, 200, 25*8);
         panel2.setLayout(new GridLayout(3, 1));
@@ -69,6 +69,7 @@ public final class JParamTournoi extends FrameBase implements IObservable{
         add(label); add(titre); add(panel);add(titre2);add(panel2);
     }
     
+    /**{@inheritDoc}**/
     @Override
     protected void initButtons() {
     	launch = new JButton("Start");
@@ -122,12 +123,7 @@ public final class JParamTournoi extends FrameBase implements IObservable{
     }
 
 
-    /**
-     * 
-     * @since 3.0
-     * @see java.awt.event.MouseAdapter
-     * @see Component#addMouseListener
-     */
+    /**{@inheritDoc}**/
     @Override
     protected void initListeners() {
     	reset.addMouseListener(new java.awt.event.MouseAdapter(){
@@ -138,9 +134,15 @@ public final class JParamTournoi extends FrameBase implements IObservable{
         });
     } 
 
+    /**{@inheritDoc}**/
+    @Override
     public void addObserver(IObserver observer){ observers.add(observer);}
 
+    /**{@inheritDoc}**/
+    @Override
     public void removeObserver(IObserver observer){ observers.remove(observer);}
 
+    /**{@inheritDoc}**/
+    @Override
     public void notifierAll(){for(IObserver observer: observers){observer.notifier();}}
 }

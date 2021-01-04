@@ -26,7 +26,7 @@ import java.util.List;
  * 
  * @see FrameBase
  * @implSpec This class respect the Singleton Design pattern
- * @author Avanzino AurÃ©lien - Gourdon StÃ©phanie
+ * @author Avanzino Aurélien - Gourdon Stéphanie
  * @serial 7596513329960155614L
  * @since 3.0
  * @version 1.0
@@ -63,6 +63,7 @@ public final class JDilemme extends FrameBase implements IObserver{
         initListeners();
     }
 
+    /**{@inheritDoc}**/
     @Override
     protected void initButtons() {
         Dimension taille = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -70,10 +71,10 @@ public final class JDilemme extends FrameBase implements IObserver{
         openRepositorie = new JButton("Opent git repositorie");
         lauchTournoi = new JButton("Launch Tournament");
         exit = new JButton("Exit");
-        lauchTournoi.setBounds(725, (taille.height - 380), 150, 25);
-        openJavaDoc.setBounds(725, (taille.height - 345), 150, 25);
-        openRepositorie.setBounds(725, (taille.height - 310), 150, 25);
-        exit.setBounds(725, (taille.height - 275), 150, 25);
+        lauchTournoi.setBounds(725, 388, 150, 25);
+        openJavaDoc.setBounds(725, 423, 150, 25);
+        openRepositorie.setBounds(725, 458, 150, 25);
+        exit.setBounds(725, 493, 150, 25);
         add(openJavaDoc);add(openRepositorie);
         add(lauchTournoi);add(exit);
     }
@@ -105,12 +106,7 @@ public final class JDilemme extends FrameBase implements IObserver{
         return JDilemme.instance;
     }
 
-    /**
-     * 
-     * @since 3.0
-     * @see java.awt.event.MouseAdapter
-     * @see Component#addMouseListener
-     */
+    /**{@inheritDoc}**/
     @Override
     protected void initListeners() {
         lauchTournoi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,6 +157,7 @@ public final class JDilemme extends FrameBase implements IObserver{
         else { throw new Exception("The class used to open web pages isn't supported on your system !"); }
     }
 
+    /**{@inheritDoc}**/
     @Override
     public void notifier(){
         try {
