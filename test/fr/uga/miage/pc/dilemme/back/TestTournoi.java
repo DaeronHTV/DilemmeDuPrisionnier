@@ -6,9 +6,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
+
 import fr.uga.miage.pc.dilemme.back.Confrontation.ConfrontationConstants;
 import fr.uga.miage.pc.dilemme.back.strategie.Gentille;
+import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
 import fr.uga.miage.pc.dilemme.back.strategie.Mechante;
 
 class TestTournoi {

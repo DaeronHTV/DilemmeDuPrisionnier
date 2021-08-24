@@ -76,9 +76,4 @@ public interface IStrategie {
 	 * @return boolean The value is present or not
 	 */
 	public boolean findValue(String value);
-
-	/*@Deprecated
-	public int getNumTour();
-	@Deprecated
-	public void incrementTour();*/
 }

@@ -10,12 +10,6 @@ public abstract class FrameBase extends JFrame{
 	private static final long serialVersionUID = -6492481484973934111L;
     private JLabel container;
 
-    protected FrameBase(){ this(-1, -1, ""); }
-
-    protected FrameBase(int width, int height){ this(width, height, "", WindowConstants.EXIT_ON_CLOSE); }
-
-    protected FrameBase(int width, int height, String windowTile){ this(width, height, windowTile, WindowConstants.EXIT_ON_CLOSE); }
-
     protected FrameBase(int width, int height, String windowTitle, int redCrossOption){
         super(windowTitle);
         Dimension taille = java.awt.Toolkit.getDefaultToolkit().getScreenSize();

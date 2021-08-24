@@ -5,6 +5,8 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+
 /*Java Awt Import*/
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -55,7 +57,7 @@ public final class JDilemme extends FrameBase implements IObserver{
      * @see FrameBase#FrameBase(int, int, String)
      */
     private JDilemme() {
-        super(-1, -1, "Dilemme du prisonnier");
+        super(-1, -1, "Dilemme du prisonnier", WindowConstants.EXIT_ON_CLOSE);
         paramFrame = JParamTournoi.getInstance();
         paramFrame.addObserver(this);
         initButtons();

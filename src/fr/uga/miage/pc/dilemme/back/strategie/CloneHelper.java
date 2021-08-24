@@ -14,55 +14,6 @@ package fr.uga.miage.pc.dilemme.back.strategie;
  */
 
 public final class CloneHelper {
-
-    /**
-     * Private class which extends the class <code>Strategie</code> in order to create a object 
-     * which is a clone of a <code>Strategie</code>
-     * @implNote this private class is here to replace the other methods of the class
-     * which are not good to in their implementation
-     * @deprecated This system isn't finished yet
-     * @since 3.0
-     */
-    @Deprecated
-    private static class strategieClone extends Strategie{
-
-        /**
-         * Constructor for the clone which just call the constructor of Strategie
-         * @param strategie - Strategie to clone
-         */
-        public strategieClone(IStrategie strategie){ 
-            super(strategie.getNom(), strategie.getDescription());
-            setPlay(strategie.getPlay());
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public void play(){
-
-        }
-    }
-
-    //TODO Une fois les versions 2.5 et 3.0 terminé faire cette partie
-    /**
-     * Create a clone of the Strategie given by using the private class StrategieClone
-     * @implNote This method is here to replace the other methods of the class which
-     * are not godd in their implementation
-     * @deprecated This system isn't finished yet
-     * @since 3.0
-     * @param strategie - Strategie to clone
-     * @return The clone of the Strategie
-     */
-    @Deprecated
-    public static IStrategie cloneTest(IStrategie strategie) {
-        IStrategie clone = new CloneHelper.strategieClone(strategie){
-            @Override
-            public void play(){
-                //int tourTmp = strategie.getNumTour();
-                strategie.play();
-            }
-        };
-        return clone;
-    }
     
     /**
      * Create the a clone of the Strategie with the code given in parameter
@@ -95,10 +46,6 @@ public final class CloneHelper {
      * @since 3.0  
      */
     public static IStrategie clone(IStrategie strategie) throws Exception {
-        //TODO Lorsque les stragies de Mariia et Marie-José seront récupérées
-        //Penser à rajouter une condition instanceof Strategie, ce qui permettra
-        //de différencier les stratgies venant de chez nous avec celles venant de
-        //chez elles
         IStrategie clone = null;
         if(strategie instanceof Gentille){ clone = new Gentille(); }
         else if(strategie instanceof Mechante){ clone = new Mechante(); }

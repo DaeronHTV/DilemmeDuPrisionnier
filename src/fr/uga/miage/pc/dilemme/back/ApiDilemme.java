@@ -2,6 +2,7 @@ package fr.uga.miage.pc.dilemme.back;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import fr.uga.miage.pc.dilemme.back.strategie.*;
 
 /**

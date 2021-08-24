@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+import fr.uga.miage.pc.dilemme.back.strategie.Strategie;
+
 class TestStrategie extends Strategie{
 
 	public TestStrategie() { super("Test", "Test Description"); }

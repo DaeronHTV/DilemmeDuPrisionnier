@@ -15,16 +15,11 @@ import java.awt.GridLayout;
 
 public final class JParamTournoi extends FrameBase {
     private static final long serialVersionUID = 5056606608631535808L;
-    /*List of Observer which need to change when JParam is modified*/
     List<IObserver> observers;
-    /*We create an ArrayList of JCheckBox in order to get the value fastly*/
     List<JCheckBox> checkBoxs = new ArrayList<JCheckBox>();
-    /*Button to control choice of the user*/
     private JButton launch;
     private JButton reset;
-    /*JTextField in order to get the number of turn per Confrontation*/
     private JTextField nbTours;
-    /* Instance of the frame in order to respect the Singleton Design Pattern */
     private static volatile JParamTournoi instance;
 
     /**
@@ -42,7 +37,6 @@ public final class JParamTournoi extends FrameBase {
         JLabel label = new JLabel("Choose the strategies : ");
         label.setBounds(25, 10, 150, 25);
         JPanel panel = new JPanel();
-        //One CheckBox per Strategie
         checkBoxs.add(new JCheckBox("Gentille"));
         checkBoxs.add(new JCheckBox("Mechante"));
         checkBoxs.add(new JCheckBox("Donnant-Donnant"));

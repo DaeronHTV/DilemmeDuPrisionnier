@@ -1,8 +1,9 @@
 package fr.uga.miage.pc.dilemme.back;
 
 import java.util.List;
-import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
+
 import fr.uga.miage.pc.dilemme.back.Confrontation.ConfrontationConstants;
+import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
 
 /**
  * 

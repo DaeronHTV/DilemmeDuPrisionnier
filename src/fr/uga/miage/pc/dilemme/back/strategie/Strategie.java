@@ -93,12 +93,4 @@ public abstract class Strategie implements IStrategie{
 	public String toString() {
 		return getNom() + " - " + getDescription();
 	}
-
-	/*@Override
-	@Deprecated
-	public int getNumTour(){ return numTour;}
-
-	@Override
-	@Deprecated
-	public void incrementTour() { numTour++; }*/
 }

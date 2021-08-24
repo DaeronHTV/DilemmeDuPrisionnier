@@ -1,12 +1,11 @@
 package fr.uga.miage.pc.dilemme.back;
 
-import fr.uga.miage.pc.dilemme.back.strategie.CloneHelper;
-import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
-
-
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
+import fr.uga.miage.pc.dilemme.back.strategie.CloneHelper;
+import fr.uga.miage.pc.dilemme.back.strategie.IStrategie;
 
 /**
  * This class allows to construct a object tournament. It can be use in order to launch different fight between two opponent
@@ -109,11 +108,8 @@ public class Tournoi implements Enumeration<Confrontation>{
 		confrontations = new ArrayList<Confrontation>();
 		for(int j = 0; j < strategies.size(); j++) {
 			for(int i = j; i < strategies.size(); i++) {
-				if(i == j) {
-					confrontations.add(new Confrontation(getStrategie(j), CloneHelper.clone(getStrategie(j))));
-				}else {
-					confrontations.add(new Confrontation(getStrategie(j), getStrategie(i)));
-				}
+				if(i == j) confrontations.add(new Confrontation(getStrategie(j), CloneHelper.clone(getStrategie(j))));
+				else confrontations.add(new Confrontation(getStrategie(j), getStrategie(i)));
 			}
 		}
 	}

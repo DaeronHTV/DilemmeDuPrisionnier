@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+import fr.uga.miage.pc.dilemme.back.strategie.DonnantDonnantDur;
+
 class TestDonnantDonnantDur {
 
 	@Test
