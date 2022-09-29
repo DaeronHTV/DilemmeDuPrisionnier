@@ -27,12 +27,6 @@ public abstract class FrameBase extends JFrame{
         setResizable(false);
     }
 
-    protected void showErrorFrame(String message, Exception e){
-        String error = message+"\n";
-        for (int i = 0; i < 5; i++) { error += e.getStackTrace()[i] + "\n"; }
-        JOptionPane.showMessageDialog(null, error, "Error", JOptionPane.ERROR_MESSAGE, null);
-    }
-
     protected void showInfoFrame(String message){ JOptionPane.showMessageDialog(null, message, "Informations Complémentaires", JOptionPane.INFORMATION_MESSAGE); }
 
     public void showFrame(){ pack(); setVisible(true); }

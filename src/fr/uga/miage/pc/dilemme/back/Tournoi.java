@@ -1,10 +1,14 @@
 package fr.uga.miage.pc.dilemme.back;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
-
+import fr.uga.miage.pc.dilemme.back.interfaces.IConfrontation;
+import fr.uga.miage.pc.dilemme.back.interfaces.ITournoi;
 import fr.uga.miage.pc.interfaces.IStrategie;
+import fr.uga.miage.pc.dilemme.back.helper.ClassHelper;
 
 /**
  * This class allows to construct a object tournament. It can be use in order to launch different fight between two opponent
@@ -18,10 +22,10 @@ import fr.uga.miage.pc.interfaces.IStrategie;
  * @see IStrategie
  */
 
-public class Tournoi implements Enumeration<Confrontation>{
+public class Tournoi implements ITournoi{
 	private int nbTours;
-	private int currentConfrontation;
-	private List<Confrontation> confrontations;
+	private Iterator<IConfrontation> iterator;
+	private Collection<IConfrontation> confrontations;
 	private List<IStrategie> strategies;
 	
 	/**
@@ -35,11 +39,13 @@ public class Tournoi implements Enumeration<Confrontation>{
 	 */
 	public Tournoi(int nbTours, List<IStrategie> strategies) throws NullPointerException, Exception {
 		if(strategies.size() >= 1) {
-			setNbTours(nbTours);
-			currentConfrontation = 0;
+			this.nbTours = nbTours;
 			setStrategies(strategies);
+			iterator = confrontations.iterator();
 		} 
-		else{throw new Exception("EmptyException : An tournament with nobody is impossible\n.at Tournoi(int nbTours, List<IStrategie> strategies) - Tournoi:line.47"); }
+		else{
+			throw new Exception("EmptyException : An tournament with nobody is impossible\n.at Tournoi(int nbTours, List<IStrategie> strategies) - Tournoi:line.47"); 
+		}
 	}
 	
 	/**
@@ -48,7 +54,7 @@ public class Tournoi implements Enumeration<Confrontation>{
 	 * @return boolean Says if the tournament continues
 	 */
 	@Override
-	public boolean hasMoreElements() { return currentConfrontation < confrontations.size(); }
+	public boolean hasMoreElements() { return iterator.hasNext(); }
 	
 	/**
 	 * Launch the next fight of the tournament and give a sum up of this last at the end
@@ -56,10 +62,9 @@ public class Tournoi implements Enumeration<Confrontation>{
 	 * @return String The sum up of the fight
 	 */
 	@Override
-	public Confrontation nextElement() {
-		Confrontation result = getConfrontation(currentConfrontation);
+	public IConfrontation nextElement() {
+		IConfrontation result = iterator.next();
 		result.start(nbTours);
-		currentConfrontation++;
 		return result;
 	}
 	
@@ -68,23 +73,7 @@ public class Tournoi implements Enumeration<Confrontation>{
 	 * @see Confrontation#Confrontation(IStrategie, IStrategie)
 	 * @return ArrayList The list of fight
 	 */
-	public List<Confrontation> getConfrontations() { return confrontations; }
-	
-	/**
-	 * Get the Confrontation at the index position of the list
-	 * @param index Position in the list
-	 * @see Confrontation#Confrontation(IStrategie, IStrategie)
-	 * @return Confrontation the fight number index
-	 */
-	public Confrontation getConfrontation(int index) { return confrontations.get(index); }
-
-	/**
-	 * Give all the opponent
-	 * @see IStrategie
-	 * @see java.util.List
-	 * @return List All the opponent of the tournament
-	 */
-	public List<IStrategie> getStrategies(){ return strategies; }
+	public Collection<IConfrontation> Confrontations() { return confrontations; }
 	
 	/**
 	 * Give the opponent saved at the index position of the list
@@ -92,7 +81,9 @@ public class Tournoi implements Enumeration<Confrontation>{
 	 * @see IStrategie
 	 * @return IStrategie The opponent number index
 	 */
-	public IStrategie getStrategie(int index) { return strategies.get(index); }
+	public final IStrategie Strategie(final int index) { return strategies.get(index); }
+	
+	public final int NbStrategie() { return strategies.size(); }
 
 	/**
 	 * Set the different opponent and theirs fights too
@@ -100,13 +91,14 @@ public class Tournoi implements Enumeration<Confrontation>{
 	 * @see Confrontation#Confrontation(IStrategie, IStrategie)
 	 * @see IStrategie
 	 */
-	public void setStrategies(List<IStrategie> strategies) throws Exception{
+	public void setStrategies(final List<IStrategie> strategies) throws Exception{
 		this.strategies = strategies;
-		confrontations = new ArrayList<Confrontation>();
+		confrontations = new ArrayList<IConfrontation>();
 		for(int j = 0; j < strategies.size(); j++) {
 			for(int i = j; i < strategies.size(); i++) {
-				if(i == j) {confrontations.add(new Confrontation(getStrategie(j), CloneHelper.clone(getStrategie(j))));}
-				else {confrontations.add(new Confrontation(getStrategie(j), getStrategie(i)));}
+				int numConfron = (strategies.size()-1) * j + i;
+				if(i == j) {confrontations.add(new Confrontation(Strategie(j), ClassHelper.clonebyReflection(Strategie(j)), numConfron));}
+				else {confrontations.add(new Confrontation(Strategie(j), Strategie(i), numConfron));}
 			}
 		}
 	}
@@ -115,25 +107,5 @@ public class Tournoi implements Enumeration<Confrontation>{
 	 * Return the number of round for each fight in the tournament
 	 * @return int The number of round for a fight
 	 */
-	public int getNbTours() { return nbTours; }
-
-	/**
-	 * Set the number of round for the tournament
-	 * @param nbTours The number of round for a fight
-	 */
-	public void setNbTours(int nbTours) { this.nbTours = nbTours; }
-	
-	/**
-	 * Return the confrontation of the tournament
-	 * @see Object#toString()
-	 * @return String which contains the number of fight and round, the different opponent and fight
-	 */
-	@Override
-	public String toString() {
-		String result = ""; int i = 0;
-		for(Confrontation confrontation: confrontations) {
-			result += "Rencontre " + i + " : " + confrontation.toString() + "\n";i++;
-		}
-		return result;
-	}
+	public final int NbTours() { return nbTours; }
 }

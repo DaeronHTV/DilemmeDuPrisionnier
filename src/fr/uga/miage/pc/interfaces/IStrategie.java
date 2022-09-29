@@ -7,7 +7,6 @@ package fr.uga.miage.pc.interfaces;
  * @since 2.0
  * @see Cloneable
  */
-
 public interface IStrategie {
 	
 	/**

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 import org.junit.jupiter.api.Order;
 
+import fr.uga.miage.pc.dilemme.back.helper.StringHelper;
 import fr.uga.miage.pc.dilemme.back.strategie.Gentille;
 import fr.uga.miage.pc.interfaces.IStrategie;
 
@@ -16,11 +17,11 @@ public class TestStringHelper {
     @Order(1)
     public void testTournoi() throws NullPointerException, Exception {
         Tournoi t = new Tournoi(20, fillList());
-        String actual = StringHelper.tournoi(false, t);
+        String actual = StringHelper.tournoi(t);
         String expected = "Voici la configuration du tournoi actuelle :\nNombre de rencontre : " 
-		    + t.getConfrontations().size() + "\nNombre de Tours par rencontre : " + t.getNbTours() + "\n" +
+		    + t.Confrontations().size() + "\nNombre de Tours par rencontre : " + t.NbTours() + "\n" +
 		    "\nCe Tournoi opposera les strategies suivantes :\n";
-		for(IStrategie strategie: t.getStrategies()) { expected += strategie.toString() + "\n"; }
+		//for(IStrategie strategie: t.Strategies()) { expected += strategie.toString() + "\n"; }
 		expected += "\nVoici les differentes rencontres du tournoi : \n" + t.toString();
         assertEquals(expected, actual);
     }
@@ -30,7 +31,7 @@ public class TestStringHelper {
     @Order(2)
     public void testSumUpTournoi() throws NullPointerException, Exception {
         Tournoi t = new Tournoi(20, fillList());
-        String actual = StringHelper.sumUpTournoi(false, t);
+        String actual = StringHelper.sumUpTournoiWithHtml(t);
         String expected = "";
         assertEquals(expected, actual);
     }
@@ -38,10 +39,10 @@ public class TestStringHelper {
     @Test
     @Order(3)
     public void testSumUpConfrontation(){
-        Confrontation confrontation = new Confrontation(new Gentille(), new Gentille());
+        Confrontation confrontation = new Confrontation(new Gentille(), new Gentille(), 1);
         confrontation.start(20);
         String expected = "Rencontre N°1 - Gentille VS Gentille\nLe score final est de : \nGentille : 60\nGentille : 60";
-        String actual = StringHelper.sumUpConfrontation(false, 1, confrontation);
+        String actual = StringHelper.sumUpConfrontation(false, confrontation);
         assertEquals(expected, actual);
     }
 

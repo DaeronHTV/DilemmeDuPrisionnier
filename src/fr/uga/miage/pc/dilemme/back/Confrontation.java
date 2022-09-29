@@ -1,5 +1,6 @@
 package fr.uga.miage.pc.dilemme.back;
 
+import fr.uga.miage.pc.dilemme.back.interfaces.IConfrontation;
 import fr.uga.miage.pc.interfaces.Comportement;
 import fr.uga.miage.pc.interfaces.IStrategie;
 
@@ -10,11 +11,12 @@ import fr.uga.miage.pc.interfaces.IStrategie;
  * @since 1.0
  * @version 2.0
  */
-
-public class Confrontation {
+public class Confrontation implements IConfrontation{
+	private int[] scoresFinal = new int[] {0, 0};
+	private int numeroConfrontation;
 	private IStrategie strategie1;
 	private IStrategie strategie2;
-	private int[] scoresFinal;
+	
 
 	/**
 	 * This is interface is here to define all the constants associated 
@@ -38,11 +40,13 @@ public class Confrontation {
 	 * @see IStrategie
 	 * @since 1.0
 	 */
-	public Confrontation(IStrategie s1, IStrategie s2) {
+	public Confrontation(IStrategie s1, IStrategie s2, int numeroConfrontation) {
 		this.strategie1 = s1;
 		this.strategie2 = s2;
-		this.scoresFinal = new int[] {0, 0};
+		this.numeroConfrontation = numeroConfrontation;
 	}
+	
+	public int Numero() { return numeroConfrontation; }
 
 	/**
 	 * Give the first or the second strategie in function
@@ -54,12 +58,8 @@ public class Confrontation {
 	 * @since 3.0
 	 * @see ConfrontationConstants
 	 */
-	public IStrategie getStrategie(int numStrategie){
-		switch(numStrategie){
-			case 1: return strategie1;
-			case 2: return strategie2;
-			default: return null;
-		}
+	public IStrategie Strategie(final int numStrategie){
+		return numStrategie == 1 ? strategie1 : strategie2;
 	}
 
 	/**
@@ -72,11 +72,11 @@ public class Confrontation {
 	 * @see ConfrontationConstants
 	 */
 	public void setStrategie(int numStrategie, IStrategie strategie){
-		switch(numStrategie){
-			case 1: strategie1 = strategie; break;
-			case 2: strategie2 = strategie; break;
-			default:break;
+		if(numStrategie == 1) {
+			strategie1 = strategie;
+			return;
 		}
+		strategie2 = strategie;
 	}
 
 	/**
@@ -89,14 +89,8 @@ public class Confrontation {
 	 * @see ConfrontationConstants
 	 * @return the final of a strategie
 	 */
-	public int getFinalScore(int numStrategie){
-		int result = -1;
-		switch(numStrategie){
-			case 1: result = scoresFinal[0]; break;
-			case 2: result = scoresFinal[1]; break;
-			default: break;
-		}
-		return result;
+	public int FinalScore(final int numStrategie){
+		return scoresFinal[numStrategie-1];
 	}
 	
 	/**
@@ -112,7 +106,7 @@ public class Confrontation {
 	 * @see IStrategie#setOppPlay(String)
 	 * @param nbTours Number of round in this fight
 	 */
-	public void start(int nbTours) {
+	public void start(final int nbTours) {
 		strategie1.clear(); strategie2.clear();
 		for(int i = 1; i <= nbTours; i++) {
 			strategie1.compareComportements();
@@ -133,71 +127,17 @@ public class Confrontation {
 	 */
 	private void scoreTour(Comportement ps1, Comportement ps2) {
 		if(ps1 == Comportement.COOPERER && ps2 == Comportement.COOPERER) {
-			scoresFinal[0] += 3;
-			scoresFinal[1] += 3;
+			scoresFinal[ConstHelper.ZERO] += 3;
+			scoresFinal[ConstHelper.ONE] += 3;
 		} else if (ps1 == Comportement.TRAHIR && ps2 == Comportement.TRAHIR) {
-			scoresFinal[0]++;
-			scoresFinal[1]++;
+			scoresFinal[ConstHelper.ZERO]++;
+			scoresFinal[ConstHelper.ONE]++;
 		} else if (ps1 == Comportement.RENONCER || ps2 == Comportement.RENONCER) {
-			scoresFinal[0] += 2;
-			scoresFinal[1] += 2;
+			scoresFinal[ConstHelper.ZERO] += 2;
+			scoresFinal[ConstHelper.ONE] += 2;
 		} else if (((ps1 == Comportement.TRAHIR) && ps2 == Comportement.COOPERER) || (ps1.equals(Comportement.COOPERER) && ps2.equals(Comportement.TRAHIR))) {
-			if(ps1 == Comportement.TRAHIR) { scoresFinal[0] += 5; } 
-			else { scoresFinal[1] += 5; }
+			if(ps1 == Comportement.TRAHIR) { scoresFinal[ConstHelper.ZERO] += 5; } 
+			else { scoresFinal[ConstHelper.ONE] += 5; }
 		}
 	}
-
-	/***********************DEPRECATED METHOD**********************************/
-
-	/**
-	 * Change the first opponent of the fight
-	 * @param IStrategie a strategie
-	 * @deprecated Use setStrategie(int numStrategie, IStrategie strategie)
-	 */
-	@Deprecated
-	public void setStrategie1(IStrategie strategie1) { this.strategie1 = strategie1; }
-	
-	/**
-	 * Change the second opponent of the fight
-	 * @param IStrategie a strategie
-	 * @deprecated Use setStrategie(int numStrategie, IStrategie strategie) instead
-	 */
-	@Deprecated
-	public void setStrategie2(IStrategie strategie2) { this.strategie2 = strategie2; }
-
-	/**
-	 * Return the final score of the fight for the first Opponent
-	 * @return int Final score for the first opponent
-	 * @deprecated Use getFinalScore(int numStrategie) instead
-	 * @since 1.0
-	 */
-	@Deprecated
-	public int getFinalScoreS1() { return scoresFinal[0]; }
-	
-	/**
-	 * Return the final score of the fight for the second Opponent
-	 * @return int Final score for the second opponent
-	 * @deprecated Use getFinalScore(int numStrategie) instead
-	 * @since 1.0
-	 */
-	@Deprecated
-	public int getFinalScoreS2() { return scoresFinal[1]; }
-
-	/**
-	 * Give the object which represents the first opponent
-	 * @see IStrategie
-	 * @return IStrategie First opponent
-	 * @deprecated Use getStrategie(int numStrategie) instead
-	 */
-	@Deprecated
-	public IStrategie getStrategie1() { return strategie1; }
-	
-	/**
-	 * Give the object which represents the first opponent
-	 * @see IStrategie
-	 * @return IStrategie First opponent
-	 * @deprecated Use getStrategie(int numStrategie)
-	 */
-	@Deprecated
-	public IStrategie getStrategie2() { return strategie2; }
 }

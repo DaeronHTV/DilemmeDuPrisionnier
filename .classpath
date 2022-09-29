@@ -8,6 +8,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="C:/Users/IM2AG/Desktop/MesTravaux/MIAGE/Semestre1/PC/pc_dilemmeduprisonnier/lib/BASSIL_SELIVANOVA_Strategies.jar"/>
+	<classpathentry kind="lib" path="D:/Mes_Travaux/Repositories/Personnel/pc_dilemmeduprisonnier/lib/BASSIL_SELIVANOVA_Strategies.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

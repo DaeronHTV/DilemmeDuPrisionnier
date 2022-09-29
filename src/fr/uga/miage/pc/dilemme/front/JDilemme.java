@@ -1,22 +1,16 @@
 package fr.uga.miage.pc.dilemme.front;
 
-/*Javax Swing Import*/
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
-/*Java Awt Import*/
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Desktop;
 import java.awt.Dimension;
-/*Local import*/
 import fr.uga.miage.pc.dilemme.back.ApiDilemme;
-import fr.uga.miage.pc.dilemme.back.Confrontation;
+import fr.uga.miage.pc.dilemme.back.ConstHelper;
+import fr.uga.miage.pc.dilemme.back.interfaces.*;
+import fr.uga.miage.pc.dilemme.front.helper.UIHelper;
 import fr.uga.miage.pc.interfaces.IStrategie;
-
-/*Java Util Import*/
-import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -34,9 +28,6 @@ import java.util.List;
 
 public final class JDilemme extends FrameBase implements IObserver{
     private static final long serialVersionUID = 7596513329960155614L;
-    /* Links of the different web pages */
-    private static final String gitRepositorie = "https://gitlab.com/AurelienAVZN/pc_dilemmeduprisonnier";
-    private static final String javadoc = "https://pc-dilemmeprisonnier.netlify.app/";
     /* JArea to show information about the tournament */
     private JTextPane dataContainer;
     /* JButtons of the frame*/
@@ -48,13 +39,7 @@ public final class JDilemme extends FrameBase implements IObserver{
     private static volatile JDilemme instance;
     private static JParamTournoi paramFrame;
 
-
-    /**
-     * 
-     * @since 3.0
-     * @see FrameBase#FrameBase(int, int, String)
-     */
-    private JDilemme() {
+    private JDilemme() throws Exception {
         super(-1, -1, "Dilemme du prisonnier");
         paramFrame = JParamTournoi.getInstance();
         paramFrame.addObserver(this);
@@ -65,15 +50,14 @@ public final class JDilemme extends FrameBase implements IObserver{
 
     @Override
     protected void initButtons() {
-        Dimension taille = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         openJavaDoc = new JButton("Open Javadoc");
         openRepositorie = new JButton("Opent git repositorie");
         lauchTournoi = new JButton("Launch Tournament");
         exit = new JButton("Exit");
-        lauchTournoi.setBounds(725, (taille.height - 380), 150, 25);
-        openJavaDoc.setBounds(725, (taille.height - 345), 150, 25);
-        openRepositorie.setBounds(725, (taille.height - 310), 150, 25);
-        exit.setBounds(725, (taille.height - 275), 150, 25);
+        lauchTournoi.setBounds(725, 20, 150, 25);
+        openJavaDoc.setBounds(725, 50, 150, 25);
+        openRepositorie.setBounds(725, 80, 150, 25);
+        exit.setBounds(725, 110, 150, 25);
         add(openJavaDoc);add(openRepositorie);
         add(lauchTournoi);add(exit);
     }
@@ -95,8 +79,9 @@ public final class JDilemme extends FrameBase implements IObserver{
      * @implSpec This method was impleted in order to respect the
      * <i><u>Singleton</u></i> design pattern
      * @return The instance of the <code>JDilemme</code> Frame
+     * @throws Exception 
      */
-    public static final JDilemme getInstance() {
+    public static final JDilemme getInstance() throws Exception {
         if (JDilemme.instance == null) {
             synchronized (JDilemme.class) {
                 if (JDilemme.instance == null) { JDilemme.instance = new JDilemme(); }
@@ -105,12 +90,6 @@ public final class JDilemme extends FrameBase implements IObserver{
         return JDilemme.instance;
     }
 
-    /**
-     * 
-     * @since 3.0
-     * @see java.awt.event.MouseAdapter
-     * @see Component#addMouseListener
-     */
     @Override
     protected void initListeners() {
         lauchTournoi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -134,8 +113,8 @@ public final class JDilemme extends FrameBase implements IObserver{
         openRepositorie.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    try { openWebPage(gitRepositorie); } 
-                    catch (Exception e1) { showErrorFrame("An error append when the opening of the web page !", e1); }
+                    try { UIHelper.openWebPage(ConstHelper.gitRepositorie); } 
+                    catch (Exception e1) { UIHelper.showErrorFrame("An error append when the opening of the web page !", e1); }
                 }
             }
         });
@@ -143,42 +122,28 @@ public final class JDilemme extends FrameBase implements IObserver{
         openJavaDoc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    try { openWebPage(javadoc); } 
-                    catch (Exception e1) { showErrorFrame("An error append when the opening of the web page !", e1); }
+                    try { UIHelper.openWebPage(ConstHelper.javadoc); } 
+                    catch (Exception e1) { UIHelper.showErrorFrame("An error append when the opening of the web page !", e1); }
                 }
             }
         });
     }
     
-    /**
-     * Open a web page to the link given in parameter if the Desktop class is supported
-     * @since 3.0
-     * @param url - The link of the web page to open in the web browser
-     * @throws ClassNotSupportedException Throw if the Desktop class is not supported on the user system
-     */
-    private static final void openWebPage(String url) throws Exception {
-        if(Desktop.isDesktopSupported()){ Desktop.getDesktop().browse(new java.net.URI(url)); } 
-        else { throw new Exception("The class used to open web pages isn't supported on your system !"); }
-    }
-
     @Override
     public void notifier(){
         try {
-            List<Integer> result = paramFrame.getListCheckSelected();
-            int nbTours = paramFrame.getNbTours();
-            int i = 1;
-            List<IStrategie> strategies = ApiDilemme.createListStrategie(result);
-            Enumeration<Confrontation> test = ApiDilemme.createTournoi(strategies, nbTours);
+            final int nbTours = paramFrame.getNbTours();
+            List<IStrategie> strategies = ApiDilemme.createListStrategie(paramFrame.getListCheckSelected());
+            ITournoi test = ApiDilemme.createTournoi(strategies, nbTours);
             paramFrame.closeWindow();
             String sumUp = ApiDilemme.tournoiHtml();
-            while(test.hasMoreElements()) {
-                Confrontation current = test.nextElement();
+            for(int i = 1; test.hasMoreElements(); i++) {
+            	IConfrontation current = test.nextElement();
                 sumUp += ApiDilemme.confrontationHtml(i, current);
-                i++;
             }
             sumUp += "<p>Fin du Tournoi !<br/><b><u>Resume du Tournoi :</u></b></p>" + ApiDilemme.sumUpTournoiHtml();
             dataContainer.setText(sumUp);
         } 
-        catch (Exception e1) { showErrorFrame("An error append during the launch of the tournament !", e1); }
+        catch (Exception e1) { UIHelper.showErrorFrame("An error append during the launch of the tournament !", e1); }
     }
 }
