@@ -11,7 +11,7 @@ import fr.uga.miage.pc.interfaces.Comportement;
 public class Gentille extends Strategie{
 	
 	public Gentille() { 
-		super("Gentille", "Je coopere toujours."); 
+		super(StrategieConstHelper.GName, StrategieConstHelper.GDesc); 
 		setComportement(Comportement.COOPERER);
 	}
 

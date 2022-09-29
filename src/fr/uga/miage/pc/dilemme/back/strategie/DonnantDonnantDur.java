@@ -11,7 +11,7 @@ import fr.uga.miage.pc.interfaces.Comportement;
 public class DonnantDonnantDur extends Strategie{
 
 	public DonnantDonnantDur() {
-		super("Donnant-Donnant Dur", "Je coopere a la premiere partie, puis je coopere sauf si mon adversaire a trahi lors de l'une des deux parties precedentes.");
+		super(StrategieConstHelper.DDDName, StrategieConstHelper.DDDDesc);
 		setComportement(Comportement.COOPERER);
 	}
 

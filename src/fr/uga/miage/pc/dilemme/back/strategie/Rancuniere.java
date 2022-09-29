@@ -11,7 +11,7 @@ import fr.uga.miage.pc.interfaces.Comportement;
 public class Rancuniere extends Strategie{
 
 	public Rancuniere() {
-		super("Rancuniere", "Je coopere a la premiere partie, mais des que mon adversaire trahit, je trahis toujours.");
+		super(StrategieConstHelper.RName, StrategieConstHelper.RDesc);
 		setComportement(Comportement.COOPERER);
 	}
 

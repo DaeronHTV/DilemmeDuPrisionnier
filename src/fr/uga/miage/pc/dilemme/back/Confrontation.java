@@ -11,7 +11,7 @@ import fr.uga.miage.pc.interfaces.IStrategie;
  * @since 1.0
  * @version 2.0
  */
-public class Confrontation implements IConfrontation{
+public final class Confrontation implements IConfrontation{
 	private int[] scoresFinal = new int[] {0, 0};
 	private int numeroConfrontation;
 	private IStrategie strategie1;
@@ -40,7 +40,7 @@ public class Confrontation implements IConfrontation{
 	 * @see IStrategie
 	 * @since 1.0
 	 */
-	public Confrontation(IStrategie s1, IStrategie s2, int numeroConfrontation) {
+	public Confrontation(final IStrategie s1, final IStrategie s2, final int numeroConfrontation) {
 		this.strategie1 = s1;
 		this.strategie2 = s2;
 		this.numeroConfrontation = numeroConfrontation;
@@ -71,7 +71,7 @@ public class Confrontation implements IConfrontation{
 	 * @since 3.0
 	 * @see ConfrontationConstants
 	 */
-	public void setStrategie(int numStrategie, IStrategie strategie){
+	public void setStrategie(final int numStrategie, final IStrategie strategie){
 		if(numStrategie == 1) {
 			strategie1 = strategie;
 			return;
@@ -125,7 +125,7 @@ public class Confrontation implements IConfrontation{
 	 * @param ps2 Choice played by the second opponent
 	 * @see Confrontation#start(int)
 	 */
-	private void scoreTour(Comportement ps1, Comportement ps2) {
+	private void scoreTour(final Comportement ps1, final Comportement ps2) {
 		if(ps1 == Comportement.COOPERER && ps2 == Comportement.COOPERER) {
 			scoresFinal[ConstHelper.ZERO] += 3;
 			scoresFinal[ConstHelper.ONE] += 3;

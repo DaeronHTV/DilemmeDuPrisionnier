@@ -4,18 +4,20 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
+import javax.swing.text.html.HTMLEditorKit;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import fr.uga.miage.pc.core.ClassHelper;
 import fr.uga.miage.pc.core.patterns.IObserver;
 import fr.uga.miage.pc.dilemme.back.ConstHelper;
 import fr.uga.miage.pc.dilemme.back.Tournoi;
-import fr.uga.miage.pc.dilemme.back.helper.StringHelper;
 import fr.uga.miage.pc.dilemme.back.interfaces.*;
-import fr.uga.miage.pc.dilemme.front.helper.UIHelper;
-import fr.uga.miage.pc.interfaces.IStrategie;
-import java.util.List;
+import fr.uga.miage.pc.dilemme.back.helper.StringHelper;
+
+import static fr.uga.miage.pc.dilemme.front.helper.UIHelper.openWebPage;
+import static fr.uga.miage.pc.dilemme.front.helper.UIHelper.showErrorFrame;
+import static fr.uga.miage.pc.core.ClassHelper.createListObject;
 
 /**
  * This class create an instance of <code>JFrame</code> used to show the
@@ -50,11 +52,11 @@ public final class JDilemme extends FrameBase implements IObserver{
     }
 
     @Override
-    protected void initButtons() {
-        openJavaDoc = new JButton("Open Javadoc");
-        openRepositorie = new JButton("Opent git repositorie");
-        lauchTournoi = new JButton("Launch Tournament");
-        exit = new JButton("Exit");
+    protected final void initButtons() {
+        openJavaDoc = new JButton(ConstUIHelper.OpenJavaDocName);
+        openRepositorie = new JButton(ConstUIHelper.OpenGit);
+        lauchTournoi = new JButton(ConstUIHelper.Launch);
+        exit = new JButton(ConstUIHelper.Exit);
         lauchTournoi.setBounds(725, 20, 150, 25);
         openJavaDoc.setBounds(725, 50, 150, 25);
         openRepositorie.setBounds(725, 80, 150, 25);
@@ -63,16 +65,14 @@ public final class JDilemme extends FrameBase implements IObserver{
         add(lauchTournoi);add(exit);
     }
 
-    private void initTextArea(){
+    private final void initTextArea(){
         dataContainer = new JTextPane();
-        dataContainer.setContentType("text/html");
+        dataContainer.setEditorKit(new HTMLEditorKit());
         javax.swing.JPanel panel = new javax.swing.JPanel();
-        JScrollPane scrollPane = new JScrollPane(dataContainer, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-            JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        panel.setSize(new Dimension(725,600));
         panel.setLayout(new BorderLayout());
         panel.setBounds(0,0,700,562);
-        panel.add(scrollPane, BorderLayout.CENTER);
+        panel.add(new JScrollPane(dataContainer, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS), BorderLayout.CENTER);
         add(panel);
     }
 
@@ -92,11 +92,11 @@ public final class JDilemme extends FrameBase implements IObserver{
     }
 
     @Override
-    protected void initListeners() {
+    protected final void initListeners() {
         lauchTournoi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent e) {
                 paramFrame.reset();
-                dataContainer.setText("");
+                dataContainer.setText(StringHelper.Empty);
                 paramFrame.showFrame();
             }
         });
@@ -124,27 +124,29 @@ public final class JDilemme extends FrameBase implements IObserver{
         });
     }
     
-    private void LeftClickOpenPage(java.awt.event.MouseEvent e, String page) {
+    private final void LeftClickOpenPage(java.awt.event.MouseEvent e, final String page) {
     	if (SwingUtilities.isLeftMouseButton(e)) {
-            try { UIHelper.openWebPage(page); } 
-            catch (Exception e1) { UIHelper.showErrorFrame("An error append when the opening of the web page !", e1); }
+            try { openWebPage(page); } 
+            catch (Exception e1) { showErrorFrame("An error append when the opening of the web page !", e1); }
         }
     }
     
     @Override
-    public void notifier(){
+    public final void notifier(){
         try {
             final int nbTours = paramFrame.getNbTours();
-            List<IStrategie> strategies = ClassHelper.createListObject(paramFrame.getListCheckSelected());
-            ITournoi test = new Tournoi(nbTours, strategies);
+            ITournoi test = new Tournoi(nbTours, createListObject(paramFrame.getListCheckSelected()));
             paramFrame.closeWindow();
-            String sumUp = StringHelper.tournoi(test);
+            StringBuilder builder = new StringBuilder();
+            builder.append(StringHelper.tournoi(test));
             for(IConfrontation current: test.Confrontations()) {
-                sumUp += StringHelper.sumUpConfrontation(true, current);
+            	current.start(nbTours);
+                builder.append(StringHelper.sumUpConfrontation(true, current));
             }
-            sumUp += "<p>Fin du Tournoi !<br/><b><u>Resume du Tournoi :</u></b></p>" + StringHelper.sumUpTournoiWithHtml(test);
-            dataContainer.setText(sumUp);
+            builder.append("<p>Fin du Tournoi !<br/><b><u>Resume du Tournoi :</u></b></p>")
+            .append(StringHelper.sumUpTournoiWithHtml(test));
+            dataContainer.setText(builder.toString());
         } 
-        catch (Exception e1) { UIHelper.showErrorFrame("An error append during the launch of the tournament !", e1); }
+        catch (Exception e1) { showErrorFrame("An error append during the launch of the tournament !", e1); }
     }
 }

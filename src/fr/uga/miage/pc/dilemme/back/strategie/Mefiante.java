@@ -11,7 +11,7 @@ import fr.uga.miage.pc.interfaces.Comportement;
 public class Mefiante extends Strategie {
 
 	public Mefiante() {
-		super("Mefiante", "Je trahis a la premiere partie, puis je joue ce qu'a joue l'autre a la partie precedente.");
+		super(StrategieConstHelper.MfName, StrategieConstHelper.MfDesc);
 		setComportement(Comportement.TRAHIR);
 	}
 

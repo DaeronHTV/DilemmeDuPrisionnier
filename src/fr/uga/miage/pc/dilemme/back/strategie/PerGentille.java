@@ -11,7 +11,7 @@ import fr.uga.miage.pc.interfaces.Comportement;
 public class PerGentille extends Strategie{
 
 	public PerGentille() {
-		super("Periodique-Gentille", "Je joue cooperer, cooperer, trahir, cooperer, cooperer, trahir, ...");
+		super(StrategieConstHelper.PerGName, StrategieConstHelper.PerGDesc);
 	}
 
 	/** {@inheritDoc} */

@@ -11,7 +11,7 @@ import fr.uga.miage.pc.interfaces.Comportement;
 public class PerMechant extends Strategie{
 	
 	public PerMechant() {
-		super("Periodique-Mechant", "Je joue trahir, trahir, cooperer, trahir, trahir, cooperer, ...");
+		super(StrategieConstHelper.PerMName, StrategieConstHelper.PerMDesc);
 	}
 
 	/** {@inheritDoc} */

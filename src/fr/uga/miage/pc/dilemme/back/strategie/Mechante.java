@@ -11,7 +11,7 @@ import fr.uga.miage.pc.interfaces.Comportement;
 public class Mechante extends Strategie{
 	
 	public Mechante() { 
-		super("Mechante", "Je trahis toujours"); 
+		super(StrategieConstHelper.MName, StrategieConstHelper.MDesc); 
 		setComportement(Comportement.TRAHIR);
 	}
 

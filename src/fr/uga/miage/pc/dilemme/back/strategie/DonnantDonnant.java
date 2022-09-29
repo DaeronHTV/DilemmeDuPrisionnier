@@ -8,10 +8,10 @@ import fr.uga.miage.pc.interfaces.Comportement;
  * @since 1.0
  * @version 3.0
  */
-public class DonnantDonnant extends Strategie{
+public final class DonnantDonnant extends Strategie{
 	
 	public DonnantDonnant() {
-		super("Donnant-Donnant", "Je coopere a la premiere partie, puis je joue ce qu'a joue l'autre a la partie precedente.");
+		super(StrategieConstHelper.DDName, StrategieConstHelper.DDDesc);
 		setComportement(Comportement.COOPERER);
 	}
 

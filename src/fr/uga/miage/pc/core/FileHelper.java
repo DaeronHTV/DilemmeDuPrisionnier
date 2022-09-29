@@ -9,16 +9,16 @@ import fr.uga.miage.pc.dilemme.back.helper.StringHelper;
 
 public final class FileHelper {
 
-	public static List<File> GetSubFile(String path, boolean recursive) throws Exception{
+	public static List<File> GetSubFile(final String path, final boolean recursive) throws Exception{
 		return GetSubFile(new File(path), recursive);
 	}
 	
-	public static List<File> GetSubFile(File directory, boolean recursive) throws Exception{
+	public static List<File> GetSubFile(final File directory, final boolean recursive) throws Exception{
 		if(!directory.exists() || !directory.isDirectory()) {
 			throw new Exception("The file given doesn't exist or isn't a directory");
 		}
 		List<File> directories = new ArrayList<File>();
-		for(File file : directory.listFiles()) {
+		for(final File file : directory.listFiles()) {
 			if(file.isDirectory()) {
 				directories.add(file);
 				if(recursive) {
@@ -35,7 +35,7 @@ public final class FileHelper {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public static List<Class> GetClasses(String packname, boolean includeSubDir) throws Exception{
+	public static List<Class> GetClasses(final String packname, final boolean includeSubDir) throws Exception{
 		String path = packname.replace('.', '/');
 		URL resource = Thread.currentThread().getContextClassLoader().getResource(path);
 		if (resource == null) {
@@ -45,12 +45,12 @@ public final class FileHelper {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public static List<Class> GetClasses(File directory, boolean includeSubDir) throws Exception{
+	public static List<Class> GetClasses(final File directory, final boolean includeSubDir) throws Exception{
 		if(!directory.exists() || !directory.isDirectory()) {
 			throw new Exception("The file given doesn't exist or isn't a directory");
 		}
 		List<Class> classes = new ArrayList<Class>();
-		for(File file: directory.listFiles()) {
+		for(final File file: directory.listFiles()) {
 			if(file.isDirectory() && includeSubDir) {
 				classes.addAll(GetClasses(file, includeSubDir));
 			}

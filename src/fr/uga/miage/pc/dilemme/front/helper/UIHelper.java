@@ -1,11 +1,9 @@
 package fr.uga.miage.pc.dilemme.front.helper;
 
+import java.awt.Component;
 import java.awt.Desktop;
-import java.util.List;
-
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import fr.uga.miage.pc.dilemme.front.extensions.ExtentedCheckBox;
 
 public final class UIHelper {
 	public static void showErrorFrame(String message, Exception e){
@@ -28,9 +26,8 @@ public final class UIHelper {
         else { throw new Exception("The class used to open web pages isn't supported on your system !"); }
     }
     
-    public List<ExtentedCheckBox> GetExtendedCheckBox(){
-    	
-    	return null;
+    public static final void AddAll(JFrame frame, Component... comps) {
+    	for(Component comp: comps) { frame.add(comp); }
     }
 
 }
