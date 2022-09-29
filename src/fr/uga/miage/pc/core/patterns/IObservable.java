@@ -1,4 +1,4 @@
-package fr.uga.miage.pc.dilemme.front;
+package fr.uga.miage.pc.core.patterns;
 
 /**
  * This interface is used in order to respect the design patter Observer.

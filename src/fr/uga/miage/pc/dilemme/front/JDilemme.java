@@ -6,8 +6,12 @@ import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import fr.uga.miage.pc.dilemme.back.ApiDilemme;
+
+import fr.uga.miage.pc.core.ClassHelper;
+import fr.uga.miage.pc.core.patterns.IObserver;
 import fr.uga.miage.pc.dilemme.back.ConstHelper;
+import fr.uga.miage.pc.dilemme.back.Tournoi;
+import fr.uga.miage.pc.dilemme.back.helper.StringHelper;
 import fr.uga.miage.pc.dilemme.back.interfaces.*;
 import fr.uga.miage.pc.dilemme.front.helper.UIHelper;
 import fr.uga.miage.pc.interfaces.IStrategie;
@@ -28,14 +32,11 @@ import java.util.List;
 
 public final class JDilemme extends FrameBase implements IObserver{
     private static final long serialVersionUID = 7596513329960155614L;
-    /* JArea to show information about the tournament */
     private JTextPane dataContainer;
-    /* JButtons of the frame*/
     private JButton openJavaDoc;
     private JButton openRepositorie;
     private JButton lauchTournoi;
     private JButton exit;
-    /* Instance of the frame in order to respect the Singleton Design Pattern */
     private static volatile JDilemme instance;
     private static JParamTournoi paramFrame;
 
@@ -112,36 +113,36 @@ public final class JDilemme extends FrameBase implements IObserver{
 
         openRepositorie.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e)) {
-                    try { UIHelper.openWebPage(ConstHelper.gitRepositorie); } 
-                    catch (Exception e1) { UIHelper.showErrorFrame("An error append when the opening of the web page !", e1); }
-                }
+            	LeftClickOpenPage(e, ConstHelper.gitRepositorie);
             }
         });
 
         openJavaDoc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e)) {
-                    try { UIHelper.openWebPage(ConstHelper.javadoc); } 
-                    catch (Exception e1) { UIHelper.showErrorFrame("An error append when the opening of the web page !", e1); }
-                }
+                LeftClickOpenPage(e, ConstHelper.javadoc);
             }
         });
+    }
+    
+    private void LeftClickOpenPage(java.awt.event.MouseEvent e, String page) {
+    	if (SwingUtilities.isLeftMouseButton(e)) {
+            try { UIHelper.openWebPage(page); } 
+            catch (Exception e1) { UIHelper.showErrorFrame("An error append when the opening of the web page !", e1); }
+        }
     }
     
     @Override
     public void notifier(){
         try {
             final int nbTours = paramFrame.getNbTours();
-            List<IStrategie> strategies = ApiDilemme.createListStrategie(paramFrame.getListCheckSelected());
-            ITournoi test = ApiDilemme.createTournoi(strategies, nbTours);
+            List<IStrategie> strategies = ClassHelper.createListObject(paramFrame.getListCheckSelected());
+            ITournoi test = new Tournoi(nbTours, strategies);
             paramFrame.closeWindow();
-            String sumUp = ApiDilemme.tournoiHtml();
-            for(int i = 1; test.hasMoreElements(); i++) {
-            	IConfrontation current = test.nextElement();
-                sumUp += ApiDilemme.confrontationHtml(i, current);
+            String sumUp = StringHelper.tournoi(test);
+            for(IConfrontation current: test.Confrontations()) {
+                sumUp += StringHelper.sumUpConfrontation(true, current);
             }
-            sumUp += "<p>Fin du Tournoi !<br/><b><u>Resume du Tournoi :</u></b></p>" + ApiDilemme.sumUpTournoiHtml();
+            sumUp += "<p>Fin du Tournoi !<br/><b><u>Resume du Tournoi :</u></b></p>" + StringHelper.sumUpTournoiWithHtml(test);
             dataContainer.setText(sumUp);
         } 
         catch (Exception e1) { UIHelper.showErrorFrame("An error append during the launch of the tournament !", e1); }

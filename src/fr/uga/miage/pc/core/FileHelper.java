@@ -1,11 +1,11 @@
-package fr.uga.miage.pc.dilemme.back.helper;
+package fr.uga.miage.pc.core;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
 import fr.uga.miage.pc.dilemme.back.ConstHelper;
+import fr.uga.miage.pc.dilemme.back.helper.StringHelper;
 
 public final class FileHelper {
 

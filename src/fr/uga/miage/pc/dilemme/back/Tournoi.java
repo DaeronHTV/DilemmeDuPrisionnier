@@ -5,10 +5,11 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
+
+import fr.uga.miage.pc.core.ClassHelper;
 import fr.uga.miage.pc.dilemme.back.interfaces.IConfrontation;
 import fr.uga.miage.pc.dilemme.back.interfaces.ITournoi;
 import fr.uga.miage.pc.interfaces.IStrategie;
-import fr.uga.miage.pc.dilemme.back.helper.ClassHelper;
 
 /**
  * This class allows to construct a object tournament. It can be use in order to launch different fight between two opponent
@@ -81,9 +82,9 @@ public class Tournoi implements ITournoi{
 	 * @see IStrategie
 	 * @return IStrategie The opponent number index
 	 */
-	public final IStrategie Strategie(final int index) { return strategies.get(index); }
+	public final IStrategie Challenger(final int index) { return strategies.get(index); }
 	
-	public final int NbStrategie() { return strategies.size(); }
+	public final int NbChallenger() { return strategies.size(); }
 
 	/**
 	 * Set the different opponent and theirs fights too
@@ -97,8 +98,8 @@ public class Tournoi implements ITournoi{
 		for(int j = 0; j < strategies.size(); j++) {
 			for(int i = j; i < strategies.size(); i++) {
 				int numConfron = (strategies.size()-1) * j + i;
-				if(i == j) {confrontations.add(new Confrontation(Strategie(j), ClassHelper.clonebyReflection(Strategie(j)), numConfron));}
-				else {confrontations.add(new Confrontation(Strategie(j), Strategie(i), numConfron));}
+				if(i == j) {confrontations.add(new Confrontation(Challenger(j), ClassHelper.clonebyReflection(Challenger(j)), numConfron));}
+				else {confrontations.add(new Confrontation(Challenger(j), Challenger(i), numConfron));}
 			}
 		}
 	}

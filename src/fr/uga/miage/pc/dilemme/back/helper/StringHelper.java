@@ -1,7 +1,6 @@
 package fr.uga.miage.pc.dilemme.back.helper;
 
-import fr.uga.miage.pc.dilemme.back.Tournoi;
-import fr.uga.miage.pc.dilemme.back.interfaces.IConfrontation;
+import fr.uga.miage.pc.dilemme.back.interfaces.*;
 import fr.uga.miage.pc.dilemme.back.Confrontation.ConfrontationConstants;
 import fr.uga.miage.pc.dilemme.back.ConstHelper;
 import fr.uga.miage.pc.interfaces.IStrategie;
@@ -35,17 +34,17 @@ public final class StringHelper {
 	
 	
 	
-    public final static String tournoi(Tournoi tournoi) {
-    	StringBuilder builder = new StringBuilder(tournoi.NbStrategie()*20);
+    public final static String tournoi(ITournoi tournoi) {
+    	StringBuilder builder = new StringBuilder(tournoi.NbChallenger()*20);
     	builder.append("<h2>Voici la configuration du tournoi actuelle :</h2><p><b>Nombre de rencontre : </b>");
     	builder.append(tournoi.Confrontations().size());
     	builder.append("<br/><b>Nombre de Tours par rencontre :</b> ").append(tournoi.NbTours()).append(ConstHelper.BR);
     	builder.append("<br/><b><u>Ce Tournoi opposera les strategies suivantes :</u></b><br/>");
-    	for(int i = 0; i < tournoi.NbStrategie(); i++) {
-    		if(i != tournoi.NbStrategie()-1) {
+    	for(int i = 0; i < tournoi.NbChallenger(); i++) {
+    		if(i != tournoi.NbChallenger()-1) {
     			builder.append(ConstHelper.BR);
     		}
-    		builder.append(tournoi.Strategie(i).toString());
+    		builder.append(tournoi.Challenger(i).toString());
     	}
     	builder.append("</p><p><b><u>Voici les differentes rencontres du tournoi :</u></b> <br/>");
         for(IConfrontation confrontation: tournoi.Confrontations()) {
@@ -55,21 +54,21 @@ public final class StringHelper {
         return builder.toString();
     }
     
-    public final static String sumUpTournoiWithHtml(final Tournoi tournoi) {
+    public final static String sumUpTournoiWithHtml(final ITournoi tournoi) {
     	StringBuilder builder = new StringBuilder();
     	builder.append(ConstHelper.TableauBase);
     	StringBuilder builderTmp = new StringBuilder();
-        for(int i = 0; i < tournoi.NbStrategie(); i++) {
+        for(int i = 0; i < tournoi.NbChallenger(); i++) {
         	int total = 0; 
-        	String nom = tournoi.Strategie(i).getStrategyName();
+        	String nom = tournoi.Challenger(i).getStrategyName();
             builder.append(ConstHelper.TdWithBorder).append("<b>").append(nom).append("</b></td>");
             builderTmp.append("<tr border: 1px solid black;><td border: 1px solid black;><b>").append(nom).append("</b></td>");
 			for(IConfrontation confrontation: tournoi.Confrontations()) {
-				if(tournoi.Strategie(i).equals(confrontation.Strategie(ConfrontationConstants.STRATEGIE_1))) {
+				if(tournoi.Challenger(i).equals(confrontation.Strategie(ConfrontationConstants.STRATEGIE_1))) {
 					total += confrontation.FinalScore(ConfrontationConstants.STRATEGIE_1);
                     builderTmp.append(ConstHelper.TdWithBorder)
                     .append(confrontation.FinalScore(ConfrontationConstants.STRATEGIE_1));
-				}else if(tournoi.Strategie(i).equals(confrontation.Strategie(ConfrontationConstants.STRATEGIE_2))){
+				}else if(tournoi.Challenger(i).equals(confrontation.Strategie(ConfrontationConstants.STRATEGIE_2))){
 					total += confrontation.FinalScore(ConfrontationConstants.STRATEGIE_2);
 					builderTmp.append(ConstHelper.TdWithBorder)
 					.append(confrontation.FinalScore(ConfrontationConstants.STRATEGIE_2));

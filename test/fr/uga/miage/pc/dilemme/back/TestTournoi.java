@@ -43,10 +43,10 @@ class TestTournoi {
 	void TestSetGetStrategie() throws Exception {
 		ArrayList<IStrategie> s = new ArrayList<IStrategie>();
 		Tournoi t = new Tournoi(10, this.fillList());
-		assertTrue(t.Strategie(0).getStrategyName().equals("Gentille"));
+		assertTrue(t.Challenger(0).getStrategyName().equals("Gentille"));
 		s.add(new Mechante());
 		t.setStrategies(s);
-		assertTrue(t.Strategie(0).getStrategyName().equals("Mechante"));
+		assertTrue(t.Challenger(0).getStrategyName().equals("Mechante"));
 	}
 
 	@Test
