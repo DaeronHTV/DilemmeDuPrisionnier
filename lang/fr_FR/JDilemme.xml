@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Lang>
+	<MainWindow>
+		<ApplicationName>Dedalus - Anonymiseur</ApplicationName>
+		<DossierInName>Dossier In</DossierInName>
+		<DossierOutName>Dossier Out</DossierOutName>
+		<ExecuterName>Executer</ExecuterName>
+		<FormatFichierName>Format Fichier</FormatFichierName>
+		<FormatTitle>Gestion des formats</FormatTitle>
+		<ListExtensionName>List Extensions Fichier</ListExtensionName>
+		<RepertoireTitle>Gestion des répertoires</RepertoireTitle>
+		<SubDirName>Inclure les sous-dossiers</SubDirName>
+	</MainWindow>
+	<Parametrage>
+		<Warning>
+			<WindowTitle>Erreur Parametrage</WindowTitle>
+			<FolderPathEmpty>Les dossiers d'émission et de réception doivent être renseignés</FolderPathEmpty>
+			<ExtensionEmpty>La liste des extensions ne peut être vide !</ExtensionEmpty>
+		</Warning>
+	</Parametrage>
+	<Anonymisation>
+		<Name>Anonymisation des messages</Name>
+		<Description>Anonymisation des messages terminés !</Description>
+		<FailedMessage>Il y a eu des erreurs !</FailedMessage>
+		<Error>
+			<WindowTitle>Anonymisation - Erreur</WindowTitle>
+			<Description>Une erreur s'est produite durant l'anonymisation...</Description>
+		</Error>
+	</Anonymisation>
+</Lang>
