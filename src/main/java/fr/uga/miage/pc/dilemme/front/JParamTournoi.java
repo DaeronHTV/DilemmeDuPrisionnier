@@ -22,9 +22,9 @@ import java.awt.GridLayout;
 public final class JParamTournoi extends FrameBase {
     private static final long serialVersionUID = 5056606608631535808L;
     /** List of Observer which need to change when JParam is modified*/
-    List<IObserver> observers = new ArrayList<IObserver>();
+    private List<IObserver> observers = new ArrayList<>();
     /** We create an ArrayList of JCheckBox in order to get the value*/
-    List<ExtentedCheckBox> checkBoxs = new ArrayList<ExtentedCheckBox>();
+    private List<ExtentedCheckBox> checkBoxs = new ArrayList<>();
     /** Button to control choice of the user*/
     private JButton launch;
     /** Button to control the reset of the parameters */
@@ -49,7 +49,7 @@ public final class JParamTournoi extends FrameBase {
 	private void initJCheckBoxs() throws Exception{
         JLabel label = new JLabel("Choose the strategies");
         JLabel titre = new JLabel("Strategies of software :");
-        JLabel titre2 = new JLabel("Strategies from Mariia and Marie-Josée");
+        JLabel titre2 = new JLabel("Strategies from Mariia and Marie-Josï¿½e");
         label.setBounds(25, 10, 150, 25);
         titre.setBounds(25, 35, 150, 25);
         titre2.setBounds(250, 35, 250, 25);
@@ -57,9 +57,9 @@ public final class JParamTournoi extends FrameBase {
         JPanel panel2 = new JPanel();
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         String path = loader.getDefinedPackages()[0].getName();
-        List<Class> classes = ClassHelper.FilterClass(FileHelper.GetClasses(path, true), c -> {
+        List<Class> classes = ClassHelper.filterClass(FileHelper.getClasses(path, true), c -> {
         	try {
-				return ClassHelper.HaveInterface(c, IStrategie.class) && !Modifier.isAbstract(c.getModifiers());
+				return ClassHelper.haveInterface(c, IStrategie.class) && !Modifier.isAbstract(c.getModifiers());
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
@@ -71,9 +71,9 @@ public final class JParamTournoi extends FrameBase {
         	panel.add(checkBox); 
         }
         //Strategy of the other group
-        checkBoxs.add(new ExtentedCheckBox("Gentille", fr.uga.miage.pc.strategies.Gentille.class));
-        checkBoxs.add(new ExtentedCheckBox("Mechante", fr.uga.miage.pc.strategies.Mechante.class));
-        checkBoxs.add(new ExtentedCheckBox("Rancunière", fr.uga.miage.pc.strategies.Rancuniere.class));
+        //checkBoxs.add(new ExtentedCheckBox("Gentille", fr.uga.miage.pc.strategies.Gentille.class));
+        //checkBoxs.add(new ExtentedCheckBox("Mechante", fr.uga.miage.pc.strategies.Mechante.class));
+        //checkBoxs.add(new ExtentedCheckBox("Rancuniï¿½re", fr.uga.miage.pc.strategies.Rancuniere.class));
         panel.setLayout(new GridLayout(8,1));
         panel.setBounds(25, 60, 200, 25*8);
         panel2.setLayout(new GridLayout(3, 1));
@@ -123,13 +123,13 @@ public final class JParamTournoi extends FrameBase {
         for(ExtentedCheckBox checkBox : checkBoxs){
             if(checkBox.isSelected()) { checkBox.setSelected(false); }
         }
-        if(nbTours.getText() != "0"){nbTours.setText("0");}
+        if(nbTours.getText().equals("0")){nbTours.setText("0");}
     }
 
     public int getNbTours(){ return Integer.parseInt(nbTours.getText());}
 
     public List<Class<? extends IStrategie>> getListCheckSelected(){
-    	List<Class<? extends IStrategie>> strategie = new ArrayList<Class<? extends IStrategie>>();
+    	List<Class<? extends IStrategie>> strategie = new ArrayList<>();
     	for(ExtentedCheckBox checkBox: checkBoxs){
     		if (checkBox.isSelected()) { 
     			strategie.add(checkBox.GetCoupledClass()); 
@@ -148,9 +148,11 @@ public final class JParamTournoi extends FrameBase {
     @Override
     protected void initListeners() {
     	reset.addMouseListener(new java.awt.event.MouseAdapter(){
+    		@Override
             public void mousePressed(MouseEvent e){ reset();}
         });
         launch.addMouseListener(new java.awt.event.MouseAdapter(){
+        	@Override
             public void mousePressed(MouseEvent e){ closeWindow(); notifierAll(); }
         });
     } 

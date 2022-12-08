@@ -40,7 +40,7 @@ public final class JDilemme extends FrameBase implements IObserver{
 
     private JDilemme() throws Exception {
         super(-1, -1, "Dilemme du prisonnier");
-        paramFrame = JParamTournoi.getInstance();
+        JParamTournoi.getInstance();
         paramFrame.addObserver(this);
         initButtons();
         initTextArea();
@@ -49,10 +49,10 @@ public final class JDilemme extends FrameBase implements IObserver{
 
     @Override
     protected final void initButtons() {
-        openJavaDoc = new JButton(ConstUIHelper.OpenJavaDocName);
-        openRepositorie = new JButton(ConstUIHelper.OpenGit);
-        lauchTournoi = new JButton(ConstUIHelper.Launch);
-        exit = new JButton(ConstUIHelper.Exit);
+        openJavaDoc = new JButton(ConstUIHelper.OPENJAVADOCNAME);
+        openRepositorie = new JButton(ConstUIHelper.OPENGIT);
+        lauchTournoi = new JButton(ConstUIHelper.LAUNCH);
+        exit = new JButton(ConstUIHelper.EXIT);
         lauchTournoi.setBounds(725, 20, 150, 25);
         openJavaDoc.setBounds(725, 50, 150, 25);
         openRepositorie.setBounds(725, 80, 150, 25);
@@ -67,8 +67,8 @@ public final class JDilemme extends FrameBase implements IObserver{
         javax.swing.JPanel panel = new javax.swing.JPanel();
         panel.setLayout(new BorderLayout());
         panel.setBounds(0,0,700,562);
-        panel.add(new JScrollPane(dataContainer, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS), BorderLayout.CENTER);
+        panel.add(new JScrollPane(dataContainer, javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+        		javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS), BorderLayout.CENTER);
         add(panel);
     }
 
@@ -90,14 +90,16 @@ public final class JDilemme extends FrameBase implements IObserver{
     @Override
     protected final void initListeners() {
         lauchTournoi.addMouseListener(new java.awt.event.MouseAdapter() {
+        	@Override
             public void mousePressed(java.awt.event.MouseEvent e) {
                 paramFrame.reset();
-                dataContainer.setText(StringHelper.Empty);
+                dataContainer.setText(StringHelper.EMPTY);
                 paramFrame.showFrame();
             }
         });
 
         exit.addMouseListener(new java.awt.event.MouseAdapter() {
+        	@Override
             public void mousePressed(java.awt.event.MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     setVisible(false);
@@ -108,14 +110,16 @@ public final class JDilemme extends FrameBase implements IObserver{
         });
 
         openRepositorie.addMouseListener(new java.awt.event.MouseAdapter() {
+        	@Override
             public void mousePressed(java.awt.event.MouseEvent e) {
-            	LeftClickOpenPage(e, ConstHelper.gitRepositorie);
+            	LeftClickOpenPage(e, ConstHelper.GITREPOSITORIE);
             }
         });
 
         openJavaDoc.addMouseListener(new java.awt.event.MouseAdapter() {
+        	@Override
             public void mousePressed(java.awt.event.MouseEvent e) {
-                LeftClickOpenPage(e, ConstHelper.javadoc);
+                LeftClickOpenPage(e, ConstHelper.JAVADOC);
             }
         });
     }
@@ -134,7 +138,7 @@ public final class JDilemme extends FrameBase implements IObserver{
             paramFrame.closeWindow();
             StringBuilder builder = new StringBuilder();
             builder.append(StringHelper.tournoi(test));
-            for(IConfrontation current: test.Confrontations()) {
+            for(IConfrontation current: test.confrontations()) {
             	current.start(nbTours);
                 builder.append(StringHelper.sumUpConfrontation(true, current));
             }

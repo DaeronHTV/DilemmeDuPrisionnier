@@ -10,7 +10,7 @@ import fr.uga.miage.pc.interfaces.IStrategie;
  * A Strategie represents a way of thinking for a certain situation, a certain context.
  * Example : A Strategie "Good" could represent a person who always cooperate.
  * This class was created for a french university project
- * @author Avanzino Aurélien - Gourdon Stéphanie
+ * @author Avanzino Aurï¿½lien - Gourdon Stï¿½phanie
  * @since 1.0
  * @version 1.5
  * @see IStrategie
@@ -88,11 +88,4 @@ public abstract class Strategie implements IStrategie{
 	public String toString() {
 		return getStrategyName()+ " - " + getDescription();
 	}
-
-	/****************************DEPRECATED METHOD****************************/
-	@Deprecated
-	public int getNumTour(){ return numTour;}
-
-	@Deprecated
-	public void incrementTour() { numTour++; }
 }

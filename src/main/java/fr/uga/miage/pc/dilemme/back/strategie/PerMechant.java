@@ -4,14 +4,14 @@ import fr.uga.miage.pc.interfaces.Comportement;
 
 /**
  * 
- * @author Avanzino Aurélien - Stéphanie Gourdon
+ * @author Avanzino Aurï¿½lien - Stï¿½phanie Gourdon
  * @since 1.0
  * @version 3.0
  */
 public class PerMechant extends Strategie{
 	
 	public PerMechant() {
-		super(StrategieConstHelper.PerMName, StrategieConstHelper.PerMDesc);
+		super(StrategieConstHelper.PERMNAME, StrategieConstHelper.PERMDESC);
 	}
 
 	/** {@inheritDoc} */

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class ClassHelper {
-	public final static <T> List<T> createListObject(final List<Class<? extends T>> classes) throws Exception{
-        ArrayList<T> objects = new ArrayList<T>();
+	public static final <T> List<T> createListObject(final List<Class<? extends T>> classes) throws Exception{
+        ArrayList<T> objects = new ArrayList<>();
         for (final Class<? extends T> classe : classes) {
         	T objet = create(classe);
             objects.add(objet);
@@ -17,8 +17,7 @@ public class ClassHelper {
 	
 	public static <T> T create(final Class<? extends T> classe) throws Exception {
 		final Constructor<? extends T> constructor = classe.getConstructor();
-    	return (T)constructor.newInstance();
-		
+    	return constructor.newInstance();
 	}
 	
 	public static <T> T clonebyReflection(final T object) throws Exception {
@@ -27,7 +26,7 @@ public class ClassHelper {
     	return create(classe);
     }
 	
-	public static boolean HaveInterface(Class<?> classe, final Class<?> inter) throws Exception {
+	public static boolean haveInterface(Class<?> classe, final Class<?> inter) throws Exception {
 		if(classe == null || inter == null) {
 			throw new Exception();
 		}
@@ -43,7 +42,7 @@ public class ClassHelper {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public static List<Class> FilterClass(final List<Class> classes, final Predicate<? super Class> predicate){
+	public static List<Class> filterClass(final List<Class> classes, final Predicate<? super Class> predicate){
 		return classes.stream().filter(predicate).toList();
 	}
 }

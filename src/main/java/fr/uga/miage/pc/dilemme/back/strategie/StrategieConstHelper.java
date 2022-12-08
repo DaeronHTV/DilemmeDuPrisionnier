@@ -1,20 +1,20 @@
 package fr.uga.miage.pc.dilemme.back.strategie;
 
 public final class StrategieConstHelper {
-	public final static String DDName = "Donnant-Donnant";
-	public final static String GName = "Gentille";
-	public final static String MName = "Méchante";
-	public final static String RName = "Rancunière";
-	public final static String DDDName = "Donnant-Donnant-Dur";
-	public final static String MfName = "Méfiante";
-	public final static String PerGName = "Périodique-Gentille";
-	public final static String PerMName = "Périodique-Méchante";
-	public final static String GDesc = "Je coopere toujours.";
-	public final static String MDesc = "Je trahis toujours";
-	public final static String RDesc = "Je coopere a la premiere partie, mais des que mon adversaire trahit, je trahis toujours.";
-	public final static String DDDesc = "Je coopere a la premiere partie, puis je joue ce qu'a joue l'autre a la partie precedente.";
-	public final static String DDDDesc = "Je coopere a la premiere partie, puis je coopere sauf si mon adversaire a trahi lors de l'une des deux parties precedentes.";
-	public final static String MfDesc = "Je trahis a la premiere partie, puis je joue ce qu'a joue l'autre a la partie precedente.";
-	public final static String PerGDesc = "Je joue cooperer, cooperer, trahir, cooperer, cooperer, trahir, ...";
-	public final static String PerMDesc = "Je joue trahir, trahir, cooperer, trahir, trahir, cooperer, ...";
+	public final static String DDNAME = "Donnant-Donnant";
+	public final static String GNNAME = "Gentille";
+	public final static String MNNAME = "Mï¿½chante";
+	public final static String RNAME = "Rancuniï¿½re";
+	public final static String DDDNAME = "Donnant-Donnant-Dur";
+	public final static String MFNAME = "Mï¿½fiante";
+	public final static String PERGNAME = "Pï¿½riodique-Gentille";
+	public final static String PERMNAME = "Pï¿½riodique-Mï¿½chante";
+	public final static String GDESC = "Je coopere toujours.";
+	public final static String MDESC = "Je trahis toujours";
+	public final static String RDESC = "Je coopere a la premiere partie, mais des que mon adversaire trahit, je trahis toujours.";
+	public final static String DDDESC = "Je coopere a la premiere partie, puis je joue ce qu'a joue l'autre a la partie precedente.";
+	public final static String DDDDESC = "Je coopere a la premiere partie, puis je coopere sauf si mon adversaire a trahi lors de l'une des deux parties precedentes.";
+	public final static String MFDESC = "Je trahis a la premiere partie, puis je joue ce qu'a joue l'autre a la partie precedente.";
+	public final static String PERGDESC = "Je joue cooperer, cooperer, trahir, cooperer, cooperer, trahir, ...";
+	public final static String PERMDESC = "Je joue trahir, trahir, cooperer, trahir, trahir, cooperer, ...";
 }

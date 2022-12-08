@@ -4,11 +4,11 @@ import java.util.Collection;
 import fr.uga.miage.pc.interfaces.IStrategie;
 
 public interface ITournoi {
-	int NbTours();
+	int nbTours();
 	
-	int NbChallenger();
+	int nbChallenger();
 	
-	Collection<IConfrontation> Confrontations();
+	Collection<IConfrontation> confrontations();
 	
-	IStrategie Challenger(final int index);
+	IStrategie challenger(final int index);
 }

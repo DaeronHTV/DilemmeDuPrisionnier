@@ -23,7 +23,7 @@ public final class Tournoi implements ITournoi{
 	 * @throws Exception If the user doesn't give at least one Strategie
 	 */
 	public Tournoi(final int nbTours, final List<IStrategie> strategies) throws NullPointerException, Exception {
-		if(strategies.size() >= 1) {
+		if(strategies.isEmpty()) {
 			this.nbTours = nbTours;
 			setStrategies(strategies);
 		} 
@@ -32,23 +32,23 @@ public final class Tournoi implements ITournoi{
 		}
 	}
 	
-	public Collection<IConfrontation> Confrontations() { return confrontations; }
+	public Collection<IConfrontation> confrontations() { return confrontations; }
 	
-	public IStrategie Challenger(final int index) { return strategies.get(index); }
+	public IStrategie challenger(final int index) { return strategies.get(index); }
 	
-	public int NbChallenger() { return strategies.size(); }
+	public int nbChallenger() { return strategies.size(); }
 
 	public void setStrategies(final List<IStrategie> strategies) throws Exception{
 		this.strategies = strategies;
-		confrontations = new ArrayList<IConfrontation>();
+		confrontations = new ArrayList<>();
 		for(int j = 0; j < strategies.size(); j++) {
 			for(int i = j; i < strategies.size(); i++) {
 				int numConfron = (strategies.size()-1) * j + i;
-				if(i == j) {confrontations.add(new Confrontation(Challenger(j), ClassHelper.clonebyReflection(Challenger(j)), numConfron));}
-				else {confrontations.add(new Confrontation(Challenger(j), Challenger(i), numConfron));}
+				if(i == j) {confrontations.add(new Confrontation(challenger(j), ClassHelper.clonebyReflection(challenger(j)), numConfron));}
+				else {confrontations.add(new Confrontation(challenger(j), challenger(i), numConfron));}
 			}
 		}
 	}
 
-	public int NbTours() { return nbTours; }
+	public int nbTours() { return nbTours; }
 }

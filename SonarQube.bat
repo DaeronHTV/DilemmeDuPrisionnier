@@ -1,0 +1,1 @@
+mvn clean verify sonar:sonar -Dsonar.projectKey=AurelienAVZN_pc_dilemmeduprisonnier_AYTz1Vk3ybMKSsgXRXrV -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_c2504002af775658aec1f4a8a37656027a530877

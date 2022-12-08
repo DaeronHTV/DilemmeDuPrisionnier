@@ -7,7 +7,7 @@ import fr.uga.miage.pc.interfaces.IStrategie;
 /**
  * This class allows to construct a object fight. This object describes all the features of a fight, the opponent, name and others.
  * This class was created for a french university project
- * @author Avanzino Aurélien - Gourdon Stéphanie
+ * @author Avanzino Aurï¿½lien - Gourdon Stï¿½phanie
  * @since 1.0
  * @version 2.0
  */
@@ -46,7 +46,7 @@ public final class Confrontation implements IConfrontation{
 		this.numeroConfrontation = numeroConfrontation;
 	}
 	
-	public int Numero() { return numeroConfrontation; }
+	public int numero() { return numeroConfrontation; }
 
 	/**
 	 * Give the first or the second strategie in function
@@ -58,7 +58,7 @@ public final class Confrontation implements IConfrontation{
 	 * @since 3.0
 	 * @see ConfrontationConstants
 	 */
-	public IStrategie Strategie(final int numStrategie){
+	public IStrategie strategie(final int numStrategie){
 		return numStrategie == 1 ? strategie1 : strategie2;
 	}
 
@@ -89,7 +89,7 @@ public final class Confrontation implements IConfrontation{
 	 * @see ConfrontationConstants
 	 * @return the final of a strategie
 	 */
-	public int FinalScore(final int numStrategie){
+	public int finalScore(final int numStrategie){
 		return scoresFinal[numStrategie-1];
 	}
 	

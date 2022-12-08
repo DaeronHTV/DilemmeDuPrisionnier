@@ -4,14 +4,14 @@ import fr.uga.miage.pc.interfaces.Comportement;
 
 /**
  * 
- * @author Avanzino Aurélien - Stéphanie Gourdon
+ * @author Avanzino Aurï¿½lien - Stï¿½phanie Gourdon
  * @since 1.0
  * @version 3.0
  */
 public class Rancuniere extends Strategie{
 
 	public Rancuniere() {
-		super(StrategieConstHelper.RName, StrategieConstHelper.RDesc);
+		super(StrategieConstHelper.RNAME, StrategieConstHelper.RDESC);
 		setComportement(Comportement.COOPERER);
 	}
 
