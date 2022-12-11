@@ -40,7 +40,7 @@ public final class JDilemme extends FrameBase implements IObserver{
 
     private JDilemme() throws Exception {
         super(-1, -1, "Dilemme du prisonnier");
-        JParamTournoi.getInstance();
+        paramFrame = JParamTournoi.getInstance();
         paramFrame.addObserver(this);
         initButtons();
         initTextArea();
@@ -112,19 +112,19 @@ public final class JDilemme extends FrameBase implements IObserver{
         openRepositorie.addMouseListener(new java.awt.event.MouseAdapter() {
         	@Override
             public void mousePressed(java.awt.event.MouseEvent e) {
-            	LeftClickOpenPage(e, ConstHelper.GITREPOSITORIE);
+            	leftClickOpenPage(e, ConstHelper.GITREPOSITORIE);
             }
         });
 
         openJavaDoc.addMouseListener(new java.awt.event.MouseAdapter() {
         	@Override
             public void mousePressed(java.awt.event.MouseEvent e) {
-                LeftClickOpenPage(e, ConstHelper.JAVADOC);
+                leftClickOpenPage(e, ConstHelper.JAVADOC);
             }
         });
     }
     
-    private final void LeftClickOpenPage(java.awt.event.MouseEvent e, final String page) {
+    private final void leftClickOpenPage(java.awt.event.MouseEvent e, final String page) {
     	if (SwingUtilities.isLeftMouseButton(e)) {
             try { openWebPage(page); } 
             catch (Exception e1) { showErrorFrame("An error append when the opening of the web page !", e1); }

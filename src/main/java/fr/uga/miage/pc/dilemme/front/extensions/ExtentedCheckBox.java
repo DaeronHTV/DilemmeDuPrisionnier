@@ -13,7 +13,7 @@ public class ExtentedCheckBox extends JCheckBox implements ICouple<Class<? exten
 		associatedStrategie = strategie;
 	}
 	
-	public Class<? extends IStrategie> GetCoupledClass() {
+	public Class<? extends IStrategie> getCoupledClass() {
 		return associatedStrategie;
 	}
 }

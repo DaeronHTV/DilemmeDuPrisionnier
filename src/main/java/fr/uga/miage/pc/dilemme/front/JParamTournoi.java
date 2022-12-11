@@ -5,14 +5,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import java.lang.reflect.Modifier;
-
-import fr.uga.miage.pc.core.ClassHelper;
+import java.lang.reflect.Modifier;+
 import fr.uga.miage.pc.core.FileHelper;
 import fr.uga.miage.pc.core.patterns.IObserver;
 import fr.uga.miage.pc.dilemme.front.extensions.ExtentedCheckBox;
 import fr.uga.miage.pc.interfaces.IStrategie;
-
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -78,7 +75,7 @@ public final class JParamTournoi extends FrameBase {
         panel.setBounds(25, 60, 200, 25*8);
         panel2.setLayout(new GridLayout(3, 1));
         panel2.setBounds(250, 60, 130, 25*3);
-        for(int i = 8; i < 11; i++){ panel2.add(checkBoxs.get(i)); }
+        //for(int i = 8; i < 11; i++){ panel2.add(checkBoxs.get(i)); }
         add(label); add(titre); add(panel);add(titre2);add(panel2);
     }
     
@@ -132,7 +129,7 @@ public final class JParamTournoi extends FrameBase {
     	List<Class<? extends IStrategie>> strategie = new ArrayList<>();
     	for(ExtentedCheckBox checkBox: checkBoxs){
     		if (checkBox.isSelected()) { 
-    			strategie.add(checkBox.GetCoupledClass()); 
+    			strategie.add(checkBox.getCoupledClass()); 
     		} 
     	}
     	return strategie;

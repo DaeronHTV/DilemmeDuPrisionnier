@@ -1,11 +1,13 @@
 package fr.uga.miage.pc.dilemme.front.helper;
 
-import java.awt.Component;
 import java.awt.Desktop;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import fr.uga.miage.pc.dilemme.back.exception.DesktopNotSupportedException;
+
 public final class UIHelper {
+	private UIHelper() {}
+	
 	public static void showErrorFrame(String message, Exception e){
 		StringBuilder builder = new StringBuilder();
 		builder.append(message).append("\n");
@@ -23,11 +25,6 @@ public final class UIHelper {
      */
     public static final void openWebPage(String url) throws Exception {
         if(Desktop.isDesktopSupported()){ Desktop.getDesktop().browse(new java.net.URI(url)); } 
-        else { throw new Exception("The class used to open web pages isn't supported on your system !"); }
+        else { throw new DesktopNotSupportedException("The class used to open web pages isn't supported on your system !"); }
     }
-    
-    public static final void AddAll(JFrame frame, Component... comps) {
-    	for(Component comp: comps) { frame.add(comp); }
-    }
-
 }

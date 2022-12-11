@@ -1,12 +1,17 @@
 package fr.uga.miage.pc.core;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
 public class ClassHelper {
-	public static final <T> List<T> createListObject(final List<Class<? extends T>> classes) throws Exception{
+	private ClassHelper() {}
+	
+	public static final <T> List<T> createListObject(final List<Class<? extends T>> classes) 
+			throws SecurityException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException
+	{
         ArrayList<T> objects = new ArrayList<>();
         for (final Class<? extends T> classe : classes) {
         	T objet = create(classe);
@@ -15,20 +20,26 @@ public class ClassHelper {
         return objects;
     }
 	
-	public static <T> T create(final Class<? extends T> classe) throws Exception {
+	public static <T> T create(final Class<? extends T> classe) 
+			throws SecurityException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException 
+	{
 		final Constructor<? extends T> constructor = classe.getConstructor();
     	return constructor.newInstance();
 	}
 	
-	public static <T> T clonebyReflection(final T object) throws Exception {
+	public static <T> T clonebyReflection(final T object) 
+			throws SecurityException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException
+	{
     	@SuppressWarnings("unchecked")
 		final Class<? extends T> classe = (Class<? extends T>) object.getClass();
     	return create(classe);
     }
 	
-	public static boolean haveInterface(Class<?> classe, final Class<?> inter) throws Exception {
+	public static boolean haveInterface(Class<?> classe, final Class<?> inter) 
+			throws NullPointerException 
+	{
 		if(classe == null || inter == null) {
-			throw new Exception();
+			throw new NullPointerException();
 		}
 		while(classe != null) {
 			for(final Class<?> interf: classe.getInterfaces()) {

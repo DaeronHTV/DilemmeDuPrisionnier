@@ -27,12 +27,12 @@ public abstract class Strategie implements IStrategie{
 	 * @param nom Name of the strategie
 	 * @param description Description of the strategie
 	 */
-	public Strategie(String nom, String description) {
+	protected Strategie(String nom, String description) {
 		play = null;
 		this.nom = nom;
 		this.description = description;
 		numTour = 1;
-		listOppPlay = new ArrayList<Comportement>();
+		listOppPlay = new ArrayList<>();
 	}
 	
 	/** {@inheritDoc} */
@@ -43,9 +43,6 @@ public abstract class Strategie implements IStrategie{
 	
 	/** {@inheritDoc} */
 	public String getDescription() { return description; }
-
-	/** {@inheritDoc} */
-	public abstract void compareComportements();
 	
 	/** {@inheritDoc} */
 	public Comportement getComportement() { return play; }

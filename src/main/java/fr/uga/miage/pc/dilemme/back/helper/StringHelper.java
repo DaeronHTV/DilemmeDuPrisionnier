@@ -22,18 +22,24 @@ public final class StringHelper {
 		return str == null || str.isEmpty();
 	}
 	
-	public static String substringAfter(final String str, final String separator) {
-        if (isNullOrEmpty(str)) {
+	public static String substringBefore(final String str, final String separator) {
+        if (isNullOrEmpty(str) || isNullOrEmpty(separator)) {
             return str;
-        }
-        if (separator == null) {
-            return "";
         }
         final int pos = str.indexOf(separator);
-        if (pos == 0) {
+        return pos == 0 ? str : str.substring(0, pos);
+    }
+	
+	public static String substringAfter(final String str, final String separator, boolean keepSeparator) {
+		return keepSeparator ? separator + substringAfter(str, separator) : substringAfter(str, separator);
+	}
+	
+	public static String substringAfter(final String str, final String separator) {
+		if (isNullOrEmpty(str) || isNullOrEmpty(separator)) {
             return str;
         }
-        return str.substring(pos + separator.length());
+        final int pos = str.indexOf(separator);
+        return pos == 0 ? str : str.substring(pos + separator.length());
     }	
 	
     public static final String tournoi(final ITournoi tournoi) {

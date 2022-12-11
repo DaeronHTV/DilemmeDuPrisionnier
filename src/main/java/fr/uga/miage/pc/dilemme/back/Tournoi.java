@@ -1,9 +1,11 @@
 package fr.uga.miage.pc.dilemme.back;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import fr.uga.miage.pc.core.ClassHelper;
+import fr.uga.miage.pc.dilemme.back.exception.TournoiEmptyException;
 import fr.uga.miage.pc.dilemme.back.interfaces.IConfrontation;
 import fr.uga.miage.pc.dilemme.back.interfaces.ITournoi;
 import fr.uga.miage.pc.interfaces.IStrategie;
@@ -22,13 +24,15 @@ public final class Tournoi implements ITournoi{
 	 * @see List
 	 * @throws Exception If the user doesn't give at least one Strategie
 	 */
-	public Tournoi(final int nbTours, final List<IStrategie> strategies) throws NullPointerException, Exception {
-		if(strategies.isEmpty()) {
+	public Tournoi(final int nbTours, final List<IStrategie> strategies) 
+			throws NullPointerException, TournoiEmptyException, SecurityException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException
+	{
+		if(!strategies.isEmpty()) {
 			this.nbTours = nbTours;
 			setStrategies(strategies);
 		} 
 		else{
-			throw new Exception("EmptyException : An tournament with nobody is impossible\n.at Tournoi(int nbTours, List<IStrategie> strategies) - Tournoi:line.47"); 
+			throw new TournoiEmptyException("EmptyException : An tournament with nobody is impossible"); 
 		}
 	}
 	
@@ -38,7 +42,9 @@ public final class Tournoi implements ITournoi{
 	
 	public int nbChallenger() { return strategies.size(); }
 
-	public void setStrategies(final List<IStrategie> strategies) throws Exception{
+	public void setStrategies(final List<IStrategie> strategies) 
+			throws SecurityException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException
+	{
 		this.strategies = strategies;
 		confrontations = new ArrayList<>();
 		for(int j = 0; j < strategies.size(); j++) {
