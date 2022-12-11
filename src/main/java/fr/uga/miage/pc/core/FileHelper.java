@@ -11,6 +11,8 @@ import fr.uga.miage.pc.dilemme.back.helper.StringHelper;
 public final class FileHelper {
 	private static String prefixPackName;
 	
+	private FileHelper() {}
+	
 	static {
 		String basePackName = Thread.currentThread().getContextClassLoader().getDefinedPackages()[0].getName();
 		prefixPackName = StringHelper.substringBefore(basePackName, ".");

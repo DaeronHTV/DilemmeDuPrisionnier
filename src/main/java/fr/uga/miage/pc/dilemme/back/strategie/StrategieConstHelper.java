@@ -11,6 +11,9 @@ public final class StrategieConstHelper {
 	public static final String MFNAME = "M�fiante";
 	public static final String PERGNAME = "P�riodique-Gentille";
 	public static final String PERMNAME = "P�riodique-M�chante";
+	public static final String DURNAME = "Dur";
+	public static final String MAJMOUNAME = "Majorité-Mou";
+	public static final String MAJDURNAME = "Majorité-Dur";
 	public static final String GDESC = "Je coopere toujours.";
 	public static final String MDESC = "Je trahis toujours";
 	public static final String RDESC = "Je coopere a la premiere partie, mais des que mon adversaire trahit, je trahis toujours.";
@@ -19,4 +22,7 @@ public final class StrategieConstHelper {
 	public static final String MFDESC = "Je trahis a la premiere partie, puis je joue ce qu'a joue l'autre a la partie precedente.";
 	public static final String PERGDESC = "Je joue cooperer, cooperer, trahir, cooperer, cooperer, trahir, ...";
 	public static final String PERMDESC = "Je joue trahir, trahir, cooperer, trahir, trahir, cooperer, ...";
+	public static final String DURDESC = "Je trahis tant que mon adversaire coopère. Dès qu’il trahit, je renonce";
+	public static final String MAJMOUDESC = "Je joue ce que l’adversaire a joué en majorité, en cas d’égalité et à la première partie, je coopère.";
+	public static final String MAJDURDESC = "Je joue ce que l’adversaire a joué en majorité, en cas d’égalité et à la première partie, je coopère.";
 }

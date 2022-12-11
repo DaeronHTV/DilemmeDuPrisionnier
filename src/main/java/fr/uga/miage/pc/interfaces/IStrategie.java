@@ -24,12 +24,6 @@ public interface IStrategie {
 	public String getDescription();
 	
 	/**
-	 * Change the description of the strategie
-	 * @param description New description
-	 */
-	public void setDescription(String description);
-	
-	/**
 	 * Launch and save the action played by the strategie
 	 */
 	public void compareComportements();

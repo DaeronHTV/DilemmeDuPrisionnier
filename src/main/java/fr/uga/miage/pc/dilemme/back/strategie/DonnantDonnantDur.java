@@ -1,5 +1,6 @@
 package fr.uga.miage.pc.dilemme.back.strategie;
 
+import fr.uga.miage.pc.dilemme.back.strategie.common.Strategie;
 import fr.uga.miage.pc.interfaces.Comportement;
 
 /**
@@ -8,7 +9,7 @@ import fr.uga.miage.pc.interfaces.Comportement;
  * @since 1.0
  * @version 3.0
  */
-public class DonnantDonnantDur extends Strategie{
+public final class DonnantDonnantDur extends Strategie{
 
 	public DonnantDonnantDur() {
 		super(StrategieConstHelper.DDDNAME, StrategieConstHelper.DDDDESC);

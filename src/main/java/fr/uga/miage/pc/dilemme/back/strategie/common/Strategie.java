@@ -1,4 +1,4 @@
-package fr.uga.miage.pc.dilemme.back.strategie;
+package fr.uga.miage.pc.dilemme.back.strategie.common;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import fr.uga.miage.pc.interfaces.IStrategie;
  * A Strategie represents a way of thinking for a certain situation, a certain context.
  * Example : A Strategie "Good" could represent a person who always cooperate.
  * This class was created for a french university project
- * @author Avanzino Aur�lien - Gourdon St�phanie
+ * @author Avanzino Aur�lien 
  * @since 1.0
  * @version 1.5
  * @see IStrategie
@@ -28,7 +28,6 @@ public abstract class Strategie implements IStrategie{
 	 * @param description Description of the strategie
 	 */
 	protected Strategie(String nom, String description) {
-		play = null;
 		this.nom = nom;
 		this.description = description;
 		numTour = 1;
@@ -39,10 +38,9 @@ public abstract class Strategie implements IStrategie{
 	public String getStrategyName() { return nom; }
 	
 	/** {@inheritDoc} */
-	public void setDescription(String description) { this.description = description; }
-	
-	/** {@inheritDoc} */
 	public String getDescription() { return description; }
+	
+	public void setDescription(String description) { }
 	
 	/** {@inheritDoc} */
 	public Comportement getComportement() { return play; }

@@ -5,7 +5,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import java.lang.reflect.Modifier;+
+import java.lang.reflect.Modifier;
+
+import fr.uga.miage.pc.core.ClassHelper;
 import fr.uga.miage.pc.core.FileHelper;
 import fr.uga.miage.pc.core.patterns.IObserver;
 import fr.uga.miage.pc.dilemme.front.extensions.ExtentedCheckBox;
